@@ -7,4 +7,6 @@ public class nose {
 	int nose;
 	
 	//kaixo
+	//kaas
+	
 }
