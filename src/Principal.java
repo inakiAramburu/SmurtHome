@@ -7,7 +7,7 @@ public class Principal {
 			System.out.println("holassss");
 			System.out.println("holaaaasswwssssssss");
 			System.out.println("txild4edelu");
-			System.out.println("todos tubhthnyhjyo");
+			System.out.println("todos wwwwwyo");
 	}
 
 }
