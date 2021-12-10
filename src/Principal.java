@@ -8,7 +8,9 @@ public class Principal {
 			System.out.println("holaaaasswwssssssss");
 			System.out.println("txild4edelu");
 			System.out.println("todos wwwwwyo");
-			System.out.println("kaixoasd");
+			System.out.println("kaixoasdasd");
+			System.out.println("jajaaj");
+			System.out.println("jaja");
 	}
 
 }
