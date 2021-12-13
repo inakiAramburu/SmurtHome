@@ -51,6 +51,8 @@ public class Principal extends JFrame {
 		bSalir.setActionCommand("exit");
 //		bSalir.addActionListener(this);
 		
+		//kaixo
+		
 		toolbar.add(bHome);
 		toolbar.addSeparator();
 		toolbar.add(lbTitulo);
