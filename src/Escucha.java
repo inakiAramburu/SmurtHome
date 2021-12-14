@@ -19,6 +19,8 @@ public class Escucha extends ResultAdapter {
 
 	@Override
 	public void resultAccepted(ResultEvent re) {
+	Lee lee = new Lee();
+
 		try {
 			Result res = (Result) (re.getSource());
 			ResultToken tokens[] = res.getBestTokens();
@@ -29,9 +31,10 @@ public class Escucha extends ResultAdapter {
 				gst = tokens[i].getSpokenText();
 				args[0] += gst + " ";
 				System.out.print(gst + " ");
+				//lee.voz(gst.toString());
 			}
 			System.out.println();
-			if (gst.equals("salir")) {
+			if (gst.contains("salir")) {
 				recognizer.deallocate();
 				args[0] = "Hasta la proxima Cmop 'salir'!";
 				System.out.println(args[0]);
@@ -47,12 +50,12 @@ public class Escucha extends ResultAdapter {
 		}
 	}
 
-	public static void main(String args[]) {
+	public  void escuchar() {
 		try {
 			recognizer = Central.createRecognizer(new EngineModeDesc(Locale.ROOT));
 			recognizer.allocate();
 
-			FileReader grammar1 = new FileReader("librerias/SimpleGrammarES2.txt");
+			FileReader grammar1 = new FileReader("Diccionario/SimpleGrammarES2.txt");
 
 			RuleGrammar rg = recognizer.loadJSGF(grammar1);
 			rg.setEnabled(true);

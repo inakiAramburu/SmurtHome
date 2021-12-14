@@ -3,5 +3,15 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="librerias/cgjsapi.jar"/>
+	<classpathentry kind="lib" path="librerias/cmu_time_awb.jar"/>
+	<classpathentry kind="lib" path="librerias/cmu_us_kal.jar"/>
+	<classpathentry kind="lib" path="librerias/cmudict04.jar"/>
+	<classpathentry kind="lib" path="librerias/cmulex.jar"/>
+	<classpathentry kind="lib" path="librerias/cmutimelex.jar"/>
+	<classpathentry kind="lib" path="librerias/en_us.jar"/>
+	<classpathentry kind="lib" path="librerias/freetts.jar"/>
+	<classpathentry kind="lib" path="librerias/freetts-jsapi10.jar"/>
+	<classpathentry kind="lib" path="librerias/mbrola.jar"/>
+	<classpathentry kind="lib" path="librerias/openai-java.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -15,7 +15,8 @@ import javax.swing.JToolBar;
 public class Principal extends JFrame {
 	
 	JLabel lbTitulo;
-	
+	Escucha escucha;
+
 	public Principal() {
 		super("Smurt House");
 		
@@ -24,6 +25,9 @@ public class Principal extends JFrame {
 		this.setContentPane(crearPanelVentana());
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		escucha = new Escucha();
+		escucha.escuchar();
+
 	}
 	
 	private Container crearPanelVentana() {
