@@ -3,8 +3,13 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.util.List;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.Box;
+import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,6 +20,7 @@ import javax.swing.JToolBar;
 public class Principal extends JFrame {
 	
 	JLabel lbTitulo;
+	List<MiAccion> listaAccion;
 	
 	public Principal() {
 		super("Smurt House");
@@ -111,6 +117,28 @@ public class Principal extends JFrame {
 		panel.add(bHab1);
 		panel.add(bCoci);
 		return panel;
+	}
+	
+	private class MiAccion extends AbstractAction {
+		String texto;
+		public MiAccion (String texto, Icon imagen, String descrip, Integer nemonic){
+			super(texto,imagen);
+			
+			this.texto = texto;
+			this.putValue( Action.SHORT_DESCRIPTION ,descrip);
+			this.putValue(Action.MNEMONIC_KEY, nemonic);
+		}
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String comando = e.getActionCommand();
+			switch(comando) {
+			case "home":
+				break;
+			}
+			
+			
+		}
 	}
 
 	public static void main(String[] args) {
