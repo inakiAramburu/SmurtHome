@@ -1,146 +1,104 @@
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
-import java.util.List;
+import java.awt.event.ActionListener;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.Box;
-import javax.swing.Icon;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JToolBar;
 
-public class Principal extends JFrame {
-	
-	JLabel lbTitulo;
-	List<MiAccion> listaAccion;
+public class Principal extends JFrame implements ActionListener {
+	final static int MAX_PANELES = 5;
+	final static String COM_CHANGE = "cambiar";
+	JPanel panelVisual;
 	
 	public Principal() {
 		super("Smurt House");
-		
+		panelVisual = new JPanel(new CardLayout());
 		this.setSize(800, 500);
 		this.setLocation(100, 50);
-		this.setContentPane(crearPanelVentana());
+		this.setContentPane(panelVisual);
+		cambiarPanel(crearPanelPrincipal());
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
-	private Container crearPanelVentana() {
-		JPanel panel = new JPanel(new BorderLayout(10,10));
-		panel.add(crearPanelNorth(),BorderLayout.NORTH);
-		panel.add(crearPanelCentral(),BorderLayout.CENTER);
-//		panel.add(crearPanelSouth(),BorderLayout.SOUTH);
-		panel.add(crearPanelSouth_v2(),BorderLayout.SOUTH);
-		return panel;
+	private Container cambiarPanel(JPanel panelActual) {
+		panelVisual.removeAll();
+		panelVisual.add(panelActual);
+		panelVisual.repaint();
+		panelVisual.revalidate();
+		return panelVisual;
 	}
-
-	private Component crearPanelNorth() {
-		JToolBar toolbar = new JToolBar();
+	
+	private JPanel crearPanelPrincipal() {
+		JPanel principal = new JPanel(new BorderLayout());
+		principal.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 		
-		JButton bHome = new JButton("home");
+		JLabel label = new JLabel("Nombre de Usuario");
+		label.setHorizontalTextPosition(JLabel.CENTER);
+		
+		JButton bHome = new JButton("Home");
 		bHome.setActionCommand("home");
-//		bHome.addActionListener(this);
-//		bHome.setUI(null); //para redondear los bordes | hacerlo "transparente"
+		bHome.addActionListener(this);
 		
-		lbTitulo = new JLabel();
-		lbTitulo.setFont(new Font("Arial",Font.ITALIC,18));
-		lbTitulo.setText("Casa");
-		
-		JButton bSalir = new JButton("salir");
-		bSalir.setActionCommand("exit");
-//		bSalir.addActionListener(this);
-		
-		toolbar.add(bHome);
-		toolbar.addSeparator();
-		toolbar.add(lbTitulo);
-		toolbar.add(Box.createGlue());
-		toolbar.add(bSalir);
-		return toolbar;
-	}
-
-	private Component crearPanelCentral() {
-		JScrollPane scroll = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_NEVER,
-				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-//		scroll.setUI(null); //para cambiar como se veria el scroll
-		
-		
-		
-		return scroll;
-	}
-
-	private Component crearPanelSouth() {
-		JToolBar toolbar = new JToolBar();
-		
-		JButton bHab1 = new JButton("Habitacion 1");
-		bHab1.setActionCommand("home");
-//		bHab1.addActionListener(this);
-//		bHab1.setUI(null); //para redondear los bordes | hacerlo "transparente"
-		
-		lbTitulo = new JLabel();
-		lbTitulo.setFont(new Font("Arial",Font.ITALIC,18));
-		lbTitulo.setText("Casa");
-		
-		JButton bCoci = new JButton("Cocina");
-		bCoci.setActionCommand("exit");
-//		bCoci.addActionListener(this);
-		
-		toolbar.add(Box.createGlue());
-		toolbar.add(bHab1);
-		toolbar.add(bCoci);
-		toolbar.add(Box.createGlue());
-		return toolbar;
+		JPanel panelNorte = new JPanel();
+		panelNorte.add(bHome);
+		panelNorte.add(label);
+		principal.add(panelNorte,BorderLayout.NORTH);
+		principal.add(bHome,BorderLayout.CENTER);
+		return principal;
 	}
 	
-	private Component crearPanelSouth_v2() {
-		JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER,10,10));
+	private JPanel crearPanelElaborado() {
+		JPanel panelNormal = new JPanel(new BorderLayout());
 		
-		JButton bHab1 = new JButton("Habitacion 1");
-		bHab1.setActionCommand("home");
-//		bHab1.addActionListener(this);
-//		bHab1.setUI(null); //para redondear los bordes | hacerlo "transparente"
+		JLabel label = new JLabel("ey");
+		label.setFont(new Font("Arial",Font.BOLD,90));
+		label.setBackground(Color.green);
+		label.setForeground(Color.blue);
+		label.setOpaque(true);
 		
-		lbTitulo = new JLabel();
-		lbTitulo.setFont(new Font("Arial",Font.ITALIC,18));
-		lbTitulo.setText("Casa");
+		panelNormal.add(label,BorderLayout.NORTH);
+		panelNormal.add(crearPanelBotones(),BorderLayout.CENTER);
+		return panelNormal;
+	}
+
+	private Component crearPanelBotones() {
+		JPanel panel = new JPanel(new FlowLayout());
+		panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 		
-		JButton bCoci = new JButton("Cocina");
-		bCoci.setActionCommand("exit");
-//		bCoci.addActionListener(this);
+		JButton bUsers = new JButton("Usuarios");
+		bUsers.setActionCommand("users");
+		bUsers.addActionListener(this);
 		
-		panel.add(bHab1);
-		panel.add(bCoci);
+		JButton bGraph = new JButton("Graficos");
+		bGraph.setActionCommand("graficos");
+		bGraph.addActionListener(this);
+		
+		panel.add(bUsers);
+		panel.add(bGraph);
 		return panel;
 	}
-	
-	private class MiAccion extends AbstractAction {
-		String texto;
-		public MiAccion (String texto, Icon imagen, String descrip, Integer nemonic){
-			super(texto,imagen);
-			
-			this.texto = texto;
-			this.putValue( Action.SHORT_DESCRIPTION ,descrip);
-			this.putValue(Action.MNEMONIC_KEY, nemonic);
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String comando = e.getActionCommand();
+		if(comando.equals("home")) {
+			cambiarPanel(crearPanelElaborado());
 		}
-		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			String comando = e.getActionCommand();
-			switch(comando) {
-			case "home":
-				break;
-			}
-			
-			
+		if(comando.equals("users")) {
+			cambiarPanel(crearPanelPrincipal());
 		}
 	}
-
+	
 	public static void main(String[] args) {
 		Principal programa = new Principal();
 	}
