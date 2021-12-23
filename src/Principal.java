@@ -82,6 +82,7 @@ public class Principal extends JFrame implements ActionListener {
 		cambiarPanel(crearPanelPrincipal());
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setResizable(false);
 	}
 	
 	private Container cambiarPanel(JPanel panelActual) {
