@@ -50,6 +50,7 @@ public class Principal extends JFrame implements ActionListener {
     int intensidad=0;
     int persiana=0;
     int microfono=0;
+    int automatico=0;
     
     List<ImageIcon> luz;
     ImageIcon bombilla0,bombilla1,bombilla2,bombilla3;
@@ -63,10 +64,10 @@ public class Principal extends JFrame implements ActionListener {
 		
 		luz=new ArrayList<ImageIcon>();
         
-        bombilla0 =new ImageIcon("bombilla0.png");
-        bombilla1 =new ImageIcon("bombilla1.png");
-        bombilla2 =new ImageIcon("bombilla2.png");
-        bombilla3 =new ImageIcon("bombilla3.png");
+        bombilla0 =new ImageIcon("iconos/PanelPrincipal/luz/bombilla0.png");
+        bombilla1 =new ImageIcon("iconos/PanelPrincipal/luz/bombilla1.png");
+        bombilla2 =new ImageIcon("iconos/PanelPrincipal/luz/bombilla2.png");
+        bombilla3 =new ImageIcon("iconos/PanelPrincipal/luz/bombilla3.png");
         luz.add(bombilla0);
         luz.add(bombilla1);
         luz.add(bombilla2);
@@ -730,6 +731,14 @@ public class Principal extends JFrame implements ActionListener {
 
     private void automaticoButtonActionPerformed(ActionEvent evt) {                                                 
         // TODO add your handling code here:
+    	
+    	 if (automatico==0) {
+    		 automatico=1;
+         }else {
+        	 automatico=0;
+         }
+         
+         System.out.println("automatico: "+automatico);
     }                                           
                                      
   
