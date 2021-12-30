@@ -1,3 +1,4 @@
+package src;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -27,6 +28,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.GroupLayout.ParallelGroup;
 
+import paneles.PanelMenu;
+import paneles.PanelPrincipall;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,16 +90,20 @@ public class Principal extends JFrame implements ActionListener {
 		
 		
 		panelVisual = new JPanel(new CardLayout());
-		this.setSize(1600, 800);
+		this.setSize(1600, 900);
 		this.setLocation(100, 50);
 		this.setContentPane(panelVisual);
-		cambiarPanel(crearPanelPrincipal(porDefecrto));
+		//cambiarPanel(crearPanelPrincipal(porDefecrto));
+        cambiarPanel(crearPanelMenu());
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setResizable(false);
-	}
+    }
 	
-	private Container cambiarPanel(JPanel panelActual) {
+	public Principal() {
+    }
+
+    public Container cambiarPanel(JPanel panelActual) {
 		panelVisual.removeAll();
 		panelVisual.add(panelActual);
 		panelVisual.repaint();
@@ -105,7 +112,22 @@ public class Principal extends JFrame implements ActionListener {
 	}
 	
 	
-	
+    private JPanel crearPanelPrincipal(Preset preset){
+        horaingoa=preset;
+
+        JPanel panel;
+        PanelPrincipall panelPrincipal = new PanelPrincipall(preset);
+        panel=panelPrincipal.getPanel();
+
+
+
+        return panel;
+    }
+
+
+
+
+	/*
 	private JPanel crearPanelPrincipal(Preset preset) {
         horaingoa=preset;
         this.nombre=preset.getNombre();
@@ -352,11 +374,24 @@ public class Principal extends JFrame implements ActionListener {
         pack();
 		return panelHome;
 	}
-	
+	*/
 	
   
-	
+	public JPanel crearPanelMenu(){
+        
 
+        JPanel panel;
+        PanelMenu panelMenu = new PanelMenu();
+        panel=panelMenu.getPanel();
+
+
+
+        return panel;
+    }
+
+
+
+/*
 	private JPanel crearPanelMenu() {
 
 		  JButton graficosButton1;
@@ -469,7 +504,8 @@ public class Principal extends JFrame implements ActionListener {
 		
 		return panelMenu;
 	}
-	
+
+    */
 	private JPanel crearPanelPreset() throws ClassNotFoundException {
         
 
