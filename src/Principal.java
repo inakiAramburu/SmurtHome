@@ -27,7 +27,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.GroupLayout.ParallelGroup;
 
-import javafx.scene.control.Button;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,19 +56,20 @@ public class Principal extends JFrame implements ActionListener {
 	    private javax.swing.JButton upButton;
     // End of variables declaration     
     
+    String nombre;
     int temperatura=20;
     int intensidad=0;
     int persiana=0;
     int microfono=0;
     int automatico=0;
-    
+    Preset horaingoa;
     List<ImageIcon> luz;
     ImageIcon bombilla0,bombilla1,bombilla2,bombilla3;
     ImageIcon home;
 	
 	
 	
-	public Principal() {
+	public Principal(Preset porDefecrto) {
 		super("Smurt House");
 		
 		
@@ -90,7 +90,7 @@ public class Principal extends JFrame implements ActionListener {
 		this.setSize(1600, 800);
 		this.setLocation(100, 50);
 		this.setContentPane(panelVisual);
-		cambiarPanel(crearPanelPrincipal());
+		cambiarPanel(crearPanelPrincipal(porDefecrto));
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setResizable(false);
@@ -106,7 +106,15 @@ public class Principal extends JFrame implements ActionListener {
 	
 	
 	
-	private JPanel crearPanelPrincipal() {
+	private JPanel crearPanelPrincipal(Preset preset) {
+        horaingoa=preset;
+        this.nombre=preset.getNombre();
+        this.temperatura=preset.getTemperatura();
+        this.intensidad=preset.getIntensidad();
+        this.persiana=preset.getPersiana();
+        this.microfono=preset.getMicrofono();
+        this.automatico=preset.getAutomatico();
+        
 
         panelHome = new javax.swing.JPanel();
         panelTemperatura = new javax.swing.JPanel();
@@ -243,7 +251,7 @@ public class Principal extends JFrame implements ActionListener {
 
         titulo.setEditable(false);
         titulo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        titulo.setText("UNO mas UNO es ILEGAL");
+        titulo.setText(nombre);
         titulo.setFont(new java.awt.Font("Product San", 0, 60));
 
         automaticoButton.setFont(new java.awt.Font("Product San", 0, 60));
@@ -469,23 +477,17 @@ public class Principal extends JFrame implements ActionListener {
          JButton atrasButton;
          JButton borrarButton;
          JButton homeButon;
-         JButton jButton1;
-         JButton jButton2;
-         JButton jButton3;
-         JButton jButton4;
          JPanel jPanel2;
          javax.swing.JScrollPane jScrollPane2;
          JPanel panelPreset;
          JPanel panelRojo;
          JFormattedTextField titulo;
 
-         List<JButton> botones;
-            int cantidadDepreset=0;
-
-            cantidadDepreset=cantidadDepreset();
-            botones=new ArrayList<JButton>();
-
-
+         List<JButton> botones=new ArrayList<JButton>();
+        
+         List<Preset> listaPreset=presetGuardados();
+         
+      
           
 
 
@@ -514,9 +516,15 @@ public class Principal extends JFrame implements ActionListener {
 
            //a√±adir botones en el panel2
 
-        for(int i=0;i<50;i++){
-            JButton botone =new JButton("Boton"+i);
+        for(int i=0;i<listaPreset.size();i++){
+
+            JButton botone =new JButton();
             botone.setFont(new Font("Product San", 0, 20));
+           botone.setText(listaPreset.get(i).getNombre());
+
+          //  urrengoa=(listaPreset.get(i));
+            
+            //aÒadir propertichange listener al boton
 
             botone.setActionCommand("home");
             botone.addActionListener(this);
@@ -637,31 +645,9 @@ public class Principal extends JFrame implements ActionListener {
 	
 	
 	
-    private int cantidadDepreset() throws ClassNotFoundException {
-        int cantidad=0;
-        
-        FileInputStream ficheroEntrada=null;
-        List<Preset> listaPreset = new ArrayList<Preset>();
-        try {
-            ficheroEntrada=new FileInputStream("datos.txt");
-            try (ObjectInputStream tuberia = new ObjectInputStream(ficheroEntrada)) {
-                listaPreset=(List<Preset>)tuberia.readObject();
-            }
-            for (Preset p:listaPreset){
-                p.mostrarDatos();
-            }
-           
-        }catch (FileNotFoundException ex){
-            ex.printStackTrace();
-        }catch (IOException ex){
+   
+  
 
-            ex.printStackTrace();
-        }
-        cantidad   = listaPreset.size();
-
-
-        return cantidad;
-    }
 
     private JPanel crearPanelGraficos() {
     	 	JButton homeButon;
@@ -868,6 +854,32 @@ public class Principal extends JFrame implements ActionListener {
     }                                           
                                      
   ///preset///
+  private List<Preset> presetGuardados() throws ClassNotFoundException {
+        
+        
+    FileInputStream ficheroEntrada=null;
+    List<Preset> listaPreset = new ArrayList<Preset>();
+    try {
+        ficheroEntrada=new FileInputStream("datos.txt");
+        try (ObjectInputStream tuberia = new ObjectInputStream(ficheroEntrada)) {
+            listaPreset=(List<Preset>)tuberia.readObject();
+        }
+        for (Preset p:listaPreset){
+            p.mostrarDatos();
+        }
+       
+    }catch (FileNotFoundException ex){
+        ex.printStackTrace();
+    }catch (IOException ex){
+
+        ex.printStackTrace();
+    }
+    
+
+
+    return listaPreset;
+}
+
 
   private void anadirButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
     // TODO add your handling code here:
@@ -890,11 +902,12 @@ private void atrasButtonActionPerformed(java.awt.event.ActionEvent evt) {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String comando = e.getActionCommand();
+        
 		if(comando.equals("menu")) {
 			cambiarPanel(crearPanelMenu());
 		}
 		if(comando.equals("home")) {
-			cambiarPanel(crearPanelPrincipal());
+			cambiarPanel(crearPanelPrincipal(horaingoa));
 		}
 		if(comando.equals("preset")) {
 			try {
@@ -908,16 +921,16 @@ private void atrasButtonActionPerformed(java.awt.event.ActionEvent evt) {
 			cambiarPanel(crearPanelGraficos());
 		}
 		if(comando.equals("users")) {
-			cambiarPanel(crearPanelPrincipal());
+			//cambiarPanel(crearPanelPrincipal());
 		}
 	}
 	
 	
-void crearDatosDePrueba(){
+public static void crearDatosDePrueba(){
     List<Preset> listaPreset = new ArrayList<Preset>();
 
-    Preset preset =new Preset("prueba", 20, 0, 1);
-    Preset preset2 =new Preset("prueba2", 25, 0, 2);
+    Preset preset =new Preset("prueba", 20, 0, 1,0,0);
+    Preset preset2 =new Preset("prueba2", 25, 0, 2,0,0);
     listaPreset.add(preset);
     listaPreset.add(preset2);
 
@@ -947,9 +960,9 @@ void crearDatosDePrueba(){
 	
 
     public static void main(String[] args) throws ClassNotFoundException {
-       // Preset porDefecrto = new Preset("UNO MAS UNO ES ILEGALISIMO", 20, 0, 0);
-		
-        Principal programa = new Principal();
+        Preset porDefecrto = new Preset("UNO MAS UNO ES ILEGALISIMO", 20, 0, 0, 0, 0);
+		crearDatosDePrueba();
+        Principal programa = new Principal(porDefecrto);
         
        
 
