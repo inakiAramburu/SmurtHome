@@ -524,7 +524,7 @@ public class Principal extends JFrame implements ActionListener {
 
           //  urrengoa=(listaPreset.get(i));
             
-            //añadir propertichange listener al boton
+            //aï¿½adir propertichange listener al boton
 
             botone.setActionCommand("home");
             botone.addActionListener(this);
@@ -571,11 +571,9 @@ public class Principal extends JFrame implements ActionListener {
             jScrollPane2.setViewportView(jPanel2);
     
             anadirButton.setText("+");
-            anadirButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    anadirButtonActionPerformed(evt);
-                }
-            });
+            anadirButton.setActionCommand("crearPreset");
+            anadirButton.addActionListener(this);
+
     
             borrarButton.setText("-");
     
@@ -642,7 +640,6 @@ public class Principal extends JFrame implements ActionListener {
 		
 		return panelPreset;
 	}
-	
 	
 	
    
@@ -881,10 +878,7 @@ public class Principal extends JFrame implements ActionListener {
 }
 
 
-  private void anadirButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-    // TODO add your handling code here:
-    System.out.println("aÃ±adiir preset");
-}                                            
+                                            
 
 private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
     // TODO add your handling code here:
@@ -920,8 +914,8 @@ private void atrasButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if(comando.equals("graficos")) {
 			cambiarPanel(crearPanelGraficos());
 		}
-		if(comando.equals("users")) {
-			//cambiarPanel(crearPanelPrincipal());
+		if(comando.equals("crearPreset")) {
+			//cambiarPanel(crearPanelPresetCreator());
 		}
 	}
 	
