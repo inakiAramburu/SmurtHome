@@ -60,8 +60,9 @@ public class Controlador implements ActionListener {
 		
 			System.out.println("preset");
 		}
-        if(comando.equals("graficos")) {
+        if(comando.equals(PANEL_GRAFICOS)) {
 			System.out.println("graficoss");
+			conector.firePropertyChange(PANEL_GRAFICOS, false, 12);
 			//cambiarPanel(crearPanelGraficos());
 		}
 		if(comando.equals("crearPreset")) {

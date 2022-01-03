@@ -19,387 +19,313 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import paneles.PanelGraficos;
 import paneles.PanelMenu;
 import paneles.PanelPreset;
 import paneles.PanelPrincipall;
 
 public class Principal extends JFrame implements ActionListener, PropertyChangeListener {
-	final static int MAX_PANELES = 5;
-	final static String COM_CHANGE = "cambiar";
-	JPanel panelVisual;
+    final static int MAX_PANELES = 5;
+    final static String COM_CHANGE = "cambiar";
+    JPanel panelVisual;
 
-	// Variables declaration - do not modify
-	private javax.swing.JPanel panelHome;
-	private javax.swing.JButton automaticoButton;
-	private javax.swing.JButton bajarPButton;
-	private javax.swing.JButton bajarTButton;
-	private javax.swing.JFormattedTextField jFormattedTextField1;
-	public javax.swing.JButton luzButton;
-	private javax.swing.JButton menuButon;
-	private javax.swing.JButton microfonoButton;
-	private javax.swing.JPanel panelPersiana;
-	private javax.swing.JPanel panelRojo;
-	private javax.swing.JPanel panelTemperatura;
-	private javax.swing.JButton pararPButton;
-	private javax.swing.JButton subirPButton;
-	private javax.swing.JFormattedTextField titulo;
-	private javax.swing.JButton upButton;
-	// End of variables declaration
+    // Variables declaration - do not modify
+    private javax.swing.JPanel panelHome;
+    private javax.swing.JButton automaticoButton;
+    private javax.swing.JButton bajarPButton;
+    private javax.swing.JButton bajarTButton;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
+    public javax.swing.JButton luzButton;
+    private javax.swing.JButton menuButon;
+    private javax.swing.JButton microfonoButton;
+    private javax.swing.JPanel panelPersiana;
+    private javax.swing.JPanel panelRojo;
+    private javax.swing.JPanel panelTemperatura;
+    private javax.swing.JButton pararPButton;
+    private javax.swing.JButton subirPButton;
+    private javax.swing.JFormattedTextField titulo;
+    private javax.swing.JButton upButton;
+    // End of variables declaration
 
-	String nombre;
-	int temperatura = 20;
-	int intensidad = 0;
-	int persiana = 0;
-	int microfono = 0;
-	int automatico = 0;
-	Preset oraingoa;
-	List<ImageIcon> luz;
-	ImageIcon bombilla0, bombilla1, bombilla2, bombilla3;
-	ImageIcon home;
-	Controlador controlador;
+    String nombre;
+    int temperatura = 20;
+    int intensidad = 0;
+    int persiana = 0;
+    int microfono = 0;
+    int automatico = 0;
+    Preset oraingoa;
+    List<ImageIcon> luz;
+    ImageIcon bombilla0, bombilla1, bombilla2, bombilla3;
+    ImageIcon home;
+    Controlador controlador;
 
-	public Principal(Preset porDefecrto) {
-		super("Smurt House");
-		controlador = new Controlador();
-		controlador.addPropertyChangeListener(this);
+    public Principal(Preset porDefecrto) {
+        super("Smurt House");
+        controlador = new Controlador();
+        controlador.addPropertyChangeListener(this);
 
-		luz = new ArrayList<ImageIcon>();
+        luz = new ArrayList<ImageIcon>();
 
-		bombilla0 = new ImageIcon("iconos/PanelPrincipal/luz/bombilla0.png");
-		bombilla1 = new ImageIcon("iconos/PanelPrincipal/luz/bombilla1.png");
-		bombilla2 = new ImageIcon("iconos/PanelPrincipal/luz/bombilla2.png");
-		bombilla3 = new ImageIcon("iconos/PanelPrincipal/luz/bombilla3.png");
-		luz.add(bombilla0);
-		luz.add(bombilla1);
-		luz.add(bombilla2);
-		luz.add(bombilla3);
+        bombilla0 = new ImageIcon("iconos/PanelPrincipal/luz/bombilla0.png");
+        bombilla1 = new ImageIcon("iconos/PanelPrincipal/luz/bombilla1.png");
+        bombilla2 = new ImageIcon("iconos/PanelPrincipal/luz/bombilla2.png");
+        bombilla3 = new ImageIcon("iconos/PanelPrincipal/luz/bombilla3.png");
+        luz.add(bombilla0);
+        luz.add(bombilla1);
+        luz.add(bombilla2);
+        luz.add(bombilla3);
 
-		panelVisual = new JPanel(new CardLayout());
-		this.setSize(1600, 900);// 1600 900
-		this.setLocation(100, 50);
-		this.setContentPane(panelVisual);
-		cambiarPanel(crearPanelPrincipal(porDefecrto));
-		// cambiarPanel(crearPanelPreset());
-		this.setVisible(true);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setResizable(false);
-	}
+        panelVisual = new JPanel(new CardLayout());
+        this.setSize(1600, 900);// 1600 900
+        this.setLocation(100, 50);
+        this.setContentPane(panelVisual);
+        cambiarPanel(crearPanelPrincipal(porDefecrto));
+        // cambiarPanel(crearPanelPreset());
+        this.setVisible(true);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setResizable(false);
+    }
 
-	public Container cambiarPanel(JPanel panelActual) {
-		panelVisual.removeAll();
-		panelVisual.add(panelActual);
-		panelVisual.repaint();
-		panelVisual.revalidate();
-		return panelVisual;
-	}
+    public Container cambiarPanel(JPanel panelActual) {
+        panelVisual.removeAll();
+        panelVisual.add(panelActual);
+        panelVisual.repaint();
+        panelVisual.revalidate();
+        return panelVisual;
+    }
 
-	private JPanel crearPanelPrincipal(Preset preset) {
-		oraingoa = preset;
+    private JPanel crearPanelPrincipal(Preset preset) {
+        oraingoa = preset;
 
-		JPanel panel;
-		PanelPrincipall panelPrincipal = new PanelPrincipall(preset, controlador);
-		panel = panelPrincipal.getPanel();
+        JPanel panel;
+        PanelPrincipall panelPrincipal = new PanelPrincipall(preset, controlador);
+        panel = panelPrincipal.getPanel();
 
-		return panel;
-	}
+        return panel;
+    }
 
-	private JPanel crearPanelPreset() {
+    private JPanel crearPanelPreset() {
 
-		JPanel panel;
-		PanelPreset panelPreset = new PanelPreset(controlador);
-		panel = panelPreset.getPanel();
+        JPanel panel;
+        PanelPreset panelPreset = new PanelPreset(controlador);
+        panel = panelPreset.getPanel();
 
-		return panel;
-	}
+        return panel;
+    }
 
-	private JPanel crearPanelGraficos() {
-		JButton homeButon;
-		JPanel panelGraficos;
-		JPanel panelRojo;
-		JFormattedTextField titulo;
-		panelGraficos = new javax.swing.JPanel();
-		homeButon = new javax.swing.JButton();
-		titulo = new javax.swing.JFormattedTextField();
-		panelRojo = new javax.swing.JPanel();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+    private void jFormattedTextField1ActionPerformed(ActionEvent evt) {
+        // TODO add your handling code here:
+    }
 
-		homeButon.setBackground(new java.awt.Color(51, 255, 255));
-		homeButon.setFont(new java.awt.Font("Product San", 0, 20));
-		home = new ImageIcon("iconos/PanelPrincipal/casa.png");
+    private void bajarTButtonActionPerformed(ActionEvent evt) {
+        // TODO add your handling code here:
+        if (temperatura > 17) {
+            temperatura--;
+            jFormattedTextField1.setText(temperatura + "");
+        }
+        System.out.println(temperatura);
 
-		homeButon.setIcon(new ImageIcon(home.getImage()));
-		homeButon.setBorder(null);
-		homeButon.setBorderPainted(false);
+    }
 
-		homeButon.setActionCommand("home");
-		homeButon.addActionListener(this);
+    private void upButtonActionPerformed(ActionEvent evt) {
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        if (temperatura < 30) {
+            temperatura++;
+            jFormattedTextField1.setText(temperatura + "");
+        }
+        System.out.println(temperatura);
 
-		titulo.setEditable(false);
-		titulo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-		titulo.setText("Graficos");
-		titulo.setFont(new java.awt.Font("Product San", 0, 60));
+    }
 
-		panelRojo.setBackground(new java.awt.Color(255, 0, 0));
+    private void luzButtonActionPerformed(ActionEvent evt) {
+        // TODO add your handling code here:
+        // TODO add your handling code here:
 
-		javax.swing.GroupLayout panelRojoLayout = new javax.swing.GroupLayout(panelRojo);
-		panelRojo.setLayout(panelRojoLayout);
-		panelRojoLayout.setHorizontalGroup(panelRojoLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 149, Short.MAX_VALUE));
-		panelRojoLayout.setVerticalGroup(panelRojoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGap(0, 150, Short.MAX_VALUE));
+        // luzButton.setIcon(new ImageIcon(azul.getImage()));
+        if (intensidad == 0) {
+            intensidad = 1;
+        } else if (intensidad != 0) {
+            if (intensidad == 3) {
+                intensidad = 0;
+            } else {
+                intensidad++;
+            }
+        } else if (false /* esterar dos segundos */) {
+            intensidad = 0;
+        }
+        System.out.println("Intensidad: " + intensidad);
+        switch (intensidad) {
+            case 0:
+                // luzButton.setBackground(new java.awt.Color(204, 204, 204));
+                break;
+            case 1:
+                // luzButton.setBackground(new java.awt.Color(153, 255, 153));
+                break;
+            case 2:
+                // luzButton.setBackground(new java.awt.Color(102, 255, 102));
+                break;
+            case 3:
+                // luzButton.setBackground(new java.awt.Color(0, 255, 0));
+                break;
+            // luzButton.setIcon(new ImageIcon(luz.get(intensidad).getImage()));
 
-		javax.swing.GroupLayout panelGraficosLayout = new javax.swing.GroupLayout(panelGraficos);
-		panelGraficos.setLayout(panelGraficosLayout);
-		panelGraficosLayout
-				.setHorizontalGroup(
-						panelGraficosLayout
-								.createParallelGroup(
-										javax.swing.GroupLayout.Alignment.LEADING)
-								.addGroup(panelGraficosLayout.createSequentialGroup().addGap(90, 90, 90)
-										.addComponent(homeButon, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addGap(60, 60, 60)
-										.addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 999,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addGap(60, 60, 60)
-										.addComponent(panelRojo, javax.swing.GroupLayout.PREFERRED_SIZE,
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addGap(90, 90, 90)));
-		panelGraficosLayout.setVerticalGroup(panelGraficosLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGraficosLayout.createSequentialGroup()
-						.addGap(80, 80, 80)
-						.addGroup(panelGraficosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(homeButon, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addComponent(panelRojo, javax.swing.GroupLayout.PREFERRED_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
-										javax.swing.GroupLayout.PREFERRED_SIZE))
-						.addContainerGap(660, Short.MAX_VALUE)));
+        }
+        luzButton.setIcon(new ImageIcon(luz.get(intensidad).getImage()));
+    }
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
-						.addComponent(panelGraficos, javax.swing.GroupLayout.PREFERRED_SIZE,
-								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addGap(0, 0, 0)));
-		layout.setVerticalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(panelGraficos,
-						javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+    private void bajarPButtonActionPerformed(ActionEvent evt) {
+        // TODO add your handling code here:
+        persiana = 2;
+        System.out.println(persiana);
+    }
 
-		return panelGraficos;
-	}
+    private void subirPButtonActionPerformed(ActionEvent evt) {
+        // TODO add your handling code here:
+        persiana = 1;
+        System.out.println(persiana);
 
-	private void jFormattedTextField1ActionPerformed(ActionEvent evt) {
-		// TODO add your handling code here:
-	}
+    }
 
-	private void bajarTButtonActionPerformed(ActionEvent evt) {
-		// TODO add your handling code here:
-		if (temperatura > 17) {
-			temperatura--;
-			jFormattedTextField1.setText(temperatura + "");
-		}
-		System.out.println(temperatura);
+    private void pararPButtonActionPerformed(ActionEvent evt) {
+        // TODO add your handling code here:
+        persiana = 0;
+        System.out.println(persiana);
+    }
 
-	}
+    private void microfonoButtonActionPerformed(ActionEvent evt) {
 
-	private void upButtonActionPerformed(ActionEvent evt) {
-		// TODO add your handling code here:
-		// TODO add your handling code here:
-		if (temperatura < 30) {
-			temperatura++;
-			jFormattedTextField1.setText(temperatura + "");
-		}
-		System.out.println(temperatura);
+        if (microfono == 0) {
+            microfono = 1;
+        } else {
+            microfono = 0;
+        }
+        System.out.println("microfono: " + microfono);
 
-	}
+    }
 
-	private void luzButtonActionPerformed(ActionEvent evt) {
-		// TODO add your handling code here:
-		// TODO add your handling code here:
+    private void automaticoButtonActionPerformed(ActionEvent evt) {
+        // TODO add your handling code here:
 
-//luzButton.setIcon(new ImageIcon(azul.getImage()));
-		if (intensidad == 0) {
-			intensidad = 1;
-		} else if (intensidad != 0) {
-			if (intensidad == 3) {
-				intensidad = 0;
-			} else {
-				intensidad++;
-			}
-		} else if (false /* esterar dos segundos */) {
-			intensidad = 0;
-		}
-		System.out.println("Intensidad: " + intensidad);
-		switch (intensidad) {
-		case 0:
-			// luzButton.setBackground(new java.awt.Color(204, 204, 204));
-			break;
-		case 1:
-			// luzButton.setBackground(new java.awt.Color(153, 255, 153));
-			break;
-		case 2:
-			// luzButton.setBackground(new java.awt.Color(102, 255, 102));
-			break;
-		case 3:
-			// luzButton.setBackground(new java.awt.Color(0, 255, 0));
-			break;
-		// luzButton.setIcon(new ImageIcon(luz.get(intensidad).getImage()));
+        if (automatico == 0) {
+            automatico = 1;
+        } else {
+            automatico = 0;
+        }
 
-		}
-		luzButton.setIcon(new ImageIcon(luz.get(intensidad).getImage()));
-	}
+        System.out.println("automatico: " + automatico);
+    }
 
-	private void bajarPButtonActionPerformed(ActionEvent evt) {
-		// TODO add your handling code here:
-		persiana = 2;
-		System.out.println(persiana);
-	}
+    private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+        System.out.println("borrar preset");
+    }
 
-	private void subirPButtonActionPerformed(ActionEvent evt) {
-		// TODO add your handling code here:
-		persiana = 1;
-		System.out.println(persiana);
+    private void atrasButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+        System.out.println("atras");
+    }
+    ////
 
-	}
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String comando = e.getActionCommand();
 
-	private void pararPButtonActionPerformed(ActionEvent evt) {
-		// TODO add your handling code here:
-		persiana = 0;
-		System.out.println(persiana);
-	}
+        if (comando.equals("menu")) {
+            // cambiarPanel(crearPanelMenu());
+        }
+        if (comando.equals("home")) {
+            cambiarPanel(crearPanelPrincipal(oraingoa));
+        }
+        /*
+         * if (comando.equals("preset")) { try { cambiarPanel(crearPanelPreset()); }
+         * catch (ClassNotFoundException e1) { // TODO Auto-generated catch block
+         * e1.printStackTrace(); } }
+         */
+        if (comando.equals("graficos")) {
+            // cambiarPanel(crearPanelGraficos());
+        }
+        if (comando.equals("crearPreset")) {
+            // cambiarPanel(crearPanelPresetCreator());
+        }
+    }
 
-	private void microfonoButtonActionPerformed(ActionEvent evt) {
+    public static void crearDatosDePrueba() {
+        List<Preset> listaPreset = new ArrayList<Preset>();
 
-		if (microfono == 0) {
-			microfono = 1;
-		} else {
-			microfono = 0;
-		}
-		System.out.println("microfono: " + microfono);
+        Preset preset = new Preset("prueba", 20, 0, 1, 0, 0);
+        Preset preset2 = new Preset("prueba2", 25, 0, 2, 0, 0);
+        listaPreset.add(preset);
+        listaPreset.add(preset2);
 
-	}
+        FileOutputStream fichero = null;
+        preset.mostrarDatos();
 
-	private void automaticoButtonActionPerformed(ActionEvent evt) {
-		// TODO add your handling code here:
+        try {
+            fichero = new FileOutputStream("datos.txt");
+            ObjectOutputStream tuberia = new ObjectOutputStream(fichero);
+            tuberia.writeObject(listaPreset);
 
-		if (automatico == 0) {
-			automatico = 1;
-		} else {
-			automatico = 0;
-		}
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
 
-		System.out.println("automatico: " + automatico);
-	}
+            ex.printStackTrace();
+        } finally {
+            try {
+                fichero.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        System.out.println("-------------------------------------------------------");
+    }
 
-	private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-		System.out.println("borrar preset");
-	}
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        final String PANEL_HOME = "home", PANEL_MENU = "menu", PANEL_PRESET = "preset", PANEL_GRAFICOS = "graficos",
+                PANEL_CREAR_PRESET = "crearPreset";
 
-	private void atrasButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-		System.out.println("atras");
-	}
-////
+        String propiedad = evt.getPropertyName();
+       
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		String comando = e.getActionCommand();
+        JPanel panel;
 
-		if (comando.equals("menu")) {
-			// cambiarPanel(crearPanelMenu());
-		}
-		if (comando.equals("home")) {
-			cambiarPanel(crearPanelPrincipal(oraingoa));
-		}
-		/*
-		 * if (comando.equals("preset")) { try { cambiarPanel(crearPanelPreset()); }
-		 * catch (ClassNotFoundException e1) { // TODO Auto-generated catch block
-		 * e1.printStackTrace(); } }
-		 */
-		if (comando.equals("graficos")) {
-			cambiarPanel(crearPanelGraficos());
-		}
-		if (comando.equals("crearPreset")) {
-			// cambiarPanel(crearPanelPresetCreator());
-		}
-	}
+        switch (propiedad) {
+            case PANEL_HOME:
+                PanelPrincipall panelPrincipal = new PanelPrincipall(oraingoa, controlador);
+                panel = panelPrincipal.getPanel();
+                cambiarPanel(panel);
+                break;
+            case PANEL_MENU:
+                PanelMenu panelMenu = new PanelMenu(controlador);
+                panel = panelMenu.getPanel();
+                cambiarPanel(panel);
+                break;
+            case PANEL_PRESET:
+                PanelPreset panelPreset = new PanelPreset(controlador);
+                panel = panelPreset.getPanel();
+                cambiarPanel(panel);
+                break;
+            case PANEL_GRAFICOS:
+                PanelGraficos panelGraficos = new PanelGraficos(controlador);
+                panel = panelGraficos.getPanel();
+                cambiarPanel(panel);
+                break;
 
-	public static void crearDatosDePrueba() {
-		List<Preset> listaPreset = new ArrayList<Preset>();
+            default:
+                System.out.println("cagaste");
 
-		Preset preset = new Preset("prueba", 20, 0, 1, 0, 0);
-		Preset preset2 = new Preset("prueba2", 25, 0, 2, 0, 0);
-		listaPreset.add(preset);
-		listaPreset.add(preset2);
+        }
 
-		FileOutputStream fichero = null;
-		preset.mostrarDatos();
+    }
 
-		try {
-			fichero = new FileOutputStream("datos.txt");
-			ObjectOutputStream tuberia = new ObjectOutputStream(fichero);
-			tuberia.writeObject(listaPreset);
+    public static void main(String[] args) throws ClassNotFoundException {
+        Preset porDefecto = new Preset("UNO MAS UNO ES ILEGALISIMO", 20, 0, 0, 0, 0);
+        crearDatosDePrueba();
+        Principal programa = new Principal(porDefecto);
 
-		} catch (FileNotFoundException ex) {
-			ex.printStackTrace();
-		} catch (IOException ex) {
-
-			ex.printStackTrace();
-		} finally {
-			try {
-				fichero.close();
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			}
-		}
-		System.out.println("-------------------------------------------------------");
-	}
-
-	@Override
-	public void propertyChange(PropertyChangeEvent evt) {
-		final String PANEL_HOME = "home", PANEL_MENU = "menu", PANEL_PRESET = "preset", PANEL_GRAFICOS = "graficos",
-				PANEL_CREAR_PRESET = "crearPreset";
-
-		String propiedad = evt.getPropertyName();
-		System.out.println(propiedad);
-
-		JPanel panel;
-
-		switch (propiedad) {
-		case PANEL_HOME:
-			PanelPrincipall panelPrincipal = new PanelPrincipall(oraingoa, controlador);
-			panel = panelPrincipal.getPanel();
-			cambiarPanel(panel);
-			break;
-		case PANEL_MENU:
-			PanelMenu panelMenu = new PanelMenu(controlador);
-			panel = panelMenu.getPanel();
-			cambiarPanel(panel);
-			break;
-		case PANEL_PRESET:
-			PanelPreset panelPreset = new PanelPreset(controlador);
-			panel = panelPreset.getPanel();
-			cambiarPanel(panel);
-			break;
-		default:
-			System.out.println("cagaste");
-
-		}
-
-	}
-
-	public static void main(String[] args) throws ClassNotFoundException {
-		Preset porDefecto = new Preset("UNO MAS UNO ES ILEGALISIMO", 20, 0, 0, 0, 0);
-		crearDatosDePrueba();
-		Principal programa = new Principal(porDefecto);
-
-	}
+    }
 
 }

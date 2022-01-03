@@ -72,7 +72,7 @@ public class PanelPreset extends JFrame {
 		for (int i = 0; i < listaPreset.size(); i++) {
 
 			JButton botone = new JButton();
-			//botone.setFont(new Font("Product San", 0, 20));
+			botone.setFont(new java.awt.Font("Product San", 0, 20));
 			botone.setText(listaPreset.get(i).getNombre());
 
 			// urrengoa=(listaPreset.get(i));
