@@ -1,42 +1,31 @@
 package src;
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.GroupLayout.ParallelGroup;
 
 import paneles.PanelMenu;
 import paneles.PanelPrincipall;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.ImageIcon;
 
-
-public class Principal extends JFrame implements ActionListener {
+public class Principal extends JFrame implements ActionListener,PropertyChangeListener {
 	final static int MAX_PANELES = 5;
 	final static String COM_CHANGE = "cambiar";
 	JPanel panelVisual;
@@ -65,7 +54,7 @@ public class Principal extends JFrame implements ActionListener {
     int persiana=0;
     int microfono=0;
     int automatico=0;
-    Preset horaingoa;
+    Preset oraingoa;
     List<ImageIcon> luz;
     ImageIcon bombilla0,bombilla1,bombilla2,bombilla3;
     ImageIcon home;
@@ -90,7 +79,7 @@ public class Principal extends JFrame implements ActionListener {
 		
 		
 		panelVisual = new JPanel(new CardLayout());
-		this.setSize(1600, 900);
+		this.setSize(1600, 900);//1600 900
 		this.setLocation(100, 50);
 		this.setContentPane(panelVisual);
 		//cambiarPanel(crearPanelPrincipal(porDefecrto));
@@ -113,7 +102,7 @@ public class Principal extends JFrame implements ActionListener {
 	
 	
     private JPanel crearPanelPrincipal(Preset preset){
-        horaingoa=preset;
+        oraingoa=preset;
 
         JPanel panel;
         PanelPrincipall panelPrincipal = new PanelPrincipall(preset);
@@ -937,7 +926,7 @@ private void atrasButtonActionPerformed(java.awt.event.ActionEvent evt) {
 			cambiarPanel(crearPanelMenu());
 		}
 		if(comando.equals("home")) {
-			cambiarPanel(crearPanelPrincipal(horaingoa));
+			cambiarPanel(crearPanelPrincipal(oraingoa));
 		}
 		if(comando.equals("preset")) {
 			try {
@@ -987,12 +976,18 @@ public static void crearDatosDePrueba(){
     }
     System.out.println("-------------------------------------------------------");
 }
+
+@Override
+public void propertyChange(PropertyChangeEvent evt) {
+	JPanel panel = (JPanel) evt.getNewValue();
+	cambiarPanel(panel);
+}
 	
 
     public static void main(String[] args) throws ClassNotFoundException {
-        Preset porDefecrto = new Preset("UNO MAS UNO ES ILEGALISIMO", 20, 0, 0, 0, 0);
+        Preset porDefecto = new Preset("UNO MAS UNO ES ILEGALISIMO", 20, 0, 0, 0, 0);
 		crearDatosDePrueba();
-        Principal programa = new Principal(porDefecrto);
+        Principal programa = new Principal(porDefecto);
         
        
 

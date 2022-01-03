@@ -2,13 +2,16 @@ package src;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeSupport;
 
 
 public class Controlador implements ActionListener {
+	final static String PANEL_MENU = "menu",PANEL_HOME="home",PANEL_PRESET="preset",PANEL_GRAFICOS="graficos",PANEL_CREAR_PRESET="crearPreset";
+	PropertyChangeSupport conector;
 
-
-
-
+	public Controlador() {
+		conector = new PropertyChangeSupport(this);
+	}
 
 
 
@@ -21,6 +24,7 @@ public class Controlador implements ActionListener {
 		if(comando.equals("menu")) {
 			//cambiarPanel(crearPanelMenu());
 			System.out.println("menu");
+//			conector.firePropertyChange(comando, -1, panel);
 		}
 		if(comando.equals("home")) {
 			//cambiarPanel(crearPanelPrincipal(horaingoa));
