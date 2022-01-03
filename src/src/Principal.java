@@ -58,12 +58,13 @@ public class Principal extends JFrame implements ActionListener,PropertyChangeLi
     List<ImageIcon> luz;
     ImageIcon bombilla0,bombilla1,bombilla2,bombilla3;
     ImageIcon home;
-	
+	Controlador controlador;
 	
 	
 	public Principal(Preset porDefecrto) {
 		super("Smurt House");
-		
+		controlador = new Controlador();
+        controlador.addPropertyChangeListener(this);
 		
 		luz=new ArrayList<ImageIcon>();
         
@@ -82,15 +83,14 @@ public class Principal extends JFrame implements ActionListener,PropertyChangeLi
 		this.setSize(1600, 900);//1600 900
 		this.setLocation(100, 50);
 		this.setContentPane(panelVisual);
-		//cambiarPanel(crearPanelPrincipal(porDefecrto));
-        cambiarPanel(crearPanelMenu());
+		cambiarPanel(crearPanelPrincipal(porDefecrto));
+        //cambiarPanel(crearPanelMenu());
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setResizable(false);
     }
 	
-	public Principal() {
-    }
+	
 
     public Container cambiarPanel(JPanel panelActual) {
 		panelVisual.removeAll();
@@ -979,8 +979,10 @@ public static void crearDatosDePrueba(){
 
 @Override
 public void propertyChange(PropertyChangeEvent evt) {
+	System.out.println("meme");
 	JPanel panel = (JPanel) evt.getNewValue();
 	cambiarPanel(panel);
+	
 }
 	
 
