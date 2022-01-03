@@ -5,8 +5,6 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-import paneles.PanelMenu;
-
 
 public class Controlador implements ActionListener {
 	final static String PANEL_MENU = "menu",

@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -30,21 +28,9 @@ public class Principal extends JFrame implements ActionListener, PropertyChangeL
     JPanel panelVisual;
 
     // Variables declaration - do not modify
-    private javax.swing.JPanel panelHome;
-    private javax.swing.JButton automaticoButton;
-    private javax.swing.JButton bajarPButton;
-    private javax.swing.JButton bajarTButton;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    public javax.swing.JButton luzButton;
-    private javax.swing.JButton menuButon;
-    private javax.swing.JButton microfonoButton;
-    private javax.swing.JPanel panelPersiana;
-    private javax.swing.JPanel panelRojo;
-    private javax.swing.JPanel panelTemperatura;
-    private javax.swing.JButton pararPButton;
-    private javax.swing.JButton subirPButton;
-    private javax.swing.JFormattedTextField titulo;
-    private javax.swing.JButton upButton;
+
+
+
     // End of variables declaration
 
     String nombre;
@@ -104,129 +90,7 @@ public class Principal extends JFrame implements ActionListener, PropertyChangeL
         return panel;
     }
 
-    private JPanel crearPanelPreset() {
 
-        JPanel panel;
-        PanelPreset panelPreset = new PanelPreset(controlador);
-        panel = panelPreset.getPanel();
-
-        return panel;
-    }
-
-
-    private void jFormattedTextField1ActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void bajarTButtonActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
-        if (temperatura > 17) {
-            temperatura--;
-            jFormattedTextField1.setText(temperatura + "");
-        }
-        System.out.println(temperatura);
-
-    }
-
-    private void upButtonActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
-        // TODO add your handling code here:
-        if (temperatura < 30) {
-            temperatura++;
-            jFormattedTextField1.setText(temperatura + "");
-        }
-        System.out.println(temperatura);
-
-    }
-
-    private void luzButtonActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
-        // TODO add your handling code here:
-
-        // luzButton.setIcon(new ImageIcon(azul.getImage()));
-        if (intensidad == 0) {
-            intensidad = 1;
-        } else if (intensidad != 0) {
-            if (intensidad == 3) {
-                intensidad = 0;
-            } else {
-                intensidad++;
-            }
-        } else if (false /* esterar dos segundos */) {
-            intensidad = 0;
-        }
-        System.out.println("Intensidad: " + intensidad);
-        switch (intensidad) {
-            case 0:
-                // luzButton.setBackground(new java.awt.Color(204, 204, 204));
-                break;
-            case 1:
-                // luzButton.setBackground(new java.awt.Color(153, 255, 153));
-                break;
-            case 2:
-                // luzButton.setBackground(new java.awt.Color(102, 255, 102));
-                break;
-            case 3:
-                // luzButton.setBackground(new java.awt.Color(0, 255, 0));
-                break;
-            // luzButton.setIcon(new ImageIcon(luz.get(intensidad).getImage()));
-
-        }
-        luzButton.setIcon(new ImageIcon(luz.get(intensidad).getImage()));
-    }
-
-    private void bajarPButtonActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
-        persiana = 2;
-        System.out.println(persiana);
-    }
-
-    private void subirPButtonActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
-        persiana = 1;
-        System.out.println(persiana);
-
-    }
-
-    private void pararPButtonActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
-        persiana = 0;
-        System.out.println(persiana);
-    }
-
-    private void microfonoButtonActionPerformed(ActionEvent evt) {
-
-        if (microfono == 0) {
-            microfono = 1;
-        } else {
-            microfono = 0;
-        }
-        System.out.println("microfono: " + microfono);
-
-    }
-
-    private void automaticoButtonActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
-
-        if (automatico == 0) {
-            automatico = 1;
-        } else {
-            automatico = 0;
-        }
-
-        System.out.println("automatico: " + automatico);
-    }
-
-    private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-        System.out.println("borrar preset");
-    }
-
-    private void atrasButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-        System.out.println("atras");
-    }
-    ////
 
     @Override
     public void actionPerformed(ActionEvent e) {

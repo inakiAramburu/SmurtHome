@@ -1,41 +1,17 @@
 package paneles;
 
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import src.Controlador;
 import src.Preset;
-
-import javax.swing.GroupLayout.ParallelGroup;
-
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.ImageIcon;
 
 public class PanelPrincipall extends JFrame {
 
@@ -70,7 +46,7 @@ public class PanelPrincipall extends JFrame {
 
 	public PanelPrincipall(Preset preset,Controlador controlador) {
 
-		controlador=controlador;
+		this.controlador=controlador;
 		luz=new ArrayList<ImageIcon>();
         
         bombilla0 =new ImageIcon("iconos/PanelPrincipal/luz/bombilla0.png");
@@ -376,7 +352,7 @@ public class PanelPrincipall extends JFrame {
             }else{
             intensidad++;
             }
-        }else if(false /* esterar dos segundos*/){
+        }else {
          intensidad=0;
         }
         System.out.println("Intensidad: "+intensidad);

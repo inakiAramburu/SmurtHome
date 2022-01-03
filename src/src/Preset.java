@@ -1,8 +1,6 @@
 package src;
 import java.io.Serializable;
 
-import javax.swing.JFormattedTextField;
-
 public class Preset implements Serializable {
 	
 	
