@@ -49,7 +49,7 @@ public class Preset implements Serializable {
 	public int getPersiana() {
 		return persiana;
 	}
-	public void setPersianas(int persiana) {
+	public void setPersiana(int persiana) {
 		this.persiana = persiana;
 	}
 	public int getIntensidad() {
@@ -68,6 +68,7 @@ public class Preset implements Serializable {
     }
 
     public void mostrarDatos() {
+		System.out.println("-------------------------------------------------------");
 		System.out.println("Nombre: " + nombre);
 		System.out.println("Temperatura: " + temperatura);
 		System.out.println("Intensidad: " + intensidad);

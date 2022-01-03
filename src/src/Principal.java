@@ -2,8 +2,6 @@ package src;
 
 import java.awt.CardLayout;
 import java.awt.Container;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.FileNotFoundException;
@@ -17,19 +15,18 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import paneles.PanelCrearPreset;
 import paneles.PanelGraficos;
 import paneles.PanelMenu;
 import paneles.PanelPreset;
 import paneles.PanelPrincipall;
 
-public class Principal extends JFrame implements ActionListener, PropertyChangeListener {
+public class Principal extends JFrame implements PropertyChangeListener {
     final static int MAX_PANELES = 5;
     final static String COM_CHANGE = "cambiar";
     JPanel panelVisual;
 
     // Variables declaration - do not modify
-
-
 
     // End of variables declaration
 
@@ -49,17 +46,6 @@ public class Principal extends JFrame implements ActionListener, PropertyChangeL
         super("Smurt House");
         controlador = new Controlador();
         controlador.addPropertyChangeListener(this);
-
-        luz = new ArrayList<ImageIcon>();
-
-        bombilla0 = new ImageIcon("iconos/PanelPrincipal/luz/bombilla0.png");
-        bombilla1 = new ImageIcon("iconos/PanelPrincipal/luz/bombilla1.png");
-        bombilla2 = new ImageIcon("iconos/PanelPrincipal/luz/bombilla2.png");
-        bombilla3 = new ImageIcon("iconos/PanelPrincipal/luz/bombilla3.png");
-        luz.add(bombilla0);
-        luz.add(bombilla1);
-        luz.add(bombilla2);
-        luz.add(bombilla3);
 
         panelVisual = new JPanel(new CardLayout());
         this.setSize(1600, 900);// 1600 900
@@ -90,41 +76,24 @@ public class Principal extends JFrame implements ActionListener, PropertyChangeL
         return panel;
     }
 
-
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String comando = e.getActionCommand();
-
-        if (comando.equals("menu")) {
-            // cambiarPanel(crearPanelMenu());
-        }
-        if (comando.equals("home")) {
-            cambiarPanel(crearPanelPrincipal(oraingoa));
-        }
-        /*
-         * if (comando.equals("preset")) { try { cambiarPanel(crearPanelPreset()); }
-         * catch (ClassNotFoundException e1) { // TODO Auto-generated catch block
-         * e1.printStackTrace(); } }
-         */
-        if (comando.equals("graficos")) {
-            // cambiarPanel(crearPanelGraficos());
-        }
-        if (comando.equals("crearPreset")) {
-            // cambiarPanel(crearPanelPresetCreator());
-        }
-    }
-
     public static void crearDatosDePrueba() {
         List<Preset> listaPreset = new ArrayList<Preset>();
 
-        Preset preset = new Preset("prueba", 20, 0, 1, 0, 0);
-        Preset preset2 = new Preset("prueba2", 25, 0, 2, 0, 0);
+        Preset preset = new Preset("prueba", 20, 1, 1, 0, 0);
+        Preset preset2 = new Preset("prueba2", 25, 2, 2, 0, 0);
+        Preset preset3 = new Preset("prueba3", 30, 3, 1, 0, 0);
+        Preset preset4 = new Preset("prueba4", 15, 0, 2, 0, 0);
+        Preset preset5 = new Preset("prueba5", 10, 0, 1, 0, 0);
+        Preset preset6 = new Preset("prueba6", 5, 0, 2, 0, 0);
+        Preset preset7 = new Preset("prueba7", 0, 0, 1, 0, 0);
+
         listaPreset.add(preset);
         listaPreset.add(preset2);
+        listaPreset.add(preset3);
+        listaPreset.add(preset4);
 
         FileOutputStream fichero = null;
-        preset.mostrarDatos();
+        
 
         try {
             fichero = new FileOutputStream("datos.txt");
@@ -152,7 +121,6 @@ public class Principal extends JFrame implements ActionListener, PropertyChangeL
                 PANEL_CREAR_PRESET = "crearPreset";
 
         String propiedad = evt.getPropertyName();
-       
 
         JPanel panel;
 
@@ -177,17 +145,32 @@ public class Principal extends JFrame implements ActionListener, PropertyChangeL
                 panel = panelGraficos.getPanel();
                 cambiarPanel(panel);
                 break;
+            case "CambioDePanel":
+
+                Preset preset = (Preset) evt.getNewValue();
+                oraingoa = preset;
+                panelPrincipal = new PanelPrincipall(oraingoa, controlador);
+                panel = panelPrincipal.getPanel();
+                cambiarPanel(panel);
+                break;
+            case PANEL_CREAR_PRESET:
+                PanelCrearPreset panelCrearPreset = new PanelCrearPreset(controlador);
+                panel = panelCrearPreset.getPanel();
+                cambiarPanel(panel);
 
             default:
                 System.out.println("cagaste");
+                break;
+
 
         }
+        
 
     }
 
     public static void main(String[] args) throws ClassNotFoundException {
-        Preset porDefecto = new Preset("UNO MAS UNO ES ILEGALISIMO", 20, 0, 0, 0, 0);
-        crearDatosDePrueba();
+        Preset porDefecto = new Preset("UNO MAS UNO ES ILEGALISIMO", 20, 2, 0, 0, 0);
+        crearDatosDePrueba();//si comentas esta linea los datos del fichero no se sobreescriben 
         Principal programa = new Principal(porDefecto);
 
     }

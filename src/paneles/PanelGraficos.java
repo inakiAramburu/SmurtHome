@@ -19,6 +19,7 @@ public class PanelGraficos extends JFrame {
 
     public PanelGraficos(Controlador controlador) {
         this.controlador = controlador;
+        
 
         panelGraficos = new javax.swing.JPanel();
         homeButon = new javax.swing.JButton();

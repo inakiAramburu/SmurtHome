@@ -30,7 +30,8 @@ public class PanelPreset extends JFrame {
     JFormattedTextField titulo;
     Controlador controlador;
     ImageIcon home;
-
+	
+	
     public PanelPreset(Controlador controlador){
         this.controlador=controlador;
 
@@ -53,6 +54,9 @@ public class PanelPreset extends JFrame {
 		anadirButton = new javax.swing.JButton();
 		borrarButton = new javax.swing.JButton();
 		atrasButton = new javax.swing.JButton();
+
+		atrasButton.setActionCommand("menu");
+		atrasButton.addActionListener(controlador);
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,8 +82,8 @@ public class PanelPreset extends JFrame {
 			// urrengoa=(listaPreset.get(i));
 
 			// a�adir propertichange listener al boton
-
-			botone.setActionCommand("home");
+			//botone.addPropertyChangeListener(controlador);
+			botone.setActionCommand(listaPreset.get(i).getNombre());
 			botone.addActionListener(controlador);
 			jPanel2.add(botone);
 			botones.add(botone);
@@ -216,4 +220,9 @@ public class PanelPreset extends JFrame {
 		return panelPreset;
 	}
     
+
+
+
+	
+
 }

@@ -1,52 +1,55 @@
 package paneles;
 
-import java.awt.event.ActionEvent;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import src.Controlador;
 import src.Preset;
 
-public class PanelPrincipall extends JFrame {
+public class PanelCrearPreset extends JFrame {
 
-	private JPanel panelHome;
-	private JButton automaticoButton;
-	private JButton bajarPButton;
-	private JButton bajarTButton;
-	private JFormattedTextField jFormattedTextField1;
-	public JButton luzButton;
-	private JButton menuButon;
-	private JButton microfonoButton;
-	private JPanel panelPersiana;
-	private JPanel panelRojo;
-	private JPanel panelTemperatura;
-	private JButton pararPButton;
-	private JButton subirPButton;
-	private JFormattedTextField titulo;
-	private JButton upButton;
+    private javax.swing.JButton bajarPButton;
+    private javax.swing.JButton bajarTButton;
+    private javax.swing.JButton cancelarButton;
+    private javax.swing.JPanel creadorPreset;
+    private javax.swing.JButton guardarButton;
+    private javax.swing.JFormattedTextField temperaturaTXT;
+    public javax.swing.JButton luzButton;
+    private javax.swing.JButton menuButon;
+    private javax.swing.JPanel panelPersiana;
+    private javax.swing.JPanel panelRojo;
+    private javax.swing.JPanel panelTemperatura;
+    private javax.swing.JButton pararPButton;
+    private javax.swing.JButton subirPButton;
+    private javax.swing.JFormattedTextField titulo;
+    private javax.swing.JButton upButton;
+    Controlador controlador;
 
-	String nombre;
+    String nombre;
     int temperatura=20;
     int intensidad=0;
     int persiana=0;
     int microfono=0;
     int automatico=0;
-   Controlador controlador;
-    Preset preset;
 
     List<ImageIcon> luz;
     ImageIcon bombilla0,bombilla1,bombilla2,bombilla3;
     ImageIcon home;
 
-	public PanelPrincipall(Preset preset,Controlador controlador) {
-       this.preset=preset;
-		this.controlador=controlador;
+
+    public PanelCrearPreset(Controlador controlador){
+        this.controlador=controlador;
 		luz=new ArrayList<ImageIcon>();
         
         bombilla0 =new ImageIcon("iconos/PanelPrincipal/luz/bombilla0.png");
@@ -59,19 +62,23 @@ public class PanelPrincipall extends JFrame {
         luz.add(bombilla3);
 		
 		//horaingoa=preset;
-        this.nombre=preset.getNombre();
-        this.temperatura=preset.getTemperatura();
-        this.intensidad=preset.getIntensidad();
-        this.persiana=preset.getPersiana();
-        this.microfono=preset.getMicrofono();
-        this.automatico=preset.getAutomatico();
+        this.nombre="jeje";
+        this.temperatura=20;    
+        this.intensidad=0;
+        this.persiana=0;
+        this.microfono=1;
+        this.automatico=0;
         
 
-        panelHome = new javax.swing.JPanel();
+        
+       
+
+
+        creadorPreset = new javax.swing.JPanel();
         panelTemperatura = new javax.swing.JPanel();
         upButton = new javax.swing.JButton();
         bajarTButton = new javax.swing.JButton();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        temperaturaTXT = new javax.swing.JFormattedTextField();
         luzButton = new javax.swing.JButton();
         panelPersiana = new javax.swing.JPanel();
         subirPButton = new javax.swing.JButton();
@@ -79,11 +86,11 @@ public class PanelPrincipall extends JFrame {
         bajarPButton = new javax.swing.JButton();
         menuButon = new javax.swing.JButton();
         titulo = new javax.swing.JFormattedTextField();
-        automaticoButton = new javax.swing.JButton();
+        guardarButton = new javax.swing.JButton();
         panelRojo = new javax.swing.JPanel();
-        microfonoButton = new javax.swing.JButton();
+        cancelarButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+       
 
         panelTemperatura.setPreferredSize(new java.awt.Dimension(400, 260));
 
@@ -110,22 +117,18 @@ public class PanelPrincipall extends JFrame {
             }
         });
 
-        jFormattedTextField1.setEditable(false);
-        jFormattedTextField1.setBorder(null);
-        jFormattedTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jFormattedTextField1.setText(temperatura+"");
-        jFormattedTextField1.setFont(new java.awt.Font("Product San", 0, 60));
-        jFormattedTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextField1ActionPerformed(evt);
-            }
-        });
+        temperaturaTXT.setEditable(false);
+        temperaturaTXT.setBorder(null);
+        temperaturaTXT.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        temperaturaTXT.setText(temperatura+"");
+        temperaturaTXT.setFont(new java.awt.Font("Product San", 0, 60));
+        
 
         javax.swing.GroupLayout panelTemperaturaLayout = new javax.swing.GroupLayout(panelTemperatura);
         panelTemperatura.setLayout(panelTemperaturaLayout);
         panelTemperaturaLayout.setHorizontalGroup(
             panelTemperaturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(temperaturaTXT, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
             .addComponent(bajarTButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(upButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -134,7 +137,7 @@ public class PanelPrincipall extends JFrame {
             .addGroup(panelTemperaturaLayout.createSequentialGroup()
                 .addComponent(upButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(temperaturaTXT, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(bajarTButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -197,21 +200,25 @@ public class PanelPrincipall extends JFrame {
         menuButon.setIcon(new ImageIcon(home.getImage()));
         menuButon.setBorder(null);
         menuButon.setBorderPainted(false);
-        menuButon.setActionCommand("menu");
-        menuButon.addActionListener(controlador);
+       
+        menuButon.setActionCommand("home");
+		menuButon.addActionListener(controlador);
 
-        titulo.setEditable(false);
         titulo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        titulo.setText(nombre);
+        titulo.setText("Nombre");
         titulo.setFont(new java.awt.Font("Product San", 0, 60));
+        
 
-        automaticoButton.setFont(new java.awt.Font("Product San", 0, 60));
-        automaticoButton.setText("Automatico");
-        automaticoButton.addActionListener(new java.awt.event.ActionListener() {
+        guardarButton.setFont(new java.awt.Font("Product San", 0, 60));
+        guardarButton.setText("Guardar");
+        guardarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                automaticoButtonActionPerformed(evt);
+                guardarButtonActionPerformed(evt);
             }
         });
+
+        guardarButton.setActionCommand("home");
+		guardarButton.addActionListener(controlador);
 
         panelRojo.setBackground(new java.awt.Color(255, 0, 0));
 
@@ -226,64 +233,67 @@ public class PanelPrincipall extends JFrame {
             .addGap(0, 150, Short.MAX_VALUE)
         );
 
-        microfonoButton.setFont(new java.awt.Font("Product San", 0, 60));
-        microfonoButton.setText("Microfono");
-        microfonoButton.addActionListener(new java.awt.event.ActionListener() {
+        cancelarButton.setFont(new java.awt.Font("Product San", 0, 60));
+        cancelarButton.setText("Cancelar");
+        cancelarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                microfonoButtonActionPerformed(evt);
+                cancelarButtonActionPerformed(evt);
             }
         });
+        cancelarButton.setActionCommand("preset");
+		cancelarButton.addActionListener(controlador);
 
-        javax.swing.GroupLayout panelHomeLayout = new javax.swing.GroupLayout(panelHome);
-        panelHome.setLayout(panelHomeLayout);
-        panelHomeLayout.setHorizontalGroup(
-            panelHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelHomeLayout.createSequentialGroup()
-                .addGroup(panelHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelHomeLayout.createSequentialGroup()
+        
+        javax.swing.GroupLayout creadorPresetLayout = new javax.swing.GroupLayout(creadorPreset);
+        creadorPreset.setLayout(creadorPresetLayout);
+        creadorPresetLayout.setHorizontalGroup(
+            creadorPresetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(creadorPresetLayout.createSequentialGroup()
+                .addGroup(creadorPresetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(creadorPresetLayout.createSequentialGroup()
                         .addGap(90, 90, 90)
                         .addComponent(menuButon, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(60, 60, 60)
                         .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(60, 60, 60)
                         .addComponent(panelRojo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelHomeLayout.createSequentialGroup()
+                    .addGroup(creadorPresetLayout.createSequentialGroup()
                         .addGap(160, 160, 160)
                         .addComponent(panelTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(60, 60, 60)
                         .addComponent(luzButton, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(60, 60, 60)
                         .addComponent(panelPersiana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelHomeLayout.createSequentialGroup()
-                        .addGap(250, 250, 250)
-                        .addComponent(automaticoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(400, 400, 400)
-                        .addComponent(microfonoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(creadorPresetLayout.createSequentialGroup()
+                        .addGap(451, 451, 451)
+                        .addComponent(guardarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(90, 90, 90))
         );
-        panelHomeLayout.setVerticalGroup(
-            panelHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHomeLayout.createSequentialGroup()
+        creadorPresetLayout.setVerticalGroup(
+            creadorPresetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, creadorPresetLayout.createSequentialGroup()
                 .addGap(80, 80, 80)
-                .addGroup(panelHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(creadorPresetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(menuButon, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelRojo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
-                .addGroup(panelHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelHomeLayout.createSequentialGroup()
+                .addGroup(creadorPresetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(creadorPresetLayout.createSequentialGroup()
                         .addComponent(panelPersiana, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(panelHomeLayout.createSequentialGroup()
-                        .addGroup(panelHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addContainerGap())
+                    .addGroup(creadorPresetLayout.createSequentialGroup()
+                        .addGroup(creadorPresetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(panelTemperatura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(panelHomeLayout.createSequentialGroup()
+                            .addGroup(creadorPresetLayout.createSequentialGroup()
                                 .addComponent(luzButton, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(100, 100, 100)
-                        .addGroup(panelHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(automaticoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(microfonoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(creadorPresetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(guardarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(110, 110, 110))))
         );
 
@@ -291,56 +301,55 @@ public class PanelPrincipall extends JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(creadorPreset, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(creadorPreset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
 
         pack();
+
+
+
+    }
+
+
+    public JPanel getPanel(){
+		return creadorPreset;
 	}
 
 
 
-
-
-
-
-
-
-
-
-
-
-	private void bajarTButtonActionPerformed(ActionEvent evt) {                                             
+    private void bajarTButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
         if(temperatura>17){
             temperatura--;
-            jFormattedTextField1.setText(temperatura+"");
+            temperaturaTXT.setText(temperatura+"");
         }
         System.out.println(temperatura);
-        preset.setTemperatura(temperatura);
-
+        
     }                                            
 
-    private void upButtonActionPerformed(ActionEvent evt) {                                         
+    private void upButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
          // TODO add your handling code here:
         if(temperatura<30){
             temperatura++;
-            jFormattedTextField1.setText(temperatura+"");
-            
+            temperaturaTXT.setText(temperatura+"");
         }
         System.out.println(temperatura);
-        preset.setTemperatura(temperatura);
-
+        
         
     }                                        
 
-    private void luzButtonActionPerformed(ActionEvent evt) {                                          
+    private void luzButtonActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
          // TODO add your handling code here:
          
@@ -359,69 +368,134 @@ public class PanelPrincipall extends JFrame {
          intensidad=0;
         }
         System.out.println("Intensidad: "+intensidad);
-       
+ 
          luzButton.setIcon( new ImageIcon(luz.get(intensidad).getImage()));
-         preset.setIntensidad(intensidad);
-
     }                                         
 
-    private void bajarPButtonActionPerformed(ActionEvent evt) {                                             
+    private void bajarPButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
           persiana=2;
         System.out.println(persiana);
-        preset.setPersiana(persiana);
     }                                            
 
-    private void subirPButtonActionPerformed(ActionEvent evt) {                                             
+    private void subirPButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
         persiana=1;
         System.out.println(persiana);
-        preset.setPersiana(persiana);
+        
         
         
     }                                            
 
-    private void pararPButtonActionPerformed(ActionEvent evt) {                                             
+    private void pararPButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
           persiana=0;
         System.out.println(persiana);
-        preset.setPersiana(persiana);
     }                                            
 
-    private void microfonoButtonActionPerformed(ActionEvent evt) {                                                
-        
-        
-      if (microfono==0){
-    	  microfono=1;
-      }else{
-    	  microfono=0;
-      }
-      System.out.println("microfono: "+microfono);
-       preset.setMicrofono(microfono);
-    	
-    	
-    	
-    }                                               
-
-    private void automaticoButtonActionPerformed(ActionEvent evt) {                                                 
+    private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
         // TODO add your handling code here:
-    	
-    	 if (automatico==0) {
-    		 automatico=1;
-         }else {
-        	 automatico=0;
-         }
-         
-         System.out.println("automatico: "+automatico);
-            preset.setAutomatico(automatico);
-    }                                           
-	private void jFormattedTextField1ActionPerformed(ActionEvent evt) {                                                     
-        // TODO add your handling code here:
-    }                                                    
+        System.out.println("cancelar");
+        
+    }                                              
+
+    private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        List<Preset> listaPreset=null;
+        try {
+            listaPreset = presetGuardados();
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        for (int i = 0; i < listaPreset.size(); i++) {
+            if (listaPreset.get(i).getNombre().equals(titulo.getText())){
+                JOptionPane.showMessageDialog(null, "Ya existe un preset con ese nombre");
+                return;
+            }
+        }
 
 
-	public JPanel getPanel(){
-		return panelHome;
+
+
+
+       
+        Preset preset = new Preset(titulo.getText(),temperatura,intensidad,persiana,microfono,automatico);
+        
+     
+      
+
+        listaPreset.add(preset);
+
+       
+
+       
+
+
+        anadirDatos(listaPreset);
+
+        System.out.println("Guardar");
+        preset.mostrarDatos();
+      
+      
+
+
+
+    }
+
+
+    private List<Preset> presetGuardados() throws ClassNotFoundException {
+
+		FileInputStream ficheroEntrada = null;
+		List<Preset> listaPreset = new ArrayList<Preset>();
+		try {
+			ficheroEntrada = new FileInputStream("datos.txt");
+			try (ObjectInputStream tuberia = new ObjectInputStream(ficheroEntrada)) {
+				listaPreset = (List<Preset>) tuberia.readObject();
+			}
+			for (Preset p : listaPreset) {
+				p.mostrarDatos();
+			}
+
+		} catch (FileNotFoundException ex) {
+			ex.printStackTrace();
+		} catch (IOException ex) {
+
+			ex.printStackTrace();
+		}
+
+		return listaPreset;
 	}
 
+
+    private void anadirDatos(List<Preset> listaPreset) {
+
+        FileOutputStream fichero = null;
+        
+
+        try {
+            fichero = new FileOutputStream("datos.txt");
+            ObjectOutputStream tuberia = new ObjectOutputStream(fichero);
+            tuberia.writeObject(listaPreset);
+
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
+
+            ex.printStackTrace();
+        } finally {
+            try {
+                fichero.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }  
+
+   
+
+
+
+
+    
 }
