@@ -18,8 +18,8 @@ public class PanelMenu extends JFrame {
     ImageIcon home;
     Controlador controlador;
 
-    public PanelMenu(){
-        controlador=new Controlador();
+    public PanelMenu(Controlador controlador){
+        this.controlador=controlador;
         panelMenu = new javax.swing.JPanel();
         homeButon = new javax.swing.JButton();
         titulo = new javax.swing.JFormattedTextField();

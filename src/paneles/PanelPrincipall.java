@@ -68,9 +68,9 @@ public class PanelPrincipall extends JFrame {
     ImageIcon bombilla0,bombilla1,bombilla2,bombilla3;
     ImageIcon home;
 
-	public PanelPrincipall(Preset preset) {
+	public PanelPrincipall(Preset preset,Controlador controlador) {
 
-		controlador=new Controlador();
+		controlador=controlador;
 		luz=new ArrayList<ImageIcon>();
         
         bombilla0 =new ImageIcon("iconos/PanelPrincipal/luz/bombilla0.png");
