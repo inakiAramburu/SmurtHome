@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import com.fazecast.jSerialComm.SerialPort;
+import com.fazecast.jSerialComm.*;
 
 
 public class Principal {
