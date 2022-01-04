@@ -15,7 +15,7 @@ public class PanelMenu extends JFrame {
     JPanel panelRojo;
     JButton presetButton;
     JFormattedTextField titulo;
-    ImageIcon home;
+    ImageIcon home,presetIcon,graficosIcon;
     Controlador controlador;
 
     public PanelMenu(Controlador controlador){
@@ -32,6 +32,9 @@ public class PanelMenu extends JFrame {
         homeButon.setBackground(new java.awt.Color(51, 255, 255));
         homeButon.setFont(new java.awt.Font("Product San", 0, 20));
         home =new ImageIcon("iconos/PanelPrincipal/casa.png");
+        presetIcon=new ImageIcon("iconos/Menu/user.png");
+        graficosIcon=new ImageIcon("iconos/Menu/graph.png");
+        
         homeButon.setIcon(new ImageIcon(home.getImage()));
         homeButon.setBorder(null);
         homeButon.setBorderPainted(false);
@@ -59,12 +62,15 @@ public class PanelMenu extends JFrame {
             .addGap(0, 150, Short.MAX_VALUE)
         );
 
-        presetButton.setText("Preset");
-        
+        //presetButton.setText("Preset");
+        presetButton.setIcon(new ImageIcon(presetIcon.getImage()));
+
         presetButton.setActionCommand("preset");
         presetButton.addActionListener(controlador);
 
-        graficosButton1.setText("Graficos");
+        //graficosButton1.setText("Graficos");
+        graficosButton1.setIcon(new ImageIcon(graficosIcon.getImage()));
+
         graficosButton1.setActionCommand("graficos");
         graficosButton1.addActionListener(controlador);
 

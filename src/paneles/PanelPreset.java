@@ -29,12 +29,14 @@ public class PanelPreset extends JFrame {
     JPanel panelRojo;
     JFormattedTextField titulo;
     Controlador controlador;
-    ImageIcon home;
+    ImageIcon home,atrasIcon,anadirIcon,borrarIcon;
 	
 	
     public PanelPreset(Controlador controlador){
         this.controlador=controlador;
-
+        atrasIcon=new ImageIcon("iconos/Preset/back.png");
+        anadirIcon=new ImageIcon("iconos/Preset/add.png");
+        borrarIcon=new ImageIcon("iconos/Preset/subtr.png");
         List<JButton> botones = new ArrayList<JButton>();
 
 		List<Preset> listaPreset=null;
@@ -112,17 +114,23 @@ public class PanelPreset extends JFrame {
 		jPanel2.setLayout(new java.awt.GridLayout(1, 3));
 		jScrollPane2.setViewportView(jPanel2);
 
-		anadirButton.setText("+");
+		//anadirButton.setText("+");
+		anadirButton.setIcon(new ImageIcon(anadirIcon.getImage()));
+
+		
 		anadirButton.setActionCommand("crearPreset");
 		anadirButton.addActionListener(controlador);
 
-		borrarButton.setText("-");
+		//borrarButton.setText("-");
+		borrarButton.setIcon(new ImageIcon(borrarIcon.getImage()));
 
 		borrarButton.setActionCommand("borrarPreset");
 		borrarButton.addActionListener(controlador);
 
 
-		atrasButton.setText("Atras");
+		//atrasButton.setText("Atras");
+		atrasButton.setIcon(new ImageIcon(atrasIcon.getImage()));
+
 
 		javax.swing.GroupLayout panelPresetLayout = new javax.swing.GroupLayout(panelPreset);
 		panelPreset.setLayout(panelPresetLayout);

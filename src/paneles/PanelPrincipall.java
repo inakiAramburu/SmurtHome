@@ -41,7 +41,7 @@ public class PanelPrincipall extends JFrame {
     Preset preset;
 
     List<ImageIcon> luz;
-    ImageIcon bombilla0,bombilla1,bombilla2,bombilla3;
+    ImageIcon bombilla0,bombilla1,bombilla2,bombilla3,subirTemperatura,bajarTemperatua,subirPersiana,bajarPersiana,pararPersiana;
     ImageIcon home;
 
 	public PanelPrincipall(Preset preset,Controlador controlador) {
@@ -53,6 +53,13 @@ public class PanelPrincipall extends JFrame {
         bombilla1 =new ImageIcon("iconos/PanelPrincipal/luz/bombilla1.png");
         bombilla2 =new ImageIcon("iconos/PanelPrincipal/luz/bombilla2.png");
         bombilla3 =new ImageIcon("iconos/PanelPrincipal/luz/bombilla3.png");
+        subirTemperatura = new ImageIcon("iconos/PanelPrincipal/Temperatura/more.png");
+        bajarTemperatua = new ImageIcon("iconos/PanelPrincipal/Temperatura/less.png");
+       
+        subirPersiana = new ImageIcon("iconos/PanelPrincipal/Persiana/up.png");
+        bajarPersiana = new ImageIcon("iconos/PanelPrincipal/Persiana/down.png");
+        pararPersiana = new ImageIcon("iconos/PanelPrincipal/Persiana/stop.png");
+
         luz.add(bombilla0);
         luz.add(bombilla1);
         luz.add(bombilla2);
@@ -89,7 +96,9 @@ public class PanelPrincipall extends JFrame {
 
         upButton.setBackground(new java.awt.Color(255, 51, 51));
         upButton.setFont(new java.awt.Font("Product San", 0, 60));
-        upButton.setText("+");
+        //upButton.setText("+");
+
+        upButton.setIcon(new ImageIcon(subirTemperatura.getImage()));
         upButton.setToolTipText("");
         upButton.setBorder(null);
         upButton.setBorderPainted(false);
@@ -101,7 +110,9 @@ public class PanelPrincipall extends JFrame {
 
         bajarTButton.setBackground(new java.awt.Color(0, 204, 255));
         bajarTButton.setFont(new java.awt.Font("Product San", 0, 60));
-        bajarTButton.setText("-");
+       //bajarTButton.setText("-");
+        bajarTButton.setIcon(new ImageIcon(bajarTemperatua.getImage()));
+
         bajarTButton.setBorder(null);
         bajarTButton.setBorderPainted(false);
         bajarTButton.addActionListener(new java.awt.event.ActionListener() {
@@ -150,7 +161,11 @@ public class PanelPrincipall extends JFrame {
         panelPersiana.setPreferredSize(new java.awt.Dimension(400, 260));
 
         subirPButton.setFont(new java.awt.Font("Product San", 0, 60));
-        subirPButton.setText("Subir");
+        //subirPButton.setText("Subir");
+        subirPButton.setBorderPainted(false);
+
+        subirPButton.setIcon(new ImageIcon(subirPersiana.getImage()));
+
         subirPButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 subirPButtonActionPerformed(evt);
@@ -158,7 +173,10 @@ public class PanelPrincipall extends JFrame {
         });
 
         pararPButton.setFont(new java.awt.Font("Product San", 0, 60));
-        pararPButton.setText("||");
+        //pararPButton.setText("||");
+        pararPButton.setIcon(new ImageIcon(pararPersiana.getImage()));
+        pararPButton.setBorderPainted(false);
+
         pararPButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pararPButtonActionPerformed(evt);
@@ -166,7 +184,10 @@ public class PanelPrincipall extends JFrame {
         });
 
         bajarPButton.setFont(new java.awt.Font("Product San", 0, 60));
-        bajarPButton.setText("Bajar");
+        //bajarPButton.setText("Bajar");
+        bajarPButton.setIcon(new ImageIcon(bajarPersiana.getImage()));
+        bajarPButton.setBorderPainted(false);
+
         bajarPButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bajarPButtonActionPerformed(evt);

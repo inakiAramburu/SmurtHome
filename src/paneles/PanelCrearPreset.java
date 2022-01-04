@@ -217,7 +217,7 @@ public class PanelCrearPreset extends JFrame {
             }
         });
 
-        guardarButton.setActionCommand("home");
+        guardarButton.setActionCommand("menu");
 		guardarButton.addActionListener(controlador);
 
         panelRojo.setBackground(new java.awt.Color(255, 0, 0));
