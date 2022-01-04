@@ -111,7 +111,7 @@ public class Controlador implements ActionListener {
 
 		if (BorrarPresetBool) {
 			System.out.println("entras en lo de borrar");
-			BorrarPresetBool = false;
+			BorrarPresetBool = true;
 
 			List<Preset> listaPreset = null;
 			try {

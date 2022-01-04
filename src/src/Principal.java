@@ -158,6 +158,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
                 PanelCrearPreset panelCrearPreset = new PanelCrearPreset(controlador);
                 panel = panelCrearPreset.getPanel();
                 cambiarPanel(panel);
+                break;
             case BORRAR_PRESET:
                 PanelBorrarPreset  PanelBorrarPreset = new PanelBorrarPreset(controlador);
                 panel = PanelBorrarPreset.getPanel();
