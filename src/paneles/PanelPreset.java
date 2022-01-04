@@ -118,6 +118,10 @@ public class PanelPreset extends JFrame {
 
 		borrarButton.setText("-");
 
+		borrarButton.setActionCommand("borrarPreset");
+		borrarButton.addActionListener(controlador);
+
+
 		atrasButton.setText("Atras");
 
 		javax.swing.GroupLayout panelPresetLayout = new javax.swing.GroupLayout(panelPreset);

@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import paneles.PanelBorrarPreset;
 import paneles.PanelCrearPreset;
 import paneles.PanelGraficos;
 import paneles.PanelMenu;
@@ -118,7 +119,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         final String PANEL_HOME = "home", PANEL_MENU = "menu", PANEL_PRESET = "preset", PANEL_GRAFICOS = "graficos",
-                PANEL_CREAR_PRESET = "crearPreset";
+                PANEL_CREAR_PRESET = "crearPreset",BORRAR_PRESET = "borrarPreset";
 
         String propiedad = evt.getPropertyName();
 
@@ -157,7 +158,11 @@ public class Principal extends JFrame implements PropertyChangeListener {
                 PanelCrearPreset panelCrearPreset = new PanelCrearPreset(controlador);
                 panel = panelCrearPreset.getPanel();
                 cambiarPanel(panel);
-
+            case BORRAR_PRESET:
+                PanelBorrarPreset  PanelBorrarPreset = new PanelBorrarPreset(controlador);
+                panel = PanelBorrarPreset.getPanel();
+                cambiarPanel(panel);
+                break;
             default:
                 System.out.println("cagaste");
                 break;
