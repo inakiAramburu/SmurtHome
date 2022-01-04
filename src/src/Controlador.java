@@ -24,8 +24,7 @@ public class Controlador implements ActionListener {
 			BORRAR_PRESET = "borrarPreset";
 	PropertyChangeSupport conector;
 
-	// final static PanelMenu panelMenu=new PanelMenu();
-
+	
 	public Controlador() {
 		conector = new PropertyChangeSupport(this);
 	}
@@ -47,7 +46,7 @@ public class Controlador implements ActionListener {
 		if (comando.equals(PANEL_HOME)) {
 			presetBool = false;
 			BorrarPresetBool = false;
-			// cambiarPanel(crearPanelPrincipal(horaingoa));
+			
 			System.out.println("homee");
 			conector.firePropertyChange(PANEL_HOME, false, 12);
 
@@ -55,7 +54,7 @@ public class Controlador implements ActionListener {
 		if (comando.equals(PANEL_MENU)) {
 			presetBool = false;
 			BorrarPresetBool = false;
-			// cambiarPanel(crearPanelMenu());
+			
 			System.out.println("menu");
 			conector.firePropertyChange(PANEL_MENU, false, 12);
 		}
@@ -71,7 +70,7 @@ public class Controlador implements ActionListener {
 			BorrarPresetBool = false;
 			System.out.println("graficoss");
 			conector.firePropertyChange(PANEL_GRAFICOS, false, 12);
-			// cambiarPanel(crearPanelGraficos());
+			
 		}
 		if (comando.equals(PANEL_CREAR_PRESET)) {
 			presetBool = false;
@@ -79,7 +78,7 @@ public class Controlador implements ActionListener {
 			System.out.println("crearPreset");
 			conector.firePropertyChange(PANEL_CREAR_PRESET, false, 12);
 
-			// cambiarPanel(crearPanelPresetCreator());
+			
 		}
 		if (comando.equals(BORRAR_PRESET)) {
 			presetBool = false;
@@ -87,14 +86,14 @@ public class Controlador implements ActionListener {
 			System.out.println("borrarPreset");
 			conector.firePropertyChange(BORRAR_PRESET, false, 12);
 		}
-
+		//esto es para cuando le das a un boton de un preset
 		if (presetBool) {
 			List<Preset> listaPreset = null;
 			BorrarPresetBool = false;
 			try {
 				listaPreset = presetGuardados();
 			} catch (ClassNotFoundException e1) {
-				// TODO Auto-generated catch block
+				
 				e1.printStackTrace();
 			}
 
@@ -103,12 +102,12 @@ public class Controlador implements ActionListener {
 					presetBool = false;
 					System.out.println("EL GANADORE ES: " + listaPreset.get(i).getNombre());
 					conector.firePropertyChange("CambioDePanel", false, listaPreset.get(i));
-					// cambiarPanel(crearPanelPreset(preset));
+					
 				}
 			}
 
 		}
-
+		//esto es para borrar el preset
 		if (BorrarPresetBool) {
 			System.out.println("entras en lo de borrar");
 			BorrarPresetBool = true;
@@ -117,7 +116,7 @@ public class Controlador implements ActionListener {
 			try {
 				listaPreset = presetGuardados();
 			} catch (ClassNotFoundException e1) {
-				// TODO Auto-generated catch block
+				
 				e1.printStackTrace();
 			}
 
@@ -131,7 +130,7 @@ public class Controlador implements ActionListener {
 					listaPreset.remove(i);
 					anadirDatos(listaPreset);
 					conector.firePropertyChange(BORRAR_PRESET, false, 12);
-					// cambiarPanel(crearPanelPreset(preset));
+				
 				}
 			}
 
