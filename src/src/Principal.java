@@ -49,14 +49,14 @@ public class Principal extends JFrame implements PropertyChangeListener {
         controlador.addPropertyChangeListener(this);
 
         panelVisual = new JPanel(new CardLayout());
-        this.setSize(1600, 900);// 1600 900
+        this.setSize(1600, 950);// 1600 900
         this.setLocation(100, 50);
         this.setContentPane(panelVisual);
         cambiarPanel(crearPanelPrincipal(porDefecrto));
         // cambiarPanel(crearPanelPreset());
         this.setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setResizable(false);
+        this.setResizable(true);
     }
 
     public Container cambiarPanel(JPanel panelActual) {
