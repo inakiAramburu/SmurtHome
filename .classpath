@@ -6,11 +6,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Aritz/Desktop/POPBL 3/Deskargak/jSerialComm-2.6.2.jar" sourcepath="jSerialComm-2.6.2/src">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="librerias/cgjsapi.jar"/>
+	<classpathentry kind="lib" path="librerias/jSerialComm-2.8.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

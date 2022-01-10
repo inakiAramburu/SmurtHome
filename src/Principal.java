@@ -1,4 +1,4 @@
-import com.fazecast.jSerialComm.*;
+import com.fazecast.jSerialComm.SerialPort;
 
 public class Principal {
 	SerialPort[] puertos;
