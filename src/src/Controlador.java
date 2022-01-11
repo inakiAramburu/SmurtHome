@@ -86,6 +86,12 @@ public class Controlador implements ActionListener {
 			System.out.println("borrarPreset");
 			conector.firePropertyChange(BORRAR_PRESET, false, 12);
 		}
+		if (comando.equals("cambiar")) {
+			presetBool = false;
+			BorrarPresetBool = true;
+			System.out.println("cabiar");
+			
+		}
 		//esto es para cuando le das a un boton de un preset
 		if (presetBool) {
 			List<Preset> listaPreset = null;
@@ -105,7 +111,7 @@ public class Controlador implements ActionListener {
 					
 				}
 			}
-
+			
 		}
 		//esto es para borrar el preset
 		if (BorrarPresetBool) {
@@ -188,4 +194,10 @@ public class Controlador implements ActionListener {
 		return listaPreset;
 	}
 
+
+
+	public PropertyChangeSupport getConector() {
+		 
+		return this.conector;
+	}
 }

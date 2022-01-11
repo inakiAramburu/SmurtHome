@@ -45,6 +45,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
 
     public Principal(Preset porDefecrto) {
         super("Smurt House");
+        oraingoa = porDefecrto;
         controlador = new Controlador();
         controlador.addPropertyChangeListener(this);
 
@@ -163,6 +164,12 @@ public class Principal extends JFrame implements PropertyChangeListener {
                 PanelBorrarPreset  PanelBorrarPreset = new PanelBorrarPreset(controlador);
                 panel = PanelBorrarPreset.getPanel();
                 cambiarPanel(panel);
+                break;
+            case "refrescarPrincipal":
+                
+            cambiarPanel(crearPanelPrincipal(oraingoa));
+            System.out.println("ll");
+
                 break;
             default:
                 System.out.println("cagaste");

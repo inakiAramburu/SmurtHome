@@ -22,12 +22,21 @@ import javax.speech.recognition.ResultEvent;
 import javax.speech.recognition.ResultToken;
 import javax.speech.recognition.RuleGrammar;
 
+import src.Controlador;
+import src.Preset;
+
 public class Escucha extends ResultAdapter {
 
 	static Recognizer recognizer;
 	String gst;
+	Preset preset;
+	Controlador controlador;
+	public Escucha(Preset preset, Controlador controlador) {
+		this.controlador=controlador;
+		this.preset = preset;
+    }
 
-	@Override
+    @Override
 	public void resultAccepted(ResultEvent re) {
 		try {
 			Result res = (Result) (re.getSource());
@@ -48,8 +57,11 @@ public class Escucha extends ResultAdapter {
 				System.exit(0);
 
 			} if (lista.get(0).equals("Temperatura")) {
-				//recognizer.deallocate();
-				
+				recognizer.deallocate();
+				int temperatura = preset.getTemperatura();
+				preset.setTemperatura(temperatura + 1);
+				controlador.getConector().firePropertyChange("refrescarPrincipal", false, 12);
+
 				System.out.println("jajaja");
 				
 				
@@ -78,7 +90,7 @@ public void escucha(int microfono) {
 				RuleGrammar rg = recognizer.loadJSGF(grammar1);
 				rg.setEnabled(true);
 
-				recognizer.addResultListener(new Escucha());
+				recognizer.addResultListener(new Escucha(this.preset,this.controlador));
 
 				System.out.println("Empieze Dictado");
 				recognizer.commitChanges();

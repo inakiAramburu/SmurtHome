@@ -48,9 +48,10 @@ public class PanelPrincipall extends JFrame {
     Escucha escucha ;
 
 	public PanelPrincipall(Preset preset,Controlador controlador) {
-		escucha = new Escucha();
+		
        this.preset=preset;
 		this.controlador=controlador;
+        escucha = new Escucha(preset,this.controlador);
 		luz=new ArrayList<ImageIcon>();
         
         bombilla0 =new ImageIcon("iconos/PanelPrincipal/luz/bombilla0.png");
@@ -74,8 +75,7 @@ public class PanelPrincipall extends JFrame {
         this.temperatura=preset.getTemperatura();
         this.intensidad=preset.getIntensidad();
         this.persiana=preset.getPersiana();
-        //this.microfono=preset.getMicrofono();
-        this.microfono=1;
+        this.microfono=preset.getMicrofono();
         this.automatico=preset.getAutomatico();
         escucha.escucha(microfono);
         
@@ -345,6 +345,7 @@ public class PanelPrincipall extends JFrame {
 	private void bajarTButtonActionPerformed(ActionEvent evt) {                                             
         // TODO add your handling code here:
         if(temperatura>17){
+            temperatura=preset.getTemperatura();
             temperatura--;
             jFormattedTextField1.setText(temperatura+"");
         }
@@ -357,6 +358,7 @@ public class PanelPrincipall extends JFrame {
         // TODO add your handling code here:
          // TODO add your handling code here:
         if(temperatura<30){
+            temperatura=preset.getTemperatura();
             temperatura++;
             jFormattedTextField1.setText(temperatura+"");
             
@@ -426,6 +428,8 @@ public class PanelPrincipall extends JFrame {
       }else{
     	  microfono=0;
       }
+
+      escucha.escucha(microfono);
       System.out.println("microfono: "+microfono);
        preset.setMicrofono(microfono);
     	
