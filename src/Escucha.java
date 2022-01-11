@@ -7,10 +7,19 @@
  *
  * @author Cmop
  */
-import javax.speech.*;
-import javax.speech.recognition.*;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+
+import javax.speech.Central;
+import javax.speech.EngineModeDesc;
+import javax.speech.recognition.Recognizer;
+import javax.speech.recognition.Result;
+import javax.speech.recognition.ResultAdapter;
+import javax.speech.recognition.ResultEvent;
+import javax.speech.recognition.ResultToken;
+import javax.speech.recognition.RuleGrammar;
 
 public class Escucha extends ResultAdapter {
 
@@ -19,25 +28,24 @@ public class Escucha extends ResultAdapter {
 
 	@Override
 	public void resultAccepted(ResultEvent re) {
-	Lee lee = new Lee();
+	
 
 		try {
 			Result res = (Result) (re.getSource());
 			ResultToken tokens[] = res.getBestTokens();
 
-			String args[] = new String[1];
-			args[0] = "";
+			List<String>lista=new ArrayList<>();
 			for (int i = 0; i < tokens.length; i++) {
-				gst = tokens[i].getSpokenText();
-				args[0] += gst + " ";
+				  = tokens[i].getSpokenText();
+				lista.add(gst);
 				System.out.print(gst + " ");
 				//lee.voz(gst.toString());
 			}
 			System.out.println();
 			if (gst.contains("salir")) {
 				recognizer.deallocate();
-				args[0] = "Hasta la proxima Cmop 'salir'!";
-				System.out.println(args[0]);
+				
+				System.out.println("Hasta la proxima Cmop 'salir'!");
 				
 				System.exit(0);
 			} else {
