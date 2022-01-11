@@ -10,6 +10,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import reconocimientoDeVoz.Escucha;
 import src.Controlador;
 import src.Preset;
 
@@ -44,7 +45,10 @@ public class PanelPrincipall extends JFrame {
     ImageIcon bombilla0,bombilla1,bombilla2,bombilla3,subirTemperatura,bajarTemperatua,subirPersiana,bajarPersiana,pararPersiana;
     ImageIcon home;
 
+    Escucha escucha ;
+
 	public PanelPrincipall(Preset preset,Controlador controlador) {
+       
        this.preset=preset;
 		this.controlador=controlador;
 		luz=new ArrayList<ImageIcon>();
@@ -70,10 +74,12 @@ public class PanelPrincipall extends JFrame {
         this.temperatura=preset.getTemperatura();
         this.intensidad=preset.getIntensidad();
         this.persiana=preset.getPersiana();
-        this.microfono=preset.getMicrofono();
+        //this.microfono=preset.getMicrofono();
+        this.microfono=1;
         this.automatico=preset.getAutomatico();
         
-
+        //escucha = new Escucha(this.microfono);
+        
         panelHome = new javax.swing.JPanel();
         panelTemperatura = new javax.swing.JPanel();
         upButton = new javax.swing.JButton();
@@ -414,6 +420,9 @@ public class PanelPrincipall extends JFrame {
         
       if (microfono==0){
     	  microfono=1;
+          
+
+
       }else{
     	  microfono=0;
       }

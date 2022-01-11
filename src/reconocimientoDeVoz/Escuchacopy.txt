@@ -22,7 +22,7 @@ import javax.speech.recognition.ResultEvent;
 import javax.speech.recognition.ResultToken;
 import javax.speech.recognition.RuleGrammar;
 
-public class Escucha extends ResultAdapter {
+public class Escuchacopy extends ResultAdapter {
 
 	static Recognizer recognizer;
 	String gst;
@@ -64,32 +64,27 @@ public class Escucha extends ResultAdapter {
 		}
 	}
 
-	//public Escucha(int microfono) {
-	public static void main(){	
-		int microfono=1;
-		
-		if (microfono==1){
-			try {
-				recognizer = Central.createRecognizer(new EngineModeDesc(Locale.ROOT));
-				recognizer.allocate();
+	public static void main(String args[]) {
+		try {
+			recognizer = Central.createRecognizer(new EngineModeDesc(Locale.ROOT));
+			recognizer.allocate();
 
-				FileReader grammar1 = new FileReader("librerias/SimpleGrammarES2.txt");
+			FileReader grammar1 = new FileReader("librerias/SimpleGrammarES2.txt");
 
-				RuleGrammar rg = recognizer.loadJSGF(grammar1);
-				rg.setEnabled(true);
+			RuleGrammar rg = recognizer.loadJSGF(grammar1);
+			rg.setEnabled(true);
 
-				recognizer.addResultListener(new Escucha());
+			recognizer.addResultListener(new Escucha());
 
-				System.out.println("Empieze Dictado");
-				recognizer.commitChanges();
+			System.out.println("Empieze Dictado");
+			recognizer.commitChanges();
 
-				recognizer.requestFocus();
-				recognizer.resume();
-			} catch (Exception e) {
-				System.out.println("Exception en " + e.toString());
-				e.printStackTrace();
-				System.exit(0);
-			}
+			recognizer.requestFocus();
+			recognizer.resume();
+		} catch (Exception e) {
+			System.out.println("Exception en " + e.toString());
+			e.printStackTrace();
+			System.exit(0);
 		}
 	}
 }
