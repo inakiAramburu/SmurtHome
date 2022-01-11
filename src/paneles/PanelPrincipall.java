@@ -48,7 +48,7 @@ public class PanelPrincipall extends JFrame {
     Escucha escucha ;
 
 	public PanelPrincipall(Preset preset,Controlador controlador) {
-       
+		escucha = new Escucha();
        this.preset=preset;
 		this.controlador=controlador;
 		luz=new ArrayList<ImageIcon>();
@@ -77,8 +77,8 @@ public class PanelPrincipall extends JFrame {
         //this.microfono=preset.getMicrofono();
         this.microfono=1;
         this.automatico=preset.getAutomatico();
+        escucha.escucha(microfono);
         
-        //escucha = new Escucha(this.microfono);
         
         panelHome = new javax.swing.JPanel();
         panelTemperatura = new javax.swing.JPanel();

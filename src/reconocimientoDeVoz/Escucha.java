@@ -64,9 +64,9 @@ public class Escucha extends ResultAdapter {
 		}
 	}
 
-	//public Escucha(int microfono) {
-	public static void main(){	
-		int microfono=1;
+public void escucha(int microfono) {
+	//public static void main(){	
+		
 		
 		if (microfono==1){
 			try {
