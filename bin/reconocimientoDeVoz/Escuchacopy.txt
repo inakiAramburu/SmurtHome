@@ -22,21 +22,12 @@ import javax.speech.recognition.ResultEvent;
 import javax.speech.recognition.ResultToken;
 import javax.speech.recognition.RuleGrammar;
 
-import src.Controlador;
-import src.Preset;
-
-public class Escucha extends ResultAdapter {
+public class Escuchacopy extends ResultAdapter {
 
 	static Recognizer recognizer;
 	String gst;
-	Preset preset;
-	Controlador controlador;
-	public Escucha(Preset preset, Controlador controlador) {
-		this.controlador=controlador;
-		this.preset = preset;
-    }
 
-    @Override
+	@Override
 	public void resultAccepted(ResultEvent re) {
 		try {
 			Result res = (Result) (re.getSource());
@@ -57,11 +48,8 @@ public class Escucha extends ResultAdapter {
 				System.exit(0);
 
 			} if (lista.get(0).equals("Temperatura")) {
-				recognizer.deallocate();
-				int temperatura = preset.getTemperatura();
-				preset.setTemperatura(temperatura + 1);
-				controlador.getConector().firePropertyChange("home", false, 12);
-
+				//recognizer.deallocate();
+				
 				System.out.println("jajaja");
 				
 				
@@ -76,32 +64,27 @@ public class Escucha extends ResultAdapter {
 		}
 	}
 
-public void escucha(int microfono) {
-	//public static void main(){	
-		
-		
-		if (microfono==1){
-			try {
-				recognizer = Central.createRecognizer(new EngineModeDesc(Locale.ROOT));
-				recognizer.allocate();
+	public static void main(String args[]) {
+		try {
+			recognizer = Central.createRecognizer(new EngineModeDesc(Locale.ROOT));
+			recognizer.allocate();
 
-				FileReader grammar1 = new FileReader("librerias/SimpleGrammarES2.txt");
+			FileReader grammar1 = new FileReader("librerias/SimpleGrammarES2.txt");
 
-				RuleGrammar rg = recognizer.loadJSGF(grammar1);
-				rg.setEnabled(true);
+			RuleGrammar rg = recognizer.loadJSGF(grammar1);
+			rg.setEnabled(true);
 
-				recognizer.addResultListener(new Escucha(this.preset,this.controlador));
+			recognizer.addResultListener(new Escucha());
 
-				System.out.println("Empieze Dictado");
-				recognizer.commitChanges();
+			System.out.println("Empieze Dictado");
+			recognizer.commitChanges();
 
-				recognizer.requestFocus();
-				recognizer.resume();
-			} catch (Exception e) {
-				System.out.println("Exception en " + e.toString());
-				e.printStackTrace();
-				System.exit(0);
-			}
+			recognizer.requestFocus();
+			recognizer.resume();
+		} catch (Exception e) {
+			System.out.println("Exception en " + e.toString());
+			e.printStackTrace();
+			System.exit(0);
 		}
 	}
 }

@@ -129,7 +129,12 @@ public class Principal extends JFrame implements PropertyChangeListener {
         switch (propiedad) {
             case PANEL_HOME:
                 PanelPrincipall panelPrincipal = new PanelPrincipall(oraingoa, controlador);
-                panel = panelPrincipal.getPanel();
+                PanelGraficos pruebaGraficos = new PanelGraficos(controlador);
+                panel = pruebaGraficos.getPanel();
+                cambiarPanel(panel);
+
+               System.out.println( oraingoa.getTemperatura());
+               panel = panelPrincipal.getPanel();
                 cambiarPanel(panel);
                 break;
             case PANEL_MENU:
@@ -166,8 +171,11 @@ public class Principal extends JFrame implements PropertyChangeListener {
                 cambiarPanel(panel);
                 break;
             case "refrescarPrincipal":
-                
-            cambiarPanel(crearPanelPrincipal(oraingoa));
+                //crear un panle principal y hacer un set de temperatura y intensidad y persianas 
+
+            //cambiarPanel(crearPanelPrincipal(oraingoa));
+
+            
             System.out.println("ll");
 
                 break;
@@ -182,7 +190,8 @@ public class Principal extends JFrame implements PropertyChangeListener {
     }
 
     public static void main(String[] args) throws ClassNotFoundException {
-        Preset porDefecto = new Preset("UNO MAS UNO ES ILEGALISIMO", 20, 2, 0, 0, 0);
+       // Preset porDefecto = new Preset("UNO MAS UNO ES ILEGALISIMO", 20, 2, 0, 0, 0);
+       Preset porDefecto = new Preset("Salon", 20, 2, 0, 0, 0);
         crearDatosDePrueba();//si comentas esta linea los datos del fichero no se sobreescriben 
         Principal programa = new Principal(porDefecto);
 
