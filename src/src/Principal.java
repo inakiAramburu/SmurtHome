@@ -21,6 +21,7 @@ import paneles.PanelGraficos;
 import paneles.PanelMenu;
 import paneles.PanelPreset;
 import paneles.PanelPrincipall;
+import reconocimientoDeVoz.Runee;
 
 public class Principal extends JFrame implements PropertyChangeListener {
     final static int MAX_PANELES = 5;
@@ -37,7 +38,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
     int persiana = 0;
     int microfono = 0;
     int automatico = 0;
-    Preset oraingoa;
+    static Preset oraingoa;
     List<ImageIcon> luz;
     ImageIcon bombilla0, bombilla1, bombilla2, bombilla3;
     ImageIcon home;
@@ -94,7 +95,6 @@ public class Principal extends JFrame implements PropertyChangeListener {
         listaPreset.add(preset4);
 
         FileOutputStream fichero = null;
-        
 
         try {
             fichero = new FileOutputStream("datos.txt");
@@ -113,13 +113,13 @@ public class Principal extends JFrame implements PropertyChangeListener {
                 ex.printStackTrace();
             }
         }
-        System.out.println("-------------------------------------------------------");
+
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         final String PANEL_HOME = "home", PANEL_MENU = "menu", PANEL_PRESET = "preset", PANEL_GRAFICOS = "graficos",
-                PANEL_CREAR_PRESET = "crearPreset",BORRAR_PRESET = "borrarPreset";
+                PANEL_CREAR_PRESET = "crearPreset", BORRAR_PRESET = "borrarPreset";
 
         String propiedad = evt.getPropertyName();
 
@@ -127,7 +127,9 @@ public class Principal extends JFrame implements PropertyChangeListener {
 
         switch (propiedad) {
             case PANEL_HOME:
+                
                 PanelPrincipall panelPrincipal = new PanelPrincipall(oraingoa, controlador);
+
                 panel = panelPrincipal.getPanel();
                 cambiarPanel(panel);
                 break;
@@ -160,23 +162,46 @@ public class Principal extends JFrame implements PropertyChangeListener {
                 cambiarPanel(panel);
                 break;
             case BORRAR_PRESET:
-                PanelBorrarPreset  PanelBorrarPreset = new PanelBorrarPreset(controlador);
+                PanelBorrarPreset PanelBorrarPreset = new PanelBorrarPreset(controlador);
                 panel = PanelBorrarPreset.getPanel();
                 cambiarPanel(panel);
+                break;
+            case "recarga":
+
+
+            if (evt.getOldValue().equals("temperatura")){//temperatura
+
+                oraingoa.setTemperatura((int)evt.getNewValue());
+            }
+            if (evt.getOldValue().equals("intensidad")){//intensidad
+                oraingoa.setIntensidad(3);
+            }
+
+                    
+           
+
+					
+            
+
+
+                    PanelPrincipall panelPrincipal2 = new PanelPrincipall(oraingoa, controlador);
+
+                    panel = panelPrincipal2.getPanel();
+                    cambiarPanel(panel);
                 break;
             default:
                 System.out.println("cagaste");
                 break;
 
-
         }
-        
 
     }
 
     public static void main(String[] args) throws ClassNotFoundException {
         Preset porDefecto = new Preset("UNO MAS UNO ES ILEGALISIMO", 20, 2, 0, 0, 0);
-        crearDatosDePrueba();//si comentas esta linea los datos del fichero no se sobreescriben 
+        // crearDatosDePrueba();//si comentas esta linea los datos del fichero no se
+        // sobreescriben
+
         Principal programa = new Principal(porDefecto);
 
     }

@@ -22,53 +22,87 @@ import javax.speech.recognition.ResultEvent;
 import javax.speech.recognition.ResultToken;
 import javax.speech.recognition.RuleGrammar;
 
+import src.Controlador;
+
 public class Escucha extends ResultAdapter {
 
 	static Recognizer recognizer;
 	String gst;
+	static boolean microfono = false;
+	static Controlador controlador;
+
+	public Escucha(Controlador controlador) {
+		this.controlador = controlador;
+	}
 
 	@Override
 	public void resultAccepted(ResultEvent re) {
-		try {
-			Result res = (Result) (re.getSource());
-			ResultToken tokens[] = res.getBestTokens();
 
-			List<String> lista = new ArrayList<String>();
-		
-		
-			for (int i = 0; i < tokens.length; i++) {
-				gst = tokens[i].getSpokenText();
-				lista.add(gst);
-				System.out.print(gst + " ");
-			}
-			System.out.println();
-			if (gst.equals("salir")) {
-				recognizer.deallocate();
-				System.out.println("Hasta la proxima Cmop 'salir'!");
-				System.exit(0);
+		if (microfono) {
 
-			} if (lista.get(0).equals("Temperatura")) {
-				//recognizer.deallocate();
-				
-				System.out.println("jajaja");
-				
-				
+			try {
+				Result res = (Result) (re.getSource());
+				ResultToken tokens[] = res.getBestTokens();
+
+				List<String> lista = new ArrayList<String>();
+
+				for (int i = 0; i < tokens.length; i++) {
+					gst = tokens[i].getSpokenText();
+					lista.add(gst);
+					System.out.print(gst + " ");
+				}
+				System.out.println();
+				if (gst.equals("salir")) {
+					recognizer.deallocate();
+					System.out.println("Hasta la proxima Cmop 'salir'!");
+					System.exit(0);
+
+				}
+				if (lista.get(0).equals("Temperatura")) {
+					// recognizer.deallocate();
+					
+					if (lista.get(1) != null) {
+						if (Integer.parseInt(lista.get(1)) >= 17 && Integer.parseInt(lista.get(1)) <= 30) {
+
+							controlador.getconector().firePropertyChange("recarga", "temperatura",Integer.parseInt(lista.get(1)));
+
+						} else {
+							System.out.println("Temperatura fuera de rango");
+						}
+
+					}
+
+				} else {
+					recognizer.suspend();
+
+					recognizer.resume();
+				}
+			} catch (Exception ex) {
+				System.out.println("Ha ocurrido algo inesperado " + ex);
 			}
-			else {
-				recognizer.suspend();
-				
-				recognizer.resume();
-			}
-		} catch (Exception ex) {
-			System.out.println("Ha ocurrido algo inesperado " + ex);
+		} else {
+			System.out.println("microfono no activado");
 		}
 	}
 
-public void escucha(int microfono) {
-	//public static void main(){	
-		
-		
-		if (microfono==1){
+	public void setMicrofono(int microfono) {
+		if (microfono == 1) {
+			this.microfono = true;
+		} else {
+			this.microfono = false;
+		}
+
+	}
+
+	public void escucha(int microfono) {
+		// public static void main(){
+		if (microfono == 1) {
+			this.microfono = true;
+		} else {
+			this.microfono = false;
+		}
+
+		if (this.microfono) {
 			try {
 				recognizer = Central.createRecognizer(new EngineModeDesc(Locale.ROOT));
 				recognizer.allocate();
@@ -78,7 +112,7 @@ public void escucha(int microfono) {
 				RuleGrammar rg = recognizer.loadJSGF(grammar1);
 				rg.setEnabled(true);
 
-				recognizer.addResultListener(new Escucha());
+				recognizer.addResultListener(new Escucha(controlador));
 
 				System.out.println("Empieze Dictado");
 				recognizer.commitChanges();
