@@ -66,7 +66,7 @@ public class PanelCrearPreset extends JFrame {
         this.temperatura=20;    
         this.intensidad=0;
         this.persiana=0;
-        this.microfono=1;
+        this.microfono=0;
         this.automatico=0;
         
 

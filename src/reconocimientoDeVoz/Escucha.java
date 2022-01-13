@@ -23,23 +23,37 @@ import javax.speech.recognition.ResultToken;
 import javax.speech.recognition.RuleGrammar;
 
 import src.Controlador;
+<<<<<<< HEAD
+=======
+import src.Preset;
+>>>>>>> branch 'reconnocimiento' of https://github.com/inakiAramburu/SmurtHome.git
 
 public class Escucha extends ResultAdapter {
 
 	static Recognizer recognizer;
 	String gst;
+<<<<<<< HEAD
 	static boolean microfono = false;
 	static Controlador controlador;
 
 	public Escucha(Controlador controlador) {
 		this.controlador = controlador;
 	}
+=======
+	Preset preset;
+	Controlador controlador;
+	public Escucha(Preset preset, Controlador controlador) {
+		this.controlador=controlador;
+		this.preset = preset;
+    }
+>>>>>>> branch 'reconnocimiento' of https://github.com/inakiAramburu/SmurtHome.git
 
-	@Override
+    @Override
 	public void resultAccepted(ResultEvent re) {
 
 		if (microfono) {
 
+<<<<<<< HEAD
 			try {
 				Result res = (Result) (re.getSource());
 				ResultToken tokens[] = res.getBestTokens();
@@ -79,6 +93,17 @@ public class Escucha extends ResultAdapter {
 				}
 			} catch (Exception ex) {
 				System.out.println("Ha ocurrido algo inesperado " + ex);
+=======
+			} if (lista.get(0).equals("Temperatura")) {
+				recognizer.deallocate();
+				int temperatura = preset.getTemperatura();
+				preset.setTemperatura(temperatura + 1);
+				controlador.getConector().firePropertyChange("home", false, 12);
+
+				System.out.println("jajaja");
+				
+				
+>>>>>>> branch 'reconnocimiento' of https://github.com/inakiAramburu/SmurtHome.git
 			}
 		} else {
 			System.out.println("microfono no activado");
@@ -112,7 +137,11 @@ public class Escucha extends ResultAdapter {
 				RuleGrammar rg = recognizer.loadJSGF(grammar1);
 				rg.setEnabled(true);
 
+<<<<<<< HEAD
 				recognizer.addResultListener(new Escucha(controlador));
+=======
+				recognizer.addResultListener(new Escucha(this.preset,this.controlador));
+>>>>>>> branch 'reconnocimiento' of https://github.com/inakiAramburu/SmurtHome.git
 
 				System.out.println("Empieze Dictado");
 				recognizer.commitChanges();
