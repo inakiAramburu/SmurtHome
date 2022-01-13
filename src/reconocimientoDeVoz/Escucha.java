@@ -72,7 +72,16 @@ public class Escucha extends ResultAdapter {
 
 					}
 
-				} else {
+				}if (lista.get(0).equals("enciende la luz")) {
+					// recognizer.deallocate();
+					System.out.println("Enciende la luz");
+					if (lista.get(1) != null) {
+						
+
+					}
+
+				} 
+				else {
 					recognizer.suspend();
 
 					recognizer.resume();
