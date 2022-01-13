@@ -130,17 +130,8 @@ public class Principal extends JFrame implements PropertyChangeListener {
             case PANEL_HOME:
                 
                 PanelPrincipall panelPrincipal = new PanelPrincipall(oraingoa, controlador);
-<<<<<<< HEAD
 
                 panel = panelPrincipal.getPanel();
-=======
-                PanelGraficos pruebaGraficos = new PanelGraficos(controlador);
-                panel = pruebaGraficos.getPanel();
-                cambiarPanel(panel);
-
-               System.out.println( oraingoa.getTemperatura());
-               panel = panelPrincipal.getPanel();
->>>>>>> branch 'reconnocimiento' of https://github.com/inakiAramburu/SmurtHome.git
                 cambiarPanel(panel);
                 break;
             case PANEL_MENU:
@@ -176,7 +167,6 @@ public class Principal extends JFrame implements PropertyChangeListener {
                 panel = PanelBorrarPreset.getPanel();
                 cambiarPanel(panel);
                 break;
-<<<<<<< HEAD
             case "recarga":
 
 
@@ -199,16 +189,6 @@ public class Principal extends JFrame implements PropertyChangeListener {
 
                     panel = panelPrincipal2.getPanel();
                     cambiarPanel(panel);
-=======
-            case "refrescarPrincipal":
-                //crear un panle principal y hacer un set de temperatura y intensidad y persianas 
-
-            //cambiarPanel(crearPanelPrincipal(oraingoa));
-
-            
-            System.out.println("ll");
-
->>>>>>> branch 'reconnocimiento' of https://github.com/inakiAramburu/SmurtHome.git
                 break;
             default:
                 System.out.println("cagaste");
@@ -219,16 +199,10 @@ public class Principal extends JFrame implements PropertyChangeListener {
     }
 
     public static void main(String[] args) throws ClassNotFoundException {
-<<<<<<< HEAD
         Preset porDefecto = new Preset("UNO MAS UNO ES ILEGALISIMO", 20, 2, 0, 0, 0);
         // crearDatosDePrueba();//si comentas esta linea los datos del fichero no se
         // sobreescriben
 
-=======
-       // Preset porDefecto = new Preset("UNO MAS UNO ES ILEGALISIMO", 20, 2, 0, 0, 0);
-       Preset porDefecto = new Preset("Salon", 20, 2, 0, 0, 0);
-        crearDatosDePrueba();//si comentas esta linea los datos del fichero no se sobreescriben 
->>>>>>> branch 'reconnocimiento' of https://github.com/inakiAramburu/SmurtHome.git
         Principal programa = new Principal(porDefecto);
 
     }

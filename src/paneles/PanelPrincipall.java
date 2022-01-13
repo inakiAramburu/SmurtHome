@@ -50,7 +50,6 @@ public class PanelPrincipall extends JFrame  {
     Escucha escucha;
     Runnable r1;
 
-<<<<<<< HEAD
     Thread th1;
 
     public PanelPrincipall(Preset preset, Controlador controlador) {
@@ -58,14 +57,6 @@ public class PanelPrincipall extends JFrame  {
         this.preset = preset;
         this.controlador = controlador;
         escucha = new Escucha(this.controlador);
-=======
-	public PanelPrincipall(Preset preset,Controlador controlador) {
-		
-       this.preset=preset;
-		this.controlador=controlador;
-        escucha = new Escucha(preset,this.controlador);
-		luz=new ArrayList<ImageIcon>();
->>>>>>> branch 'reconnocimiento' of https://github.com/inakiAramburu/SmurtHome.git
         
         luz = new ArrayList<ImageIcon>();
         /*
@@ -88,7 +79,6 @@ public class PanelPrincipall extends JFrame  {
         luz.add(bombilla1);
         luz.add(bombilla2);
         luz.add(bombilla3);
-<<<<<<< HEAD
 
         // horaingoa=preset;
         this.nombre = preset.getNombre();
@@ -98,17 +88,6 @@ public class PanelPrincipall extends JFrame  {
         this.microfono = preset.getMicrofono();
         // this.microfono=1;
         this.automatico = preset.getAutomatico();
-=======
-		
-		//horaingoa=preset;
-        this.nombre=preset.getNombre();
-        this.temperatura=preset.getTemperatura();
-        this.intensidad=preset.getIntensidad();
-        this.persiana=preset.getPersiana();
-        this.microfono=preset.getMicrofono();
-        this.automatico=preset.getAutomatico();
-        escucha.escucha(microfono);
->>>>>>> branch 'reconnocimiento' of https://github.com/inakiAramburu/SmurtHome.git
         
 
         panelHome = new javax.swing.JPanel();
@@ -394,12 +373,7 @@ public class PanelPrincipall extends JFrame  {
 
     private void bajarTButtonActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
-<<<<<<< HEAD
         if (temperatura > 17) {
-=======
-        if(temperatura>17){
-            temperatura=preset.getTemperatura();
->>>>>>> branch 'reconnocimiento' of https://github.com/inakiAramburu/SmurtHome.git
             temperatura--;
             jFormattedTextField1.setText(temperatura + "");
         }
@@ -410,14 +384,8 @@ public class PanelPrincipall extends JFrame  {
 
     private void upButtonActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
-<<<<<<< HEAD
         // TODO add your handling code here:
         if (temperatura < 30) {
-=======
-         // TODO add your handling code here:
-        if(temperatura<30){
-            temperatura=preset.getTemperatura();
->>>>>>> branch 'reconnocimiento' of https://github.com/inakiAramburu/SmurtHome.git
             temperatura++;
             jFormattedTextField1.setText(temperatura + "");
 
@@ -508,67 +476,8 @@ public class PanelPrincipall extends JFrame  {
         // TODO add your handling code here:
     }
 
-<<<<<<< HEAD
     public JPanel getPanel() {
         return panelHome;
     }
-=======
-    private void subirPButtonActionPerformed(ActionEvent evt) {                                             
-        // TODO add your handling code here:
-        persiana=1;
-        System.out.println(persiana);
-        preset.setPersiana(persiana);
-        
-        
-    }                                            
-
-    private void pararPButtonActionPerformed(ActionEvent evt) {                                             
-        // TODO add your handling code here:
-          persiana=0;
-        System.out.println(persiana);
-        preset.setPersiana(persiana);
-    }                                            
-
-    private void microfonoButtonActionPerformed(ActionEvent evt) {                                                
-        
-        
-      if (microfono==0){
-    	  microfono=1;
-          
-
-
-      }else{
-    	  microfono=0;
-      }
-
-      escucha.escucha(microfono);
-      System.out.println("microfono: "+microfono);
-       preset.setMicrofono(microfono);
-    	
-    	
-    	
-    }                                               
-
-    private void automaticoButtonActionPerformed(ActionEvent evt) {                                                 
-        // TODO add your handling code here:
-    	
-    	 if (automatico==0) {
-    		 automatico=1;
-         }else {
-        	 automatico=0;
-         }
-         
-         System.out.println("automatico: "+automatico);
-            preset.setAutomatico(automatico);
-    }                                           
-	private void jFormattedTextField1ActionPerformed(ActionEvent evt) {                                                     
-        // TODO add your handling code here:
-    }                                                    
-
-
-	public JPanel getPanel(){
-		return panelHome;
-	}
->>>>>>> branch 'reconnocimiento' of https://github.com/inakiAramburu/SmurtHome.git
 
 }
