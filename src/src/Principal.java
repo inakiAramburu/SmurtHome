@@ -27,6 +27,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
     final static int MAX_PANELES = 5;
     final static String COM_CHANGE = "cambiar";
     JPanel panelVisual;
+ 
 
     // Variables declaration - do not modify
 
@@ -219,7 +220,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
     }
 
     public static void main(String[] args) throws ClassNotFoundException {
-        Preset porDefecto = new Preset("UNO MAS UNO ES ILEGALISIMO", 20, 2, 0, 0, 0);
+        Preset porDefecto = new Preset("UNO MAS UNO ES ILEGAL", 20, 2, 0, 0, 0);
          crearDatosDePrueba();//si comentas esta linea los datos del fichero no se
         // sobreescriben
 

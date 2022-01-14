@@ -14,6 +14,7 @@ import reconocimientoDeVoz.Escucha;
 import reconocimientoDeVoz.Runee;
 import src.Controlador;
 import src.Preset;
+import src.Uart;
 
 public class PanelPrincipall extends JFrame  {
 
@@ -33,6 +34,7 @@ public class PanelPrincipall extends JFrame  {
     private JFormattedTextField titulo;
     private JButton upButton;
 
+    Uart uart;
     String nombre;
     int temperatura = 20;
     int intensidad = 0;
@@ -57,7 +59,8 @@ public class PanelPrincipall extends JFrame  {
         this.preset = preset;
         this.controlador = controlador;
         escucha = new Escucha(this.controlador);
-        
+        uart=new Uart(preset);
+        uart.start();
         luz = new ArrayList<ImageIcon>();
         /*
         r1 = new Runee(preset);
