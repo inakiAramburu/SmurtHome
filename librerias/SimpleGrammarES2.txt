@@ -27,5 +27,5 @@ public <sentence> =
 <dato13>=Informatica;
 <dato14>=Comida;
 <dato15>=1 | 2 | 3 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 ;
-<dato16>=hp;
+<dato16>=menu;
 <dato17>=Auriculares;

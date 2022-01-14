@@ -133,9 +133,7 @@ public class Controlador implements ActionListener {
 
 	}
 
-	public PropertyChangeSupport getconector() {
-		return this.conector;
-	}
+
 
 	private void anadirDatos(List<Preset> listaPreset) {
 

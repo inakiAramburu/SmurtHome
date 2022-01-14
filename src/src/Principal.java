@@ -128,7 +128,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
 
         switch (propiedad) {
             case PANEL_HOME:
-                
+
                 PanelPrincipall panelPrincipal = new PanelPrincipall(oraingoa, controlador);
 
                 panel = panelPrincipal.getPanel();
@@ -169,26 +169,46 @@ public class Principal extends JFrame implements PropertyChangeListener {
                 break;
             case "recarga":
 
+                if (evt.getOldValue().equals("temperatura")) {// temperatura
 
-            if (evt.getOldValue().equals("temperatura")){//temperatura
+                    oraingoa.setTemperatura((int) evt.getNewValue());
+                }
 
-                oraingoa.setTemperatura((int)evt.getNewValue());
-            }
-            if (evt.getOldValue().equals("intensidad")){//intensidad
-                oraingoa.setIntensidad(3);
-            }
+                if (evt.getOldValue().equals("intensidad")) {// intensidad
+
+                    oraingoa.setIntensidad((int) evt.getNewValue());
+
+                }
+                if (evt.getOldValue().equals("luz")) {// intensidad
+                    if (oraingoa.getIntensidad() == 0) {
+                        oraingoa.setIntensidad(1);
+                    }else{
+                        System.out.println("la luz esta encendida");
+                    }
+                }
+                if (evt.getOldValue().equals("persiana")) {// persiana
+
+                    switch ((String) evt.getNewValue()) {
+                        case "subir":
+                            oraingoa.setPersiana(1);
+                            break;
+                        case "parar":
+                            oraingoa.setPersiana(0);
+                            break;
+                        case "bajar":
+                            oraingoa.setPersiana(2);
+                            break;
+                    }
+                    System.out.println("persiana por micro: " + oraingoa.getPersiana());
 
                     
-           
 
-					
-            
+                }
 
+                PanelPrincipall panelPrincipal2 = new PanelPrincipall(oraingoa, controlador);
 
-                    PanelPrincipall panelPrincipal2 = new PanelPrincipall(oraingoa, controlador);
-
-                    panel = panelPrincipal2.getPanel();
-                    cambiarPanel(panel);
+                panel = panelPrincipal2.getPanel();
+                cambiarPanel(panel);
                 break;
             default:
                 System.out.println("cagaste");
@@ -200,7 +220,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
 
     public static void main(String[] args) throws ClassNotFoundException {
         Preset porDefecto = new Preset("UNO MAS UNO ES ILEGALISIMO", 20, 2, 0, 0, 0);
-        // crearDatosDePrueba();//si comentas esta linea los datos del fichero no se
+         crearDatosDePrueba();//si comentas esta linea los datos del fichero no se
         // sobreescriben
 
         Principal programa = new Principal(porDefecto);

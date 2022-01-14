@@ -4,6 +4,7 @@ package reconocimientoDeVoz;
  * and open the template in the editor.
  */
 
+import java.beans.PropertyChangeSupport;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,7 @@ public class Escucha extends ResultAdapter {
 		this.controlador = controlador;
 	}
 
-    @Override
+	@Override
 	public void resultAccepted(ResultEvent re) {
 
 		if (microfono) {
@@ -45,26 +46,28 @@ public class Escucha extends ResultAdapter {
 				ResultToken tokens[] = res.getBestTokens();
 
 				List<String> lista = new ArrayList<String>();
-
+				String frase = "";
 				for (int i = 0; i < tokens.length; i++) {
 					gst = tokens[i].getSpokenText();
 					lista.add(gst);
+					frase = frase + gst;
 					System.out.print(gst + " ");
 				}
 				System.out.println();
-				if (gst.equals("salir")) {
+				/*if (gst.equals("salir")) {
 					recognizer.deallocate();
 					System.out.println("Hasta la proxima Cmop 'salir'!");
 					System.exit(0);
 
-				}
+				}*/
 				if (lista.get(0).equals("Temperatura")) {
 					// recognizer.deallocate();
-					
+
 					if (lista.get(1) != null) {
 						if (Integer.parseInt(lista.get(1)) >= 17 && Integer.parseInt(lista.get(1)) <= 30) {
 
-							controlador.getconector().firePropertyChange("recarga", "temperatura",Integer.parseInt(lista.get(1)));
+							controlador.getConector().firePropertyChange("recarga", "temperatura",
+									Integer.parseInt(lista.get(1)));
 
 						} else {
 							System.out.println("Temperatura fuera de rango");
@@ -72,15 +75,35 @@ public class Escucha extends ResultAdapter {
 
 					}
 
-				}if (lista.get(0).equals("enciende la luz")) {
+				}
+				if (frase.equals("enciendelaluz")) {
+
+					
+					controlador.getConector().firePropertyChange("recarga", "luz",1);
+
+				}
+				if (lista.get(0).equals("intensidad")) {
 					// recognizer.deallocate();
-					System.out.println("Enciende la luz");
+
 					if (lista.get(1) != null) {
-						
+						if (Integer.parseInt(lista.get(1)) >= 1 && Integer.parseInt(lista.get(1)) <= 3) {
+
+							controlador.getConector().firePropertyChange("recarga", "intensidad",
+									Integer.parseInt(lista.get(1)));
+
+						} else {
+							System.out.println("Intensidad fuera de rango");
+						}
 
 					}
+				}if (frase.equals("apagalaluz")) {
+					controlador.getConector().firePropertyChange("recarga", "intensidad",0);
 
-				} 
+				}if(lista.get(1).equals("persiana")){
+
+					controlador.getConector().firePropertyChange("recarga", "persiana",lista.get(0));
+				}
+				
 				else {
 					recognizer.suspend();
 
