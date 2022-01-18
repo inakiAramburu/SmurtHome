@@ -59,8 +59,8 @@ public class PanelPrincipall extends JFrame  {
         this.preset = preset;
         this.controlador = controlador;
         escucha = new Escucha(this.controlador);
-        uart=new Uart(preset);
-        uart.start();
+        //uart=new Uart(preset);
+       // uart.start();
         luz = new ArrayList<ImageIcon>();
         /*
         r1 = new Runee(preset);
