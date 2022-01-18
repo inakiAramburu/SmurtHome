@@ -58,7 +58,10 @@ public class PanelPrincipall extends JFrame  {
        
         this.preset = preset;
         this.controlador = controlador;
-        escucha = new Escucha(this.controlador);
+       
+        escucha = Escucha.getEscucha(controlador);
+        System.out.println("hashcode: " + escucha.hashCode());
+
         //uart=new Uart(preset);
        // uart.start();
         luz = new ArrayList<ImageIcon>();

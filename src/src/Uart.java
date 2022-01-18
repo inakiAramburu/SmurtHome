@@ -10,31 +10,33 @@ import com.fazecast.jSerialComm.SerialPort;
 
 public class Uart {
 	Preset preset;
-       
-	public Uart(Preset preset) {
-		this.preset=preset;
+        SerialPort puerto;
+	public Uart() {
+		//this.preset=preset;
+
+                SerialPort puertos[] = SerialPort.getCommPorts();
+                System.out.println("Select a port:");
+                int i = 1;
+                for (SerialPort puerto : puertos) {
+                        System.out.println(i++ + ". " + puerto.getSystemPortName());
+                }
+                Scanner s = new Scanner(System.in);
+                int chosenPort = s.nextInt();
+    
+                // open and configure the port
+                puerto = puertos[chosenPort - 1];
+                if (puerto.openPort()) {
+                        System.out.println("Successfully opened the port.");
+                } else {
+                        System.out.println("Unable to open the port.");
+                        return;
+                }
+                puerto.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0);
         }
         
-        public void start() {
+        public void start(Preset preset) {
         	// determine which serial port to use
-            SerialPort puertos[] = SerialPort.getCommPorts();
-            System.out.println("Select a port:");
-            int i = 1;
-            for (SerialPort puerto : puertos) {
-                    System.out.println(i++ + ". " + puerto.getSystemPortName());
-            }
-            Scanner s = new Scanner(System.in);
-            int chosenPort = s.nextInt();
-
-            // open and configure the port
-            SerialPort puerto = puertos[chosenPort - 1];
-            if (puerto.openPort()) {
-                    System.out.println("Successfully opened the port.");
-            } else {
-                    System.out.println("Unable to open the port.");
-                    return;
-            }
-            puerto.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0);
+           
 
             Integer  datos[] = new Integer[4];
             
@@ -57,7 +59,7 @@ public class Uart {
                    // System.out.println("\r\n automatico: ");
                     datos[3] = preset.getAutomatico();
                     // Convert Integer number to byte value
-                    for (i = 0; i < datos.length; i++)
+                    for (int i = 0; i < datos.length; i++)
                             bD[i] = datos[i].byteValue();
 
                     puerto.writeBytes(bD, datos.length);

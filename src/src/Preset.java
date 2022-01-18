@@ -9,8 +9,11 @@ public class Preset implements Serializable {
 	int temperatura=20;
     int intensidad=0;
     int persiana=0;
+	int automatico=0;
     int microfono=0;
-    int automatico=0;
+    
+
+
     
 	
 	public Preset(String nombre, int temperatura, int intensidad, int persiana,int microfono,int automatico) {
@@ -67,15 +70,13 @@ public class Preset implements Serializable {
         return this.automatico;
     }
 
-    public void mostrarDatos() {
-		System.out.println("-------------------------------------------------------");
-		System.out.println("Nombre: " + nombre);
-		System.out.println("Temperatura: " + temperatura);
-		System.out.println("Intensidad: " + intensidad);
-		System.out.println("Persiana: " + persiana);
-		System.out.println("Microfono: " + microfono);
-		System.out.println("Automatico: " + automatico);
-    }
+
+    
+    @Override
+	public String toString() {
+		return "Preset [nombre=" + nombre + ", temperatura=" + temperatura + ", intensidad=" + intensidad
+				+ ", persiana=" + persiana + ", microfono=" + microfono + ", automatico=" + automatico + "]";
+	}
 
 
    

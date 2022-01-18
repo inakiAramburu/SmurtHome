@@ -214,7 +214,7 @@ public class PanelPreset extends JFrame {
 				listaPreset = (List<Preset>) tuberia.readObject();
 			}
 			for (Preset p : listaPreset) {
-				p.mostrarDatos();
+				System.out.println(p);
 			}
 
 		} catch (FileNotFoundException ex) {

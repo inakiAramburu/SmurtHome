@@ -27,14 +27,25 @@ import src.Controlador;
 
 public class Escucha extends ResultAdapter {
 
+	private static Escucha escucha;
 	static Recognizer recognizer;
 	String gst;
 	static boolean microfono = false;
 	static Controlador controlador;
 
-	public Escucha(Controlador controlador) {
+	private Escucha(Controlador controlador) {
 		this.controlador = controlador;
 	}
+
+public synchronized static Escucha getEscucha(Controlador controlador){
+
+	if (escucha==null){
+		escucha = new Escucha(controlador);
+	}
+
+	return escucha;
+	
+}
 
 	@Override
 	public void resultAccepted(ResultEvent re) {
@@ -116,7 +127,7 @@ public class Escucha extends ResultAdapter {
 			System.out.println("microfono no activado");
 		}
 	}
-
+/*
 	public void setMicrofono(int microfono) {
 		if (microfono == 1) {
 			this.microfono = true;
@@ -125,7 +136,7 @@ public class Escucha extends ResultAdapter {
 		}
 
 	}
-
+*/
 	public void escucha(int microfono) {
 		// public static void main(){
 		if (microfono == 1) {

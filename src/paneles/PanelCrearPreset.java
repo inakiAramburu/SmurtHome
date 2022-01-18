@@ -435,7 +435,7 @@ public class PanelCrearPreset extends JFrame {
         anadirDatos(listaPreset);
 
         System.out.println("Guardar");
-        preset.mostrarDatos();
+        System.out.println(preset);
       
       
 
@@ -454,7 +454,7 @@ public class PanelCrearPreset extends JFrame {
 				listaPreset = (List<Preset>) tuberia.readObject();
 			}
 			for (Preset p : listaPreset) {
-				p.mostrarDatos();
+				System.out.println(p);
 			}
 
 		} catch (FileNotFoundException ex) {
