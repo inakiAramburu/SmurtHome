@@ -1,6 +1,5 @@
 package paneles;
 
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -12,40 +11,43 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import src.Controlador;
 import src.Preset;
 
 public class PanelPreset extends JFrame {
-    
-    JButton anadirButton;
-    JButton atrasButton;
-    JButton borrarButton;
-    JButton homeButon;
-    JPanel jPanel2;
-    javax.swing.JScrollPane jScrollPane2;
-    JPanel panelPreset;
-    JPanel panelRojo;
-    JFormattedTextField titulo;
-    Controlador controlador;
-    ImageIcon home,atrasIcon,anadirIcon,borrarIcon;
-	
-	
-    public PanelPreset(Controlador controlador){
-        this.controlador=controlador;
-        atrasIcon=new ImageIcon("iconos/Preset/back.png");
-        anadirIcon=new ImageIcon("iconos/Preset/add.png");
-        borrarIcon=new ImageIcon("iconos/Preset/subtr.png");
-        List<JButton> botones = new ArrayList<JButton>();
 
-		List<Preset> listaPreset=null;
-        try {
-            listaPreset = presetGuardados();
-        } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+	JButton anadirButton;
+	JButton atrasButton;
+	JButton borrarButton;
+	JButton homeButon;
+	JPanel jPanel2;
+	javax.swing.JScrollPane jScrollPane2;
+	JPanel panelPreset;
+	JPanel panelRojo;
+	JFormattedTextField titulo;
+	Controlador controlador;
+	ImageIcon home, atrasIcon, anadirIcon, borrarIcon, icono;
+	JLabel iconoLabel;
+
+	public PanelPreset(Controlador controlador) {
+		this.controlador = controlador;
+		atrasIcon = new ImageIcon("iconos/Preset/back.png");
+		anadirIcon = new ImageIcon("iconos/Preset/add.png");
+		borrarIcon = new ImageIcon("iconos/Preset/subtr.png");
+		icono = new ImageIcon("iconos/icono.png");
+		List<JButton> botones = new ArrayList<JButton>();
+		iconoLabel = new javax.swing.JLabel();
+
+		List<Preset> listaPreset = null;
+		try {
+			listaPreset = presetGuardados();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		panelPreset = new javax.swing.JPanel();
 		homeButon = new javax.swing.JButton();
@@ -62,9 +64,9 @@ public class PanelPreset extends JFrame {
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-		panelPreset.setBackground(new java.awt.Color(255, 255, 255));
+		panelPreset.setBackground(new java.awt.Color(36, 36, 36));
 
-		homeButon.setBackground(new java.awt.Color(51, 255, 255));
+		homeButon.setBackground(new java.awt.Color(36, 36, 36));
 		homeButon.setFont(new java.awt.Font("Product San", 0, 20));
 		home = new ImageIcon("iconos/PanelPrincipal/casa.png");
 		homeButon.setIcon(new ImageIcon(home.getImage()));
@@ -79,12 +81,14 @@ public class PanelPreset extends JFrame {
 
 			JButton botone = new JButton();
 			botone.setFont(new java.awt.Font("Product San", 0, 20));
-			botone.setText(listaPreset.get(i).getNombre());
 
+			botone.setText(listaPreset.get(i).getNombre());
+			botone.setForeground(new java.awt.Color(255, 255, 255));
+			botone.setBackground(new java.awt.Color(58, 58, 58));
 			// urrengoa=(listaPreset.get(i));
 
 			// a�adir propertichange listener al boton
-			//botone.addPropertyChangeListener(controlador);
+			// botone.addPropertyChangeListener(controlador);
 			botone.setActionCommand(listaPreset.get(i).getNombre());
 			botone.addActionListener(controlador);
 			jPanel2.add(botone);
@@ -96,41 +100,59 @@ public class PanelPreset extends JFrame {
 		titulo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		titulo.setText("Preset");
 		titulo.setFont(new java.awt.Font("Product San", 0, 60));
-		JButton boton = new JButton("Boton");
+		titulo.setBackground(new java.awt.Color(58, 58, 58));
+		titulo.setForeground(new java.awt.Color(255, 255, 255));
 
-		panelRojo.setBackground(new java.awt.Color(255, 0, 0));
+		JButton boton = new JButton("Boton");
+		//////////////////////
+		panelRojo.setBackground(new java.awt.Color(36, 36, 36));
+		panelRojo.setPreferredSize(new java.awt.Dimension(150, 150));
+
+		iconoLabel.setIcon(icono);
 
 		javax.swing.GroupLayout panelRojoLayout = new javax.swing.GroupLayout(panelRojo);
 		panelRojo.setLayout(panelRojoLayout);
-		panelRojoLayout.setHorizontalGroup(panelRojoLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 149, Short.MAX_VALUE));
-		panelRojoLayout.setVerticalGroup(panelRojoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGap(0, 150, Short.MAX_VALUE));
-
+		panelRojoLayout.setHorizontalGroup(
+				panelRojoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRojoLayout.createSequentialGroup()
+								.addGap(0, 0, 0)
+								.addComponent(iconoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
+										javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		panelRojoLayout.setVerticalGroup(
+				panelRojoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(panelRojoLayout.createSequentialGroup()
+								.addGap(0, 0, 0)
+								.addComponent(iconoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
+										javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addGap(0, 0, 0)));
+		//////////////////////
 		jScrollPane2.setBorder(null);
 		jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-		jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+		jPanel2.setBackground(new java.awt.Color(36, 36, 36));
 		jPanel2.setLayout(new java.awt.GridLayout(1, 3));
 		jScrollPane2.setViewportView(jPanel2);
 
-		//anadirButton.setText("+");
+		// anadirButton.setText("+");
 		anadirButton.setIcon(new ImageIcon(anadirIcon.getImage()));
 
-		
 		anadirButton.setActionCommand("crearPreset");
+
+		anadirButton.setBackground(new java.awt.Color(58, 57, 80));
 		anadirButton.addActionListener(controlador);
 
-		//borrarButton.setText("-");
+		// borrarButton.setText("-");
 		borrarButton.setIcon(new ImageIcon(borrarIcon.getImage()));
+		borrarButton.setBackground(new java.awt.Color(58, 57, 80));
 
 		borrarButton.setActionCommand("borrarPreset");
+		borrarButton.setBackground(new java.awt.Color(58, 57, 80));
 		borrarButton.addActionListener(controlador);
 
-
-		//atrasButton.setText("Atras");
+		// atrasButton.setText("Atras");
 		atrasButton.setIcon(new ImageIcon(atrasIcon.getImage()));
-
+		atrasButton.setBackground(new java.awt.Color(58, 57, 80));
 
 		javax.swing.GroupLayout panelPresetLayout = new javax.swing.GroupLayout(panelPreset);
 		panelPreset.setLayout(panelPresetLayout);
@@ -201,10 +223,9 @@ public class PanelPreset extends JFrame {
 
 		pack();
 
-    }
+	}
 
-
-    private List<Preset> presetGuardados() throws ClassNotFoundException {
+	private List<Preset> presetGuardados() throws ClassNotFoundException {
 
 		FileInputStream ficheroEntrada = null;
 		List<Preset> listaPreset = new ArrayList<Preset>();
@@ -214,7 +235,7 @@ public class PanelPreset extends JFrame {
 				listaPreset = (List<Preset>) tuberia.readObject();
 			}
 			for (Preset p : listaPreset) {
-				p.mostrarDatos();
+				System.out.println(p);
 			}
 
 		} catch (FileNotFoundException ex) {
@@ -227,14 +248,8 @@ public class PanelPreset extends JFrame {
 		return listaPreset;
 	}
 
-
-    public JPanel getPanel(){
+	public JPanel getPanel() {
 		return panelPreset;
 	}
-    
-
-
-
-	
 
 }

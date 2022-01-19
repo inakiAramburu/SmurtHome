@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -27,8 +28,9 @@ public class PanelBorrarPreset extends JFrame {
         JPanel panelBorrarPreset;
         JPanel panelRojo;
         JFormattedTextField titulo;
-        ImageIcon home;
+        ImageIcon home, atrasIcon, icono;
         Controlador controlador;
+        JLabel iconoLabel;
 
         public PanelBorrarPreset(Controlador controlador) {
                 this.controlador = controlador;
@@ -39,7 +41,10 @@ public class PanelBorrarPreset extends JFrame {
                 jScrollPane2 = new javax.swing.JScrollPane();
                 jPanel2 = new javax.swing.JPanel();
                 atrasButton = new javax.swing.JButton();
+                iconoLabel = new javax.swing.JLabel();
 
+                atrasIcon = new ImageIcon("iconos/Preset/back.png");
+                icono = new ImageIcon("iconos/icono.png");
                 List<JButton> botones = new ArrayList<JButton>();
 
                 List<Preset> listaPreset = null;
@@ -52,9 +57,9 @@ public class PanelBorrarPreset extends JFrame {
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-                panelBorrarPreset.setBackground(new java.awt.Color(255, 255, 255));
+                panelBorrarPreset.setBackground(new java.awt.Color(36, 36, 36));
 
-                homeButon.setBackground(new java.awt.Color(51, 255, 255));
+                homeButon.setBackground(new java.awt.Color(36, 36, 36));
                 homeButon.setFont(new java.awt.Font("Product San", 0, 20));
                 home = new ImageIcon("iconos/PanelPrincipal/casa.png");
                 homeButon.setIcon(new ImageIcon(home.getImage()));
@@ -70,9 +75,9 @@ public class PanelBorrarPreset extends JFrame {
                         JButton botone = new JButton();
                         botone.setFont(new java.awt.Font("Product San", 0, 20));
                         botone.setText(listaPreset.get(i).getNombre());
-                        
-                        botone.setBackground(new java.awt.Color(255, 0, 0));
 
+                        botone.setForeground(new java.awt.Color(255, 255, 255));
+                        botone.setBackground(new java.awt.Color(57, 58, 80));
 
                         // urrengoa=(listaPreset.get(i));
 
@@ -87,30 +92,52 @@ public class PanelBorrarPreset extends JFrame {
 
                 titulo.setEditable(false);
                 titulo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-                titulo.setText("Preset");
+                titulo.setText("Borrar Preset");
                 titulo.setFont(new java.awt.Font("Product San", 0, 60));
+                titulo.setForeground(new java.awt.Color(255, 255, 255));
+                titulo.setBackground(new java.awt.Color(58, 58, 58));
+////////////
+                panelRojo.setBackground(new java.awt.Color(36, 36, 36));
+                panelRojo.setPreferredSize(new java.awt.Dimension(150, 150));
 
-                panelRojo.setBackground(new java.awt.Color(255, 0, 0));
+                iconoLabel.setIcon(icono);
 
                 javax.swing.GroupLayout panelRojoLayout = new javax.swing.GroupLayout(panelRojo);
                 panelRojo.setLayout(panelRojoLayout);
                 panelRojoLayout.setHorizontalGroup(
                                 panelRojoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 149, Short.MAX_VALUE));
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRojoLayout
+                                                                .createSequentialGroup()
+                                                                .addGap(0, 0, 0)
+                                                                .addComponent(iconoLabel,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                150,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                Short.MAX_VALUE)));
                 panelRojoLayout.setVerticalGroup(
                                 panelRojoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 150, Short.MAX_VALUE));
-
+                                                .addGroup(panelRojoLayout.createSequentialGroup()
+                                                                .addGap(0, 0, 0)
+                                                                .addComponent(iconoLabel,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                150,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(0, 0, 0)));
+//////////////
                 jScrollPane2.setBorder(null);
                 jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-                jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+                jPanel2.setBackground(new java.awt.Color(36, 36, 36));
                 jPanel2.setLayout(new java.awt.GridLayout(1, 3));
                 jScrollPane2.setViewportView(jPanel2);
 
-                atrasButton.setText("Atras");
+                // atrasButton.setText("Atras");
 
-                
+                atrasButton.setIcon(new ImageIcon(atrasIcon.getImage()));
+
+                atrasButton.setBackground(new java.awt.Color(58, 58, 58));
+
                 atrasButton.setActionCommand("preset");
                 atrasButton.addActionListener(controlador);
 
@@ -211,7 +238,7 @@ public class PanelBorrarPreset extends JFrame {
                         try (ObjectInputStream tuberia = new ObjectInputStream(ficheroEntrada)) {
                                 listaPreset = (List<Preset>) tuberia.readObject();
                         }
-                        
+
                 } catch (FileNotFoundException ex) {
                         ex.printStackTrace();
                 } catch (IOException ex) {

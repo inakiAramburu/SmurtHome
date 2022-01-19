@@ -23,10 +23,25 @@ public class Controlador implements ActionListener {
 			PANEL_CREAR_PRESET = "crearPreset",
 			BORRAR_PRESET = "borrarPreset";
 	PropertyChangeSupport conector;
+	private static Controlador controlador;
 
-	public Controlador() {
+	private Controlador() {
 		conector = new PropertyChangeSupport(this);
 	}
+
+
+	public synchronized static Controlador getcontrolador(){
+
+		if (controlador==null){
+			controlador = new Controlador();
+		}
+	
+		return controlador;
+		
+	}
+
+
+
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 
@@ -168,7 +183,7 @@ public class Controlador implements ActionListener {
 				listaPreset = (List<Preset>) tuberia.readObject();
 			}
 			for (Preset p : listaPreset) {
-				p.mostrarDatos();
+				System.out.println(p);
 			}
 
 		} catch (FileNotFoundException ex) {

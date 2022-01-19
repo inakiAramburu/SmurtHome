@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -21,7 +23,6 @@ import paneles.PanelGraficos;
 import paneles.PanelMenu;
 import paneles.PanelPreset;
 import paneles.PanelPrincipall;
-import reconocimientoDeVoz.Runee;
 
 public class Principal extends JFrame implements PropertyChangeListener {
     final static int MAX_PANELES = 5;
@@ -47,7 +48,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
     public Principal(Preset porDefecrto) {
         super("Smurt House");
         oraingoa = porDefecrto;
-        controlador = new Controlador();
+        controlador = Controlador.getcontrolador();
         controlador.addPropertyChangeListener(this);
 
         panelVisual = new JPanel(new CardLayout());
@@ -182,7 +183,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
                 if (evt.getOldValue().equals("luz")) {// intensidad
                     if (oraingoa.getIntensidad() == 0) {
                         oraingoa.setIntensidad(1);
-                    }else{
+                    } else {
                         System.out.println("la luz esta encendida");
                     }
                 }
@@ -201,8 +202,6 @@ public class Principal extends JFrame implements PropertyChangeListener {
                     }
                     System.out.println("persiana por micro: " + oraingoa.getPersiana());
 
-                    
-
                 }
 
                 PanelPrincipall panelPrincipal2 = new PanelPrincipall(oraingoa, controlador);
@@ -219,9 +218,41 @@ public class Principal extends JFrame implements PropertyChangeListener {
     }
 
     public static void main(String[] args) throws ClassNotFoundException {
-        Preset porDefecto = new Preset("UNO MAS UNO ES ILEGALISIMO", 20, 2, 0, 0, 0);
-         crearDatosDePrueba();//si comentas esta linea los datos del fichero no se
+        Preset porDefecto = new Preset("UNO MAS UNO ES ILEGAL", 20, 2, 0, 1, 0);
+        crearDatosDePrueba();// si comentas esta linea los datos del fichero no se
         // sobreescriben
+        // crea un thead
+        Thread hilo = new Thread(new Runnable() {
+            @Override
+            
+            public void run() {
+                int i=0;
+                try {
+                       
+                    Uart uart = new Uart();
+                   
+                    System.out.println("inicio");
+                    while (true) {
+                        
+                        uart.start(oraingoa);
+
+                        i++;
+                        // printea la clase preset
+                        System.out.println(i+" "+oraingoa);
+
+
+
+                        
+                        Thread.sleep(5000);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+        });
+        hilo.start();
 
         Principal programa = new Principal(porDefecto);
 

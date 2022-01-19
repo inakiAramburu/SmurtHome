@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import src.Controlador;
@@ -15,8 +16,9 @@ public class PanelMenu extends JFrame {
     JPanel panelRojo;
     JButton presetButton;
     JFormattedTextField titulo;
-    ImageIcon home,presetIcon,graficosIcon;
+    ImageIcon home,presetIcon,graficosIcon,icono;
     Controlador controlador;
+    JLabel iconoLabel;
 
     public PanelMenu(Controlador controlador){
         this.controlador=controlador;
@@ -26,14 +28,16 @@ public class PanelMenu extends JFrame {
         panelRojo = new javax.swing.JPanel();
         presetButton = new javax.swing.JButton();
         graficosButton1 = new javax.swing.JButton();
+        iconoLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        homeButon.setBackground(new java.awt.Color(51, 255, 255));
+        homeButon.setBackground(new java.awt.Color(36, 36, 36));
         homeButon.setFont(new java.awt.Font("Product San", 0, 20));
         home =new ImageIcon("iconos/PanelPrincipal/casa.png");
         presetIcon=new ImageIcon("iconos/Menu/user.png");
         graficosIcon=new ImageIcon("iconos/Menu/graph.png");
+        icono =new ImageIcon("iconos/icono.png");
         
         homeButon.setIcon(new ImageIcon(home.getImage()));
         homeButon.setBorder(null);
@@ -46,20 +50,29 @@ public class PanelMenu extends JFrame {
         titulo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         titulo.setText("Menu");
         titulo.setFont(new java.awt.Font("Product San", 0, 60));
-        
-       
+        titulo.setBackground(new java.awt.Color(58, 58, 58));
+        titulo.setForeground(new java.awt.Color(255, 255, 255));
 
-        panelRojo.setBackground(new java.awt.Color(255, 0, 0));
+        panelRojo.setBackground(new java.awt.Color(36, 36, 36));
+        panelRojo.setPreferredSize(new java.awt.Dimension(150, 150));
+
+        iconoLabel.setIcon(icono);
 
         javax.swing.GroupLayout panelRojoLayout = new javax.swing.GroupLayout(panelRojo);
         panelRojo.setLayout(panelRojoLayout);
         panelRojoLayout.setHorizontalGroup(
             panelRojoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 149, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRojoLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(iconoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRojoLayout.setVerticalGroup(
             panelRojoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addGroup(panelRojoLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(iconoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
 
         //presetButton.setText("Preset");
@@ -67,13 +80,16 @@ public class PanelMenu extends JFrame {
 
         presetButton.setActionCommand("preset");
         presetButton.addActionListener(controlador);
+        presetButton.setBackground(new java.awt.Color(58, 58, 58));
 
         //graficosButton1.setText("Graficos");
         graficosButton1.setIcon(new ImageIcon(graficosIcon.getImage()));
 
         graficosButton1.setActionCommand("graficos");
         graficosButton1.addActionListener(controlador);
+        graficosButton1.setBackground(new java.awt.Color(58, 58, 58));
 
+        panelMenu.setBackground(new java.awt.Color(36, 36, 36));
 
         javax.swing.GroupLayout panelMenuLayout = new javax.swing.GroupLayout(panelMenu);
         panelMenu.setLayout(panelMenuLayout);
