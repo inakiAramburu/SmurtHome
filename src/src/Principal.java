@@ -218,7 +218,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
     }
 
     public static void main(String[] args) throws ClassNotFoundException {
-        Preset porDefecto = new Preset("UNO MAS UNO ES ILEGAL", 20, 2, 0, 0, 0);
+        Preset porDefecto = new Preset("UNO MAS UNO ES ILEGAL", 20, 2, 0, 1, 0);
         crearDatosDePrueba();// si comentas esta linea los datos del fichero no se
         // sobreescriben
         // crea un thead
@@ -235,7 +235,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
                     while (true) {
                         
                         uart.start(oraingoa);
-                        
+
                         i++;
                         // printea la clase preset
                         System.out.println(i+" "+oraingoa);
@@ -243,7 +243,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
 
 
                         
-                        Thread.sleep(2000);
+                        Thread.sleep(5000);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
