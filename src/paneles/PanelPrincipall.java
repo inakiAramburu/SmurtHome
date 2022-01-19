@@ -567,6 +567,7 @@ public class PanelPrincipall extends JFrame {
 
                 System.out.println("microfono: " + preset.getMicrofono());
                 microfono = preset.getMicrofono();
+                
                 escucha.escucha(microfono);
 
         }
