@@ -33,8 +33,42 @@ public class Uart {
                 }
                 puerto.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0);
         }
-        
-        public void start(Preset preset) {
+      
+       
+        public void start(Uart uart, Preset oraingoa) {
+                Thread hilo = new Thread(new Runnable() {
+                        @Override
+            
+                        public void run() {
+                            int i = 0;
+                            try {
+            
+                                            
+                                System.out.println("inicio");
+                                while (true) {
+                                    uart.enviar(oraingoa);
+                                    // printea la clase preset
+                                    System.out.println(i++ + " " + oraingoa);
+                                    Thread.sleep(5);
+            
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+            
+                        }
+            
+                    });
+
+                    hilo.start();
+
+
+        }
+
+
+
+
+        public void enviar(Preset preset) {
         	// determine which serial port to use
            
 
@@ -43,11 +77,12 @@ public class Uart {
             byte bD[] = new byte[4];
             Scanner data = new Scanner(puerto.getInputStream());
             // enter into an infinite loop that reads from the port and updates the GUI
-            while (data.hasNextLine()) {
-                    String readData = new String(data.nextLine());
-                    System.out.println(readData);
+            while (true) {
+                   // String readData = new String(data.nextLine());
+                 //   System.out.println(readData);
                     
                     //System.out.println("\r\nTemp: ");
+                    
                     datos[0] = preset.getTemperatura();
 
                     //System.out.println("\r\nLuz: ");
@@ -67,6 +102,7 @@ public class Uart {
 
 		}
 
+      
     
 
 }

@@ -50,7 +50,7 @@ public class PanelPrincipall extends JFrame {
         List<ImageIcon> microfonoIconList;
         ImageIcon bombilla0, bombilla1, bombilla2, bombilla3, subirTemperatura, bajarTemperatua, subirPersiana,
                         bajarPersiana, pararPersiana;
-        ImageIcon home, automaticoON, automaticoOFF, microfonoON, microfonoOFF,icono;
+        ImageIcon home, automaticoON, automaticoOFF, microfonoON, microfonoOFF, icono;
 
         Escucha escucha;
         Runnable r1;
@@ -92,7 +92,7 @@ public class PanelPrincipall extends JFrame {
                 microfonoON = new ImageIcon("iconos/PanelPrincipal/botones/microfonoON.png");
                 microfonoOFF = new ImageIcon("iconos/PanelPrincipal/botones/microfonoOFF.png");
 
-                icono =new ImageIcon("iconos/icono.png");
+                icono = new ImageIcon("iconos/icono.png");
                 iconoLabel = new javax.swing.JLabel();
                 luz.add(bombilla0);
                 luz.add(bombilla1);
@@ -305,7 +305,7 @@ public class PanelPrincipall extends JFrame {
 
                 automaticoButton.setIcon(new ImageIcon(automaticoOFF.getImage()));
                 automaticoButton.setIcon(new ImageIcon(automaticoIconList.get(preset.getAutomatico()).getImage()));
-               
+
                 automaticoButton.setBorderPainted(false);
                 automaticoButton.setBackground(new java.awt.Color(36, 36, 36));
 
@@ -317,26 +317,31 @@ public class PanelPrincipall extends JFrame {
 
                 panelRojo.setBackground(new java.awt.Color(36, 36, 36));
                 panelRojo.setPreferredSize(new java.awt.Dimension(150, 150));
-        
+
                 iconoLabel.setIcon(icono);
-        
+
                 javax.swing.GroupLayout panelRojoLayout = new javax.swing.GroupLayout(panelRojo);
                 panelRojo.setLayout(panelRojoLayout);
                 panelRojoLayout.setHorizontalGroup(
-                    panelRojoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRojoLayout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(iconoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                );
+                                panelRojoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRojoLayout
+                                                                .createSequentialGroup()
+                                                                .addGap(0, 0, 0)
+                                                                .addComponent(iconoLabel,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                150,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                Short.MAX_VALUE)));
                 panelRojoLayout.setVerticalGroup(
-                    panelRojoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRojoLayout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(iconoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0))
-                );
-               
+                                panelRojoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(panelRojoLayout.createSequentialGroup()
+                                                                .addGap(0, 0, 0)
+                                                                .addComponent(iconoLabel,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                150,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(0, 0, 0)));
 
                 microfonoButton.setFont(new java.awt.Font("Product San", 0, 60));
                 // microfonoButton.setText("Microfono");
@@ -567,7 +572,7 @@ public class PanelPrincipall extends JFrame {
 
                 System.out.println("microfono: " + preset.getMicrofono());
                 microfono = preset.getMicrofono();
-                
+
                 escucha.escucha(microfono);
 
         }
@@ -584,7 +589,6 @@ public class PanelPrincipall extends JFrame {
                 }
 
                 automaticoButton.setIcon(new ImageIcon(automaticoIconList.get(preset.getAutomatico()).getImage()));
-
 
                 System.out.println("automatico: " + automatico);
                 preset.setAutomatico(automatico);
