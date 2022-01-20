@@ -123,6 +123,12 @@ public class PanelGraficos extends JFrame {
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(panelGraficos,
                         javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 
+//crear un grafico
+
+
+
+
+
     }
 
 

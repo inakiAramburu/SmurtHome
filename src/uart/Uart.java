@@ -79,7 +79,7 @@ public class Uart {
             byte bD[] = new byte[4];
             Scanner data = new Scanner(puerto.getInputStream());
             // enter into an infinite loop that reads from the port and updates the GUI
-            while (true) {
+         
                    // String readData = new String(data.nextLine());
                  //   System.out.println(readData);
                     
@@ -100,7 +100,7 @@ public class Uart {
                             bD[i] = datos[i].byteValue();
 
                     puerto.writeBytes(bD, datos.length);
-            }
+            
 
 		}
 
