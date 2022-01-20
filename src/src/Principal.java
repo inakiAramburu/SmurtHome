@@ -15,13 +15,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import consumo.Consumo;
+import consumo.ListaConsumo;
 import paneles.PanelBorrarPreset;
 import paneles.PanelCrearPreset;
 import paneles.PanelGraficos;
 import paneles.PanelMenu;
 import paneles.PanelPreset;
 import paneles.PanelPrincipall;
-import uart.Uart;
 
 public class Principal extends JFrame implements PropertyChangeListener {
     final static int MAX_PANELES = 5;
@@ -225,6 +226,61 @@ public class Principal extends JFrame implements PropertyChangeListener {
        // Uart uart = new Uart();
         //uart.start(uart,oraingoa);
 
+        //inicia un thread para que el programa no se cierre
+        Thread hilo = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Consumo consumoEncendido=null;
+                    Consumo consumoApagado=null;
+                    Boolean comprobado = false;
+                    while(true){
+                        Thread.sleep(1000);
+                        
+                        
+
+                        if(oraingoa.getIntensidad()>=1 && comprobado==false){
+                            consumoEncendido= new Consumo();
+                            comprobado=true;
+                        }
+                        if (oraingoa.getIntensidad() == 0 && comprobado==true){
+                            consumoApagado= new Consumo();
+                            comprobado = false;
+
+                            consumoEncendido.mostarConsumo();
+                            consumoApagado.mostarConsumo();
+                            
+                            consumoEncendido.getTiempoTotal();
+                            consumoApagado.getTiempoTotal();
+
+                            int diferencia =consumoEncendido.compare(consumoApagado);
+                            System.out.println("consumo total "+consumoEncendido.compare(consumoApagado));
+                            
+                            Consumo total= new Consumo(diferencia);
+
+                           ListaConsumo listaConsumos=ListaConsumo.getListaConsumo();
+                           
+                           listaConsumos.meterDatos(total);
+                           listaConsumos.mostrarDatos();
+                        }
+
+                        
+
+                        
+
+
+
+
+
+                    }
+                   
+                } catch (Exception ex) {
+                   System.out.println(ex);
+                }
+            }
+        });
+
+        hilo.start();
 
         Principal programa = new Principal(porDefecto);
 

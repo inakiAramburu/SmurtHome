@@ -1,4 +1,4 @@
-package src;
+package consumo;
 
 import java.util.Calendar;
 
@@ -11,6 +11,7 @@ public class Consumo {
     int hora;
     int minuto;
     int segundo;
+    int tiempoTotal;
 
     int consumo; //segundos de uso de luz
 
@@ -36,12 +37,22 @@ public class Consumo {
         
     }
 
-public Consumo(int i) {
+public Consumo(int diferencia) {
+
+    Calendar calendario = Calendar.getInstance();
+    this.año =calendario.get(Calendar.YEAR);
+    this.mes =calendario.get(Calendar.MONTH);
+    this.dia = diaSemana(calendario.get(Calendar.DAY_OF_WEEK));
+
+    
+
+    this.consumo=diferencia;
+
     }
 
 private String diaSemana(int diaSemana){
     String diaSemanaString=null;
-
+    diaSemana--;
     switch (diaSemana){
         case 1:
             diaSemanaString="Lunes";
@@ -104,15 +115,33 @@ private String diaSemana(int diaSemana){
         this.segundo = i;
     }
 
-    public void consumo() {
+    public int getTiempoTotal() {
         
-        consumo=hora*3600+minuto*60+segundo;
+        tiempoTotal=hora*3600+minuto*60+segundo;
+        return tiempoTotal;
 
-
+    }
+    public int getAno() {
+        return this.año;
+    }
+    public int getMes() {
+        return this.mes;
     }
 
     public int getConsumo() {
         return consumo;
+    }
+    public String getDia() {
+        return this.dia;
+    }
+
+    public void mostarConsumo() {
+        System.out.println("hora: "+hora+" minuto: "+minuto+" segundo: "+segundo);
+    }
+
+    public int compare(Consumo consumoApagado) {
+
+        return consumoApagado.getTiempoTotal() -this.getTiempoTotal();
     }
 
  
