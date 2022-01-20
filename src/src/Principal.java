@@ -8,9 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -23,6 +21,7 @@ import paneles.PanelGraficos;
 import paneles.PanelMenu;
 import paneles.PanelPreset;
 import paneles.PanelPrincipall;
+import uart.Uart;
 
 public class Principal extends JFrame implements PropertyChangeListener {
     final static int MAX_PANELES = 5;
@@ -225,7 +224,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
         oraingoa=porDefecto;
        // Uart uart = new Uart();
         //uart.start(uart,oraingoa);
-        
+
 
         Principal programa = new Principal(porDefecto);
 

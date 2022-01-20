@@ -15,7 +15,7 @@ import reconocimientoDeVoz.Escucha;
 import reconocimientoDeVoz.Runee;
 import src.Controlador;
 import src.Preset;
-import src.Uart;
+import uart.Uart;
 
 public class PanelPrincipall extends JFrame {
 

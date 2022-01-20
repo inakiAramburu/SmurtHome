@@ -1,4 +1,4 @@
-package src;
+package uart;
 
 import java.util.Scanner;
 
@@ -7,6 +7,8 @@ import javax.swing.JLabel;
 import javax.swing.JSlider;
 
 import com.fazecast.jSerialComm.SerialPort;
+
+import src.Preset;
 
 public class Uart {
 	Preset preset;
