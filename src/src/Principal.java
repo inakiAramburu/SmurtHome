@@ -8,10 +8,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -222,37 +222,10 @@ public class Principal extends JFrame implements PropertyChangeListener {
         crearDatosDePrueba();// si comentas esta linea los datos del fichero no se
         // sobreescriben
         // crea un thead
-        Thread hilo = new Thread(new Runnable() {
-            @Override
-            
-            public void run() {
-                int i=0;
-                try {
-                       
-                    Uart uart = new Uart();
-                   
-                    System.out.println("inicio");
-                    while (true) {
-                        
-                        uart.start(oraingoa);
-
-                        i++;
-                        // printea la clase preset
-                        System.out.println(i+" "+oraingoa);
-
-
-
-                        
-                        Thread.sleep(5000);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-        });
-        hilo.start();
+        oraingoa=porDefecto;
+       // Uart uart = new Uart();
+        //uart.start(uart,oraingoa);
+        
 
         Principal programa = new Principal(porDefecto);
 
