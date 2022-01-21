@@ -8,9 +8,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -47,6 +50,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
     ImageIcon home;
     Controlador controlador;
     static Uart uart;
+    static Hilo hilo;
 
     public Principal(Preset porDefecrto) {
         super("Smurt House");
@@ -75,12 +79,11 @@ public class Principal extends JFrame implements PropertyChangeListener {
 
     private JPanel crearPanelPrincipal(Preset preset) {
         oraingoa = preset;
-       
-        
+
         JPanel panel;
         PanelPrincipall panelPrincipal = new PanelPrincipall(preset, controlador);
         panel = panelPrincipal.getPanel();
-        System.out.println( "principal: "+ oraingoa.hashCode());
+        System.out.println("principal: " + oraingoa.hashCode());
 
         return panel;
     }
@@ -88,13 +91,10 @@ public class Principal extends JFrame implements PropertyChangeListener {
     public static void crearDatosDePrueba() {
         List<Preset> listaPreset = new ArrayList<Preset>();
 
-        Preset preset = new Preset("prueba", 20, 1, 1, 0, 0);
-        Preset preset2 = new Preset("prueba2", 25, 2, 2, 0, 0);
-        Preset preset3 = new Preset("prueba3", 30, 3, 1, 0, 0);
-        Preset preset4 = new Preset("prueba4", 15, 0, 2, 0, 0);
-        Preset preset5 = new Preset("prueba5", 10, 0, 1, 0, 0);
-        Preset preset6 = new Preset("prueba6", 5, 0, 2, 0, 0);
-        Preset preset7 = new Preset("prueba7", 0, 0, 1, 0, 0);
+        Preset preset = new Preset("Qing Yu", 20, 1, 1, 0, 0);
+        Preset preset2 = new Preset("Ainhoa", 25, 2, 2, 0, 0);
+        Preset preset3 = new Preset("Iñaki", 30, 3, 1, 0, 0);
+        Preset preset4 = new Preset("Aritz", 15, 0, 2, 0, 0);
 
         listaPreset.add(preset);
         listaPreset.add(preset2);
@@ -131,7 +131,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
         String propiedad = evt.getPropertyName();
 
         JPanel panel;
-       
+
         switch (propiedad) {
             case PANEL_HOME:
 
@@ -159,7 +159,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
 
                 Preset preset = (Preset) evt.getNewValue();
                 oraingoa = preset;
-                uart.setPreset(oraingoa);
+                actualizarPreset(preset);
                 panelPrincipal = new PanelPrincipall(oraingoa, controlador);
                 panel = panelPrincipal.getPanel();
                 cambiarPanel(panel);
@@ -223,64 +223,64 @@ public class Principal extends JFrame implements PropertyChangeListener {
 
     }
 
+    private void actualizarPreset(Preset preset) {
+        uart.setPreset(preset);
+        hilo.setPreset(preset);
+    }
+
     public static void main(String[] args) throws ClassNotFoundException {
         Preset porDefecto = new Preset("UNO MAS UNO ES ILEGAL", 20, 2, 0, 1, 0);
-        crearDatosDePrueba();// si comentas esta linea los datos del fichero no se
-        // sobreescriben
-        // crea un thead
         oraingoa = porDefecto;
-         uart = new Uart();
-         uart.start(uart,oraingoa);
+        crearDatosDePrueba();// si comentas esta linea los datos del fichero no se
+        crearDatosDeConsumo();
+
+        uart = new Uart();
+        uart.start(uart, oraingoa);
 
         // inicia un thread para que el programa no se cierre
-        Thread hilo = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Consumo consumoEncendido = null;
-                    Consumo consumoApagado = null;
-                    Boolean comprobado = false;
-                   
-
-                    while (true) {
-                        Thread.sleep(1000);
-
-                        if (oraingoa.getIntensidad() >= 1 && comprobado == false) {
-                            consumoEncendido = new Consumo();
-                            comprobado = true;
-                        }
-                        if (oraingoa.getIntensidad() == 0 && comprobado == true) {
-                            consumoApagado = new Consumo();
-                            comprobado = false;
-
-                            consumoEncendido.mostarConsumo();
-                            consumoApagado.mostarConsumo();
-
-                            consumoEncendido.getTiempoTotal();
-                            consumoApagado.getTiempoTotal();
-
-                            int diferencia = consumoEncendido.compare(consumoApagado);
-                            System.out.println("consumo total " + consumoEncendido.compare(consumoApagado));
-
-                            Consumo total = new Consumo(diferencia);
-
-                            ListaConsumo listaConsumos = ListaConsumo.getListaConsumo();
-
-                             listaConsumos.meterDatos(total);
-                             listaConsumos.mostrarDatos();
-                        }
-
-                    }
-
-                } catch (Exception ex) {
-                    System.out.println(ex);
-                }
-            }
-        });
-
-        hilo.start();
+        hilo = new Hilo(oraingoa);
 
         Principal programa = new Principal(porDefecto);
+
+    }
+
+    private static void crearDatosDeConsumo() {
+
+        Map<LocalDate, Integer> listaConsumos = new HashMap<LocalDate, Integer>();
+
+        // crear datos inventados de hace 7 dias
+
+        // generar un numero aleatorio entre 0 y 100
+        Random r = new Random();
+        int numero;
+
+        for (int i = 0; i < 7; i++) {
+            numero = r.nextInt(86400);
+            LocalDate fecha = LocalDate.now().minusDays(i);
+
+            listaConsumos.put(fecha, numero);
+
+        }
+
+        FileOutputStream fichero = null;
+
+        try {
+            fichero = new FileOutputStream("datosConsumo.bin");
+            ObjectOutputStream tuberia = new ObjectOutputStream(fichero);
+            tuberia.writeObject(listaConsumos);
+
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
+
+            ex.printStackTrace();
+        } finally {
+            try {
+                fichero.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
 
     }
 
