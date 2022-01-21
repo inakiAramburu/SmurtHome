@@ -225,8 +225,8 @@ public class Principal extends JFrame implements PropertyChangeListener {
         // sobreescriben
         // crea un thead
         oraingoa = porDefecto;
-        // Uart uart = new Uart();
-        // uart.start(uart,oraingoa);
+         Uart uart = new Uart();
+         uart.start(uart,oraingoa);
 
         // inicia un thread para que el programa no se cierre
         Thread hilo = new Thread(new Runnable() {
