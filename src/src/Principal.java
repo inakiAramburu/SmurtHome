@@ -46,6 +46,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
     ImageIcon bombilla0, bombilla1, bombilla2, bombilla3;
     ImageIcon home;
     Controlador controlador;
+    static Uart uart;
 
     public Principal(Preset porDefecrto) {
         super("Smurt House");
@@ -74,10 +75,12 @@ public class Principal extends JFrame implements PropertyChangeListener {
 
     private JPanel crearPanelPrincipal(Preset preset) {
         oraingoa = preset;
-
+       
+        
         JPanel panel;
         PanelPrincipall panelPrincipal = new PanelPrincipall(preset, controlador);
         panel = panelPrincipal.getPanel();
+        System.out.println( "principal: "+ oraingoa.hashCode());
 
         return panel;
     }
@@ -128,7 +131,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
         String propiedad = evt.getPropertyName();
 
         JPanel panel;
-
+       
         switch (propiedad) {
             case PANEL_HOME:
 
@@ -156,6 +159,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
 
                 Preset preset = (Preset) evt.getNewValue();
                 oraingoa = preset;
+                uart.setPreset(oraingoa);
                 panelPrincipal = new PanelPrincipall(oraingoa, controlador);
                 panel = panelPrincipal.getPanel();
                 cambiarPanel(panel);
@@ -225,7 +229,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
         // sobreescriben
         // crea un thead
         oraingoa = porDefecto;
-         Uart uart = new Uart();
+         uart = new Uart();
          uart.start(uart,oraingoa);
 
         // inicia un thread para que el programa no se cierre

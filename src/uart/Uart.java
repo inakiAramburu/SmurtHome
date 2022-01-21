@@ -7,7 +7,7 @@ import com.fazecast.jSerialComm.SerialPort;
 import src.Preset;
 
 public class Uart {
-	Preset preset;
+	static Preset preset;
 	SerialPort puerto;
 
 	public Uart() {
@@ -34,6 +34,7 @@ public class Uart {
 	}
 
 	public void start(Uart uart, Preset oraingoa) {
+		Uart.preset=oraingoa;
 		Thread hilo = new Thread(new Runnable() {
 			@Override
 
@@ -43,11 +44,15 @@ public class Uart {
 
 					System.out.println("inicio");
 					while (true) {
-						uart.enviar(oraingoa);
+						//preset=getPreset();
+						
+						uart.enviar();
+						System.out.println( "hascodeuart: "+ preset.hashCode());
+						System.out.println("hascode Uart.preset: "+Uart.preset.hashCode());
 						// printea la clase preset
-						System.out.println(i++ + " " + oraingoa);
-						uart.leer(oraingoa);
-						Thread.sleep(000);
+						System.out.println(i++ + " " + preset);
+						//uart.leer(oraingoa);
+						Thread.sleep(1000);
 
 					}
 				} catch (Exception e) {
@@ -62,7 +67,7 @@ public class Uart {
 
 	}
 
-	public void enviar(Preset preset) {
+	public void enviar() {
 		// determine which serial port to use
 
 		Integer datos[] = new Integer[4];
@@ -84,7 +89,7 @@ public class Uart {
 
 	}
 
-	public void leer(Preset oraingoa) {
+	public void leer() {
 
 		byte bD[] = new byte[1];
 		int dato;
@@ -94,9 +99,14 @@ public class Uart {
 		dato = (bD[0]-48);
 
 		if(dato==1) {
-			oraingoa.setPersiana(0);
+			preset.setPersiana(0);
 		}
 
 	}
 
+	
+
+	public void setPreset(Preset preset) {
+		Uart.preset = preset;
+	}
 }
