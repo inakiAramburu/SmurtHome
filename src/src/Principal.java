@@ -23,6 +23,7 @@ import paneles.PanelGraficos;
 import paneles.PanelMenu;
 import paneles.PanelPreset;
 import paneles.PanelPrincipall;
+import uart.Uart;
 
 public class Principal extends JFrame implements PropertyChangeListener {
     final static int MAX_PANELES = 5;
@@ -219,12 +220,12 @@ public class Principal extends JFrame implements PropertyChangeListener {
 
     public static void main(String[] args) throws ClassNotFoundException {
         Preset porDefecto = new Preset("UNO MAS UNO ES ILEGAL", 20, 2, 0, 1, 0);
-        crearDatosDePrueba();// si comentas esta linea los datos del fichero no se
+        //crearDatosDePrueba();// si comentas esta linea los datos del fichero no se
         // sobreescriben
-        // crea un thead
+        // crea un thread
         oraingoa=porDefecto;
-       // Uart uart = new Uart();
-        //uart.start(uart,oraingoa);
+        Uart uart = new Uart(oraingoa);
+        
 
         //inicia un thread para que el programa no se cierre
         Thread hilo = new Thread(new Runnable() {
@@ -235,6 +236,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
                     Consumo consumoApagado=null;
                     Boolean comprobado = false;
                     while(true){
+                    	uart.start(uart);
                         Thread.sleep(1000);
                         
                         
@@ -263,13 +265,6 @@ public class Principal extends JFrame implements PropertyChangeListener {
                            listaConsumos.meterDatos(total);
                            listaConsumos.mostrarDatos();
                         }
-
-                        
-
-                        
-
-
-
 
 
                     }

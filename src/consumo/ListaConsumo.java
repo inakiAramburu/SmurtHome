@@ -35,10 +35,10 @@ public class ListaConsumo {
 
     // mostrar datos por consola
     public void mostrarDatos() {
-        for (Map.Entry<Integer, Map<Integer, Map<String, Integer>>> año : listaConsumos.entrySet()) {
-            for (Map.Entry<Integer, Map<String, Integer>> mes : año.getValue().entrySet()) {
+        for (Map.Entry<Integer, Map<Integer, Map<String, Integer>>> a�o : listaConsumos.entrySet()) {
+            for (Map.Entry<Integer, Map<String, Integer>> mes : a�o.getValue().entrySet()) {
                 for (Map.Entry<String, Integer> dia : mes.getValue().entrySet()) {
-                    System.out.println("año: " + año.getKey() + " mes: " + mes.getKey() + " dia: " + dia.getKey()
+                    System.out.println("año: " + a�o.getKey() + " mes: " + mes.getKey() + " dia: " + dia.getKey()
                             + " consumo: " + dia.getValue());
                 }
             }
