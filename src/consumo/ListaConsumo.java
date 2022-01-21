@@ -6,18 +6,18 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import src.Preset;
 
 public class ListaConsumo {
     // año , mes ,dia, consumo
     static ListaConsumo lista;
-    static Map<Integer, Map<Integer, Map<String, Integer>>> listaConsumos = new HashMap<Integer, Map<Integer, Map<String, Integer>>>();
-    static Map<Integer, Map<String, Integer>> mes = new HashMap<Integer, Map<String, Integer>>();
-    static Map<String, Integer> dia = new HashMap<String, Integer>();
+    //static Map<Integer, Map<Integer, Map<String, Integer>>> listaConsumos = new HashMap<Integer, Map<Integer, Map<String, Integer>>>();
+    //static Map<Integer, Map<String, Integer>> mes = new HashMap<Integer, Map<String, Integer>>();
+    //static Map<String, Integer> dia = new HashMap<String, Integer>();
+
+Map <LocalDate,Integer> listaConsumos = new HashMap<LocalDate,Integer>();
 
     private ListaConsumo() {
 
@@ -33,48 +33,43 @@ public class ListaConsumo {
 
     }
 
-    // mostrar datos por consola
-    public void mostrarDatos() {
-        for (Map.Entry<Integer, Map<Integer, Map<String, Integer>>> año : listaConsumos.entrySet()) {
-            for (Map.Entry<Integer, Map<String, Integer>> mes : año.getValue().entrySet()) {
-                for (Map.Entry<String, Integer> dia : mes.getValue().entrySet()) {
-                    System.out.println("año: " + año.getKey() + " mes: " + mes.getKey() + " dia: " + dia.getKey()
-                            + " consumo: " + dia.getValue());
-                }
-            }
+    public void meterDatos(Consumo consumo) {
+       
+        int consumoAnterior=0;
+        try {
+            listaConsumos=leerDatosConsumo();
+            consumoAnterior=listaConsumos.get(consumo.fecha);
+            System.out.println("consumo anterior "+consumoAnterior);
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
-    }
+       
+        listaConsumos.put(consumo.getFecha(),consumo.getConsumo()+consumoAnterior);
 
-    public void meterDatos(Consumo consumoDia) throws ClassNotFoundException {
-        int consumoAnterior = 0;
-      
-        this.listaConsumos=leerDatosConsumo();
-        
-
-        // listaConsumos.get(consumoDia.getAno()).get(consumoDia.getMes()).get(consumoDia.getDia())
-        if (listaConsumos.get(consumoDia.getAno()) != null) {
-            if (listaConsumos.get(consumoDia.getAno()).get(consumoDia.getMes()) != null) {
-                if (listaConsumos.get(consumoDia.getAno()).get(consumoDia.getMes()).get(consumoDia.getDia()) != null) {
-                    consumoAnterior = listaConsumos.get(consumoDia.getAno()).get(consumoDia.getMes())
-                            .get(consumoDia.getDia());
-                }
-            }
-            System.out.println("consumoAnterior: " + consumoAnterior);
-        }
-        // meter en listaConsumos el año el mes el dia y el consumo
-        listaConsumos.put(consumoDia.getAno(), mes);
-        mes.put(consumoDia.getMes(), dia);
-        dia.put(consumoDia.getDia(), consumoDia.consumo + consumoAnterior);
 
         guardarDatosConsumo();
+
     }
 
+
+    // mostrar datos por consola
+    public void mostrarDatos() {
+        System.out.println("Lista de consumos");
+        for (Map.Entry<LocalDate, Integer> entry : listaConsumos.entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        }
+    }
+    
+    
+
+    
     private void guardarDatosConsumo() {
 
         FileOutputStream fichero = null;
 
         try {
-            fichero = new FileOutputStream("datosConsumo.txt");
+            fichero = new FileOutputStream("datosConsumo.bin");
             ObjectOutputStream tuberia = new ObjectOutputStream(fichero);
             tuberia.writeObject(listaConsumos);
 
@@ -95,14 +90,14 @@ public class ListaConsumo {
 
 
 
-    private Map<Integer, Map<Integer, Map<String, Integer>>> leerDatosConsumo() throws ClassNotFoundException {
+    private Map<LocalDate, Integer> leerDatosConsumo() throws ClassNotFoundException {
 
         FileInputStream ficheroEntrada = null;
-        Map<Integer, Map<Integer, Map<String, Integer>>> listaConsumos = new HashMap<Integer, Map<Integer, Map<String, Integer>>>();
+         listaConsumos = new HashMap<LocalDate,Integer>();
         try {
-            ficheroEntrada = new FileInputStream("datosConsumo.txt");
+            ficheroEntrada = new FileInputStream("datosConsumo.bin");
             try (ObjectInputStream tuberia = new ObjectInputStream(ficheroEntrada)) {
-                listaConsumos = (Map<Integer, Map<Integer, Map<String, Integer>>>) tuberia.readObject();
+                listaConsumos =  (Map<LocalDate, Integer>) tuberia.readObject();
             }
             
 
