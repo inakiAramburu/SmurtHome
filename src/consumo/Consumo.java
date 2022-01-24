@@ -1,5 +1,6 @@
 package consumo;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 
 public class Consumo {
@@ -7,6 +8,8 @@ public class Consumo {
     int año;
     int mes;
     String dia;
+
+    LocalDate fecha;
 
     int hora;
     int minuto;
@@ -26,6 +29,11 @@ public class Consumo {
     public Consumo() {
 
         Calendar calendario = Calendar.getInstance();
+        
+        //guardar la fecha en fecha
+        fecha = LocalDate.now();
+
+        
 
         this.año =calendario.get(Calendar.YEAR);
         this.mes =calendario.get(Calendar.MONTH);
@@ -40,9 +48,7 @@ public class Consumo {
 public Consumo(int diferencia) {
 
     Calendar calendario = Calendar.getInstance();
-    this.año =calendario.get(Calendar.YEAR);
-    this.mes =calendario.get(Calendar.MONTH);
-    this.dia = diaSemana(calendario.get(Calendar.DAY_OF_WEEK));
+    fecha = LocalDate.now();
 
     
 
@@ -117,6 +123,7 @@ private String diaSemana(int diaSemana){
 
     public int getTiempoTotal() {
         
+        
         tiempoTotal=hora*3600+minuto*60+segundo;
         return tiempoTotal;
 
@@ -142,6 +149,10 @@ private String diaSemana(int diaSemana){
     public int compare(Consumo consumoApagado) {
 
         return consumoApagado.getTiempoTotal() -this.getTiempoTotal();
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
     }
 
  

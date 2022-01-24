@@ -80,7 +80,7 @@ public class PanelPreset extends JFrame {
 		for (int i = 0; i < listaPreset.size(); i++) {
 
 			JButton botone = new JButton();
-			botone.setFont(new java.awt.Font("Product San", 0, 20));
+			botone.setFont(new java.awt.Font("Product San", 0, 50));
 
 			botone.setText(listaPreset.get(i).getNombre());
 			botone.setForeground(new java.awt.Color(255, 255, 255));
