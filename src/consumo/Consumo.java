@@ -5,7 +5,7 @@ import java.util.Calendar;
 
 public class Consumo {
     
-    int año;
+    int anio;
     int mes;
     String dia;
 
@@ -35,7 +35,7 @@ public class Consumo {
 
         
 
-        this.año =calendario.get(Calendar.YEAR);
+        this.anio =calendario.get(Calendar.YEAR);
         this.mes =calendario.get(Calendar.MONTH);
         this.dia = diaSemana(calendario.get(Calendar.DAY_OF_WEEK));
   
@@ -129,7 +129,7 @@ private String diaSemana(int diaSemana){
 
     }
     public int getAno() {
-        return this.año;
+        return this.anio;
     }
     public int getMes() {
         return this.mes;
