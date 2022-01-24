@@ -5,7 +5,7 @@ import consumo.ListaConsumo;
 
 public class Hilo {
     
-    Preset preset;
+    static Preset preset;
 
 
     public Hilo( Preset preset) {
@@ -23,12 +23,12 @@ public class Hilo {
 
                     while (true) {
                         Thread.sleep(1000);
-                        System.out.println("Hilo"+preset);
-                        if (preset.getIntensidad() >= 1 && comprobado == false) {
+                        System.out.println("Hilo "+Hilo.preset);
+                        if (Hilo.preset.getIntensidad() >= 1 && comprobado == false) {
                             consumoEncendido = new Consumo();
                             comprobado = true;
                         }
-                        if (preset.getIntensidad() == 0 && comprobado == true) {
+                        if (Hilo.preset.getIntensidad() == 0 && comprobado == true) {
                             consumoApagado = new Consumo();
                             comprobado = false;
 
