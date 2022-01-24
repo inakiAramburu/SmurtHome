@@ -224,6 +224,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
     }
 
     private void actualizarPreset(Preset preset) {
+        
         uart.setPreset(preset);
         hilo.setPreset(preset);
     }
