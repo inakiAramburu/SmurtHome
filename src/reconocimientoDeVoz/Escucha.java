@@ -65,14 +65,9 @@ public synchronized static Escucha getEscucha(Controlador controlador){
 					System.out.print(gst + " ");
 				}
 				System.out.println();
-				/*if (gst.equals("salir")) {
-					recognizer.deallocate();
-					System.out.println("Hasta la proxima Cmop 'salir'!");
-					System.exit(0);
-
-				}*/
+				
 				if (lista.get(0).equals("Temperatura")) {
-					// recognizer.deallocate();
+				
 
 					if (lista.get(1) != null) {
 						if (Integer.parseInt(lista.get(1)) >= 17 && Integer.parseInt(lista.get(1)) <= 30) {
