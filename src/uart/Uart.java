@@ -54,8 +54,8 @@ public class Uart {
 						System.out.println("hascode Uart.preset: "+Uart.preset.hashCode());
 						// printea la clase preset
 						System.out.println(i++ + " " + preset);
-						//uart.leer(oraingoa);
-						Thread.sleep(1000);
+						uart.leer();
+						//Thread.sleep(1000);
 
 					}
 				} catch (Exception e) {
@@ -106,8 +106,6 @@ public class Uart {
 		}
 
 	}
-
-	
 
 	public void setPreset(Preset preset) {
 		Uart.preset = preset;
