@@ -31,6 +31,9 @@ public class Uart {
 			return;
 		}
 		puerto.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0);
+
+		// ver la velocidad de transmision
+		System.out.println("Baud rate: " + puerto.getBaudRate());
 	}
 
 	public void start(Uart uart, Preset oraingoa) {
