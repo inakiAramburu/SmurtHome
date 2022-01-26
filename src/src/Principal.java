@@ -83,7 +83,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
         JPanel panel;
         PanelPrincipall panelPrincipal = new PanelPrincipall(preset, controlador);
         panel = panelPrincipal.getPanel();
-        System.out.println("principal: " + oraingoa.hashCode());
+        
 
         return panel;
     }
@@ -216,7 +216,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
                 cambiarPanel(panel);
                 break;
             default:
-                System.out.println("cagaste");
+                
                 break;
 
         }
@@ -230,7 +230,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
     }
 
     public static void main(String[] args) throws ClassNotFoundException {
-        Preset porDefecto = new Preset("UNO MAS UNO ES ILEGAL", 20, 2, 0, 0, 0);
+        Preset porDefecto = new Preset("Salón", 20, 2, 0, 0, 0);
         oraingoa = porDefecto;
         crearDatosDePrueba();// si comentas esta linea los datos del fichero no se
         crearDatosDeConsumo();

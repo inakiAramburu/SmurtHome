@@ -31,6 +31,9 @@ public class Uart {
 			return;
 		}
 		puerto.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0);
+
+		
+	
 	}
 
 	public void start(Uart uart, Preset oraingoa) {
@@ -44,15 +47,12 @@ public class Uart {
 
 					System.out.println("inicio");
 					while (true) {
-						//preset=getPreset();
-						
+											
 						uart.enviar();
-						System.out.println( "hascodeuart: "+ preset.hashCode());
-						System.out.println("hascode Uart.preset: "+Uart.preset.hashCode());
 						// printea la clase preset
 						System.out.println(i++ + " " + preset);
 						uart.leer();
-						//Thread.sleep(1000);
+						
 
 					}
 				} catch (Exception e) {
