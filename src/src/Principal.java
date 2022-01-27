@@ -95,11 +95,19 @@ public class Principal extends JFrame implements PropertyChangeListener {
         Preset preset2 = new Preset("Ainhoa", 25, 2, 2, 0, 0);
         Preset preset3 = new Preset("Iñaki", 30, 3, 1, 0, 0);
         Preset preset4 = new Preset("Aritz", 15, 0, 2, 0, 0);
+        Preset preset5 = new Preset("Mikel", 23, 1, 0, 0, 0);
 
         listaPreset.add(preset);
         listaPreset.add(preset2);
         listaPreset.add(preset3);
         listaPreset.add(preset4);
+        listaPreset.add(preset5);
+
+      
+
+      
+
+
 
         FileOutputStream fichero = null;
 
