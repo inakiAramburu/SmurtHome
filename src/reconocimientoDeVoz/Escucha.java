@@ -109,7 +109,6 @@ public synchronized static Escucha getEscucha(Controlador controlador){
 
 					controlador.getConector().firePropertyChange("recarga", "persiana",lista.get(0));
 				}
-				
 				else {
 					recognizer.suspend();
 
