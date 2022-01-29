@@ -121,16 +121,7 @@ public synchronized static Escucha getEscucha(Controlador controlador){
 			System.out.println("microfono no activado");
 		}
 	}
-/*
-	public void setMicrofono(int microfono) {
-		if (microfono == 1) {
-			this.microfono = true;
-		} else {
-			this.microfono = false;
-		}
 
-	}
-*/
 	public void escucha(int microfono) {
 		// public static void main(){
 		if (microfono == 1) {
