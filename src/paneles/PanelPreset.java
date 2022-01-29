@@ -75,7 +75,7 @@ public class PanelPreset extends JFrame {
 		homeButon.setActionCommand("home");
 		homeButon.addActionListener(controlador);
 
-		// añadir botones en el panel2
+		
 
 		for (int i = 0; i < listaPreset.size(); i++) {
 
@@ -85,10 +85,7 @@ public class PanelPreset extends JFrame {
 			botone.setText(listaPreset.get(i).getNombre());
 			botone.setForeground(new java.awt.Color(255, 255, 255));
 			botone.setBackground(new java.awt.Color(58, 58, 58));
-			// urrengoa=(listaPreset.get(i));
-
-			// a�adir propertichange listener al boton
-			// botone.addPropertyChangeListener(controlador);
+			
 			botone.setActionCommand(listaPreset.get(i).getNombre());
 			botone.addActionListener(controlador);
 			jPanel2.add(botone);

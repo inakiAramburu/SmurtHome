@@ -11,11 +11,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ListaConsumo {
-    // año , mes ,dia, consumo
+    
     static ListaConsumo lista;
-    //static Map<Integer, Map<Integer, Map<String, Integer>>> listaConsumos = new HashMap<Integer, Map<Integer, Map<String, Integer>>>();
-    //static Map<Integer, Map<String, Integer>> mes = new HashMap<Integer, Map<String, Integer>>();
-    //static Map<String, Integer> dia = new HashMap<String, Integer>();
+    
 
 Map <LocalDate,Integer> listaConsumos = new HashMap<LocalDate,Integer>();
 
