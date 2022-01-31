@@ -61,7 +61,7 @@ public class Controlador implements ActionListener {
 			presetBool = false;
 			BorrarPresetBool = false;
 
-			
+			System.out.println("homee");
 			conector.firePropertyChange(PANEL_HOME, false, 12);
 
 		}
@@ -69,34 +69,34 @@ public class Controlador implements ActionListener {
 			presetBool = false;
 			BorrarPresetBool = false;
 
-			
+			System.out.println("menu");
 			conector.firePropertyChange(PANEL_MENU, false, 12);
 		}
 
 		if (comando.equals(PANEL_PRESET)) {
 			presetBool = true;
 			BorrarPresetBool = false;
-			
+			System.out.println("preset");
 			conector.firePropertyChange(PANEL_PRESET, false, 12);
 		}
 		if (comando.equals(PANEL_GRAFICOS)) {
 			presetBool = false;
 			BorrarPresetBool = false;
-			
+			System.out.println("graficoss");
 			conector.firePropertyChange(PANEL_GRAFICOS, false, 12);
 
 		}
 		if (comando.equals(PANEL_CREAR_PRESET)) {
 			presetBool = false;
 			BorrarPresetBool = false;
-		
+			System.out.println("crearPreset");
 			conector.firePropertyChange(PANEL_CREAR_PRESET, false, 12);
 
 		}
 		if (comando.equals(BORRAR_PRESET)) {
 			presetBool = false;
 			BorrarPresetBool = true;
-			
+			System.out.println("borrarPreset");
 			conector.firePropertyChange(BORRAR_PRESET, false, 12);
 		}
 		// esto es para cuando le das a un boton de un preset
@@ -113,7 +113,7 @@ public class Controlador implements ActionListener {
 			for (int i = 0; i < listaPreset.size(); i++) {
 				if (comando.equals(listaPreset.get(i).getNombre())) {
 					presetBool = false;
-					
+					System.out.println("EL GANADORE ES: " + listaPreset.get(i).getNombre());
 					conector.firePropertyChange("CambioDePanel", false, listaPreset.get(i));
 
 				}
@@ -122,7 +122,7 @@ public class Controlador implements ActionListener {
 		}
 		// esto es para borrar el preset
 		if (BorrarPresetBool) {
-			
+			System.out.println("entras en lo de borrar");
 			BorrarPresetBool = true;
 
 			List<Preset> listaPreset = null;
@@ -136,7 +136,7 @@ public class Controlador implements ActionListener {
 			for (int i = 0; i < listaPreset.size(); i++) {
 				if (comando.equals(listaPreset.get(i).getNombre())) {
 
-					
+					System.out.println("se borrar el: " + listaPreset.get(i).getNombre());
 					listaPreset.remove(i);
 					anadirDatos(listaPreset);
 					conector.firePropertyChange(BORRAR_PRESET, false, 12);
@@ -182,7 +182,10 @@ public class Controlador implements ActionListener {
 			try (ObjectInputStream tuberia = new ObjectInputStream(ficheroEntrada)) {
 				listaPreset = (List<Preset>) tuberia.readObject();
 			}
-			
+			for (Preset p : listaPreset) {
+				System.out.println(p);
+			}
+
 		} catch (FileNotFoundException ex) {
 			ex.printStackTrace();
 		} catch (IOException ex) {

@@ -22,7 +22,8 @@ public class Hilo {
                     Boolean comprobado = false;
 
                     while (true) {
-//                        
+//                        Thread.sleep(1000);
+                        System.out.println("Hilo "+Hilo.preset);
                         if (Hilo.preset.getIntensidad() >= 1 && comprobado == false) {
                             consumoEncendido = new Consumo();
                             comprobado = true;

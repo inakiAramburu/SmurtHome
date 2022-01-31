@@ -65,9 +65,14 @@ public synchronized static Escucha getEscucha(Controlador controlador){
 					System.out.print(gst + " ");
 				}
 				System.out.println();
-				
+				/*if (gst.equals("salir")) {
+					recognizer.deallocate();
+					System.out.println("Hasta la proxima Cmop 'salir'!");
+					System.exit(0);
+
+				}*/
 				if (lista.get(0).equals("Temperatura")) {
-				
+					// recognizer.deallocate();
 
 					if (lista.get(1) != null) {
 						if (Integer.parseInt(lista.get(1)) >= 17 && Integer.parseInt(lista.get(1)) <= 30) {
@@ -109,6 +114,7 @@ public synchronized static Escucha getEscucha(Controlador controlador){
 
 					controlador.getConector().firePropertyChange("recarga", "persiana",lista.get(0));
 				}
+				
 				else {
 					recognizer.suspend();
 
@@ -121,7 +127,16 @@ public synchronized static Escucha getEscucha(Controlador controlador){
 			System.out.println("microfono no activado");
 		}
 	}
+/*
+	public void setMicrofono(int microfono) {
+		if (microfono == 1) {
+			this.microfono = true;
+		} else {
+			this.microfono = false;
+		}
 
+	}
+*/
 	public void escucha(int microfono) {
 		// public static void main(){
 		if (microfono == 1) {

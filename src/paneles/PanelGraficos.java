@@ -230,10 +230,10 @@ public class PanelGraficos extends JFrame {
 
     }
 
-    private static Comparable traducirDia(String dia) {
+    private static Comparable traducirDia(String string) {
 
         // traduce los dias de la semana
-        switch (dia) {
+        switch (string) {
             case "MONDAY":
                 return "Lunes";
             case "TUESDAY":

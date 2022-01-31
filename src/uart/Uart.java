@@ -32,10 +32,12 @@ public class Uart {
 		}
 		puerto.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0);
 
+		// ver la velocidad de transmision
+		System.out.println("Baud rate: " + puerto.getBaudRate());
 	}
 
 	public void start(Uart uart, Preset oraingoa) {
-		Uart.preset = oraingoa;
+		Uart.preset=oraingoa;
 		Thread hilo = new Thread(new Runnable() {
 			@Override
 
@@ -45,11 +47,15 @@ public class Uart {
 
 					System.out.println("inicio");
 					while (true) {
-
+						//preset=getPreset();
+						
 						uart.enviar();
+						System.out.println( "hascodeuart: "+ preset.hashCode());
+						System.out.println("hascode Uart.preset: "+Uart.preset.hashCode());
 						// printea la clase preset
 						System.out.println(i++ + " " + preset);
 						uart.leer();
+						//Thread.sleep(1000);
 
 					}
 				} catch (Exception e) {
@@ -90,12 +96,12 @@ public class Uart {
 
 		byte bD[] = new byte[1];
 		int dato;
-
+		
 		puerto.readBytes(bD, 1);
 
-		dato = (bD[0] - 48);
+		dato = (bD[0]-48);
 
-		if (dato == 1) {
+		if(dato==1) {
 			preset.setPersiana(0);
 		}
 

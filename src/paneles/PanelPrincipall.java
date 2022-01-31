@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import reconocimientoDeVoz.Escucha;
-
+import reconocimientoDeVoz.Runee;
 import src.Controlador;
 import src.Preset;
 
@@ -346,7 +346,7 @@ public class PanelPrincipall extends JFrame {
                 microfonoButton.setFont(new java.awt.Font("Product San", 0, 60));
                 // microfonoButton.setText("Microfono");
 
-                microfonoButton.setIcon(new ImageIcon(microfonoIconList.get(0).getImage()));
+                microfonoButton.setIcon(new ImageIcon(microfonoIconList.get(preset.getMicrofono()).getImage()));
                 microfonoButton.setBorderPainted(false);
                 microfonoButton.setBackground(new java.awt.Color(36, 36, 36));
 
@@ -515,7 +515,10 @@ public class PanelPrincipall extends JFrame {
         }
 
         private void luzButtonActionPerformed(ActionEvent evt) {
-               
+                // TODO add your handling code here:
+                // TODO add your handling code here:
+
+                // luzButton.setIcon(new ImageIcon(azul.getImage()));
                 if (intensidad == 0) {
                         intensidad = 1;
                 } else if (intensidad != 0) {

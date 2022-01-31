@@ -83,7 +83,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
         JPanel panel;
         PanelPrincipall panelPrincipal = new PanelPrincipall(preset, controlador);
         panel = panelPrincipal.getPanel();
-        
+        System.out.println("principal: " + oraingoa.hashCode());
 
         return panel;
     }
@@ -93,21 +93,13 @@ public class Principal extends JFrame implements PropertyChangeListener {
 
         Preset preset = new Preset("Qing Yu", 20, 1, 1, 0, 0);
         Preset preset2 = new Preset("Ainhoa", 25, 2, 2, 0, 0);
-        Preset preset3 = new Preset("Inaki", 30, 3, 1, 0, 0);
+        Preset preset3 = new Preset("Iñaki", 30, 3, 1, 0, 0);
         Preset preset4 = new Preset("Aritz", 15, 0, 2, 0, 0);
-        Preset preset5 = new Preset("Mikel", 23, 1, 0, 0, 0);
 
         listaPreset.add(preset);
         listaPreset.add(preset2);
         listaPreset.add(preset3);
         listaPreset.add(preset4);
-        listaPreset.add(preset5);
-
-      
-
-      
-
-
 
         FileOutputStream fichero = null;
 
@@ -134,7 +126,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         final String PANEL_HOME = "home", PANEL_MENU = "menu", PANEL_PRESET = "preset", PANEL_GRAFICOS = "graficos",
-                PANEL_CREAR_PRESET = "crearPreset", BORRAR_PRESET = "borrarPreset",CAMBIAR_DE_PANEL="cambioDePanel";
+                PANEL_CREAR_PRESET = "crearPreset", BORRAR_PRESET = "borrarPreset";
 
         String propiedad = evt.getPropertyName();
 
@@ -163,7 +155,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
                 panel = panelGraficos.getPanel();
                 cambiarPanel(panel);
                 break;
-            case CAMBIAR_DE_PANEL:
+            case "CambioDePanel":
 
                 Preset preset = (Preset) evt.getNewValue();
                 oraingoa = preset;
@@ -224,7 +216,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
                 cambiarPanel(panel);
                 break;
             default:
-                
+                System.out.println("cagaste");
                 break;
 
         }
@@ -238,7 +230,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
     }
 
     public static void main(String[] args) throws ClassNotFoundException {
-        Preset porDefecto = new Preset("COCINA", 20, 2, 0, 0, 0);
+        Preset porDefecto = new Preset("Salón", 20, 2, 0, 0, 0);
         oraingoa = porDefecto;
         crearDatosDePrueba();// si comentas esta linea los datos del fichero no se
         crearDatosDeConsumo();
@@ -246,7 +238,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
         uart = new Uart();
         uart.start(uart, oraingoa);
 
-        // inicia un thread del consumo de datos
+        // inicia un thread para que el programa no se cierre
         hilo = new Hilo(oraingoa);
 
         Principal programa = new Principal(porDefecto);
